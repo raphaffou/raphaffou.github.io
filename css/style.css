@@ -39,7 +39,6 @@ ul.first:hover li.first{
 }
 *{
     font-family: 'Noto Sans Mono', monospace;
-    filter : blur(3px);
 }
 body{
     padding:0px;
@@ -73,6 +72,7 @@ body{
     display:inline-block;
     padding:5px;
     margin:auto;
+    filter : blur(0.5px);
 }
 .namediv{
     text-align:center;
@@ -89,6 +89,7 @@ body{
     background-origin: center;
     background-size: 100%;
     min-height:500px;
+    filter : blur(0.5px);
 }
 
 @media screen and (max-width: 640px) {
