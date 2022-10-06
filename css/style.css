@@ -91,7 +91,9 @@ body{
     min-height:500px;
     filter : blur(0.5px);
 }
-
+li::content, #menuIco {
+    filter : blur(0.5px);
+}
 @media screen and (max-width: 640px) {
     .links{
         min-width:0px;
