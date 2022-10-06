@@ -1,0 +1,62 @@
+[
+    {
+      "Matières": "Analyse numérique avec python",
+      "ECTS": 4,
+      "Cours": 12,
+      "TD": "",
+      "TP": 24
+    },
+    {
+      "Matières": "Analyse numérique avec python\n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          4\n        \n      \n            \n      Détail du volume horaire :\n                        \n            Cours :\n                          12\n                      \n                                              \n            Travaux pratiques :\n                          24\n                      \n                                                                                                      \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :"
+    },
+    {
+      "Matières": "Oraux de math S3",
+      "ECTS": 2,
+      "Cours": "",
+      "TD": 5,
+      "TP": ""
+    },
+    {
+      "Matières": "Oraux de math S3\n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          2\n        \n      \n            \n      Détail du volume horaire :\n                                      \n            Travaux dirigés :\n                          5\n                      \n                                                                                                                    \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :\n                                      \n            Programme/plan/contenus :\n                          L'objectif de cet enseignement est de favoriser le travail et l'approfondissement des mathématiques en petits groupes et d'entrainer les étudiant.e.s à présenter à l'oral un raisonnement, un théorème du cours ou une résolution d'exercice."
+    },
+    {
+      "Matières": "Oraux de math S4",
+      "ECTS": 2,
+      "Cours": "",
+      "TD": 5,
+      "TP": ""
+    },
+    {
+      "Matières": "Oraux de math S4\n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          2\n        \n      \n            \n      Détail du volume horaire :\n                                      \n            Travaux dirigés :\n                          5\n                      \n                                                                                                                    \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :\n                                      \n            Programme/plan/contenus :\n                          L'objectif de cet enseignement est de favoriser le travail et l'approfondissement des mathématiques en petits groupes et d'entrainer les étudiant.e.s à présenter à l'oral un raisonnement, un théorème du cours ou une résolution d'exercice."
+    },
+    {
+      "Matières": "SPOC Enjeux de la transition écologique (2 ECTS)",
+      "ECTS": 2,
+      "Cours": 18,
+      "TD": 6,
+      "TP": ""
+    },
+    {
+      "Matières": "SPOC Enjeux de la transition écologique (2 ECTS)\n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          2\n        \n      \n            \n      Détail du volume horaire :\n                        \n            Cours :\n                          18\n                      \n                                \n            Travaux dirigés :\n                          6\n                      \n                                                                                                                    \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :\n                                      \n            Programme/plan/contenus :\n                          Cette unité d’enseignement transversale vise à donner à tout étudiant de 1er cycle de l’université Paris Saclay des notions de bases sur les enjeux de la transition écologique à mener dans les décennies à venir pour dépasser les grandes crises environnementales, notamment concernant le changement climatique et l’érosion de la biodiversité.\n             Cette UE est disponible sous forme de ressources numériques avec une partie de présentiel : \nl’équivalent de 18h de cours/td sous forme de ressources numériques (vidéos, ppt, pdf,…)\n2 fois 1h30 d’amphi débat retransmis en streaming sur un thème\n2 fois 1h30 de TD sur un thème\n Le plan est le suivant :\n             I- Causes anthropiques des changements globaux : évolution de la place de l'être humain dans la nature\n             II- Erosion de la biodiversité et changement climatique\n             III- Comment répondre aux changements globaux : adaptation et actions\n                      \n                                \n            Pré-requis :\n                          Aucun prérequis particulier, cette UE est accessible à tout étudiant de 1e cycle de l’université Paris Saclay"
+    },
+    {
+      "Matières": "Info graphique pour la science des données",
+      "ECTS": 5,
+      "Cours": 18,
+      "TD": 24,
+      "TP": ""
+    },
+    {
+      "Matières": "Info graphique pour la science des données \n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          5\n        \n      \n            \n      Détail du volume horaire :\n                        \n            Cours :\n                          18\n                      \n                                \n            Travaux dirigés :\n                          24\n                      \n                                                                                                                    \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :\n                        \n            Objectifs d'apprentissage :\n                          acquisition des compétences particulières de la mise en place d'un affichage 3D. Maîtrise de l'ensemble du pipeline graphique des données jusqu'à l'affichage sur GPU.\n                      \n                                \n            Programme/plan/contenus :\n                          Ce cours aborde les aspects 2D et 3D du graphisme qui permettent de construire des visualisations interactives de données. Sans aborder les problèmes de réalisme ce cours s'attache à comprendre le pipeline graphique et comment l'utiliser pour faire passer à l'échelle un système de visualisation de grandes quantités de données. Par ailleurs le besoin de rendre les systèmes interactifs implique également de mettre en oeuvre des graphismes performants qui permettent l'exploration des données sans attendre le système.\n                      \n                                \n            Pré-requis :\n                          Introduction au Graphisme et aux Systèmes Interactifs\n                      \n                                \n            Semestre calendaire :\n                          S4\n                      \n                                                            \n            Modalités pédagogiques particulières\n                          6CM sur le pipeline graphique performant et l'algorithmique graphique et 6CM sur la mise en œuvre dans un environnement concret. 4 TD sur l'algorithme graphique et 6 séance sur un mini projet."
+    },
+    {
+      "Matières": "PPEI",
+      "ECTS": 2,
+      "Cours": "",
+      "TD": 4,
+      "TP": ""
+    },
+    {
+      "Matières": "PPEI\n\n\n                            \n        Langue d'enseignement :\n          Français\n        \n      \n                          \n        ECTS :\n          2\n        \n      \n            \n      Détail du volume horaire :\n                                      \n            Travaux dirigés :\n                          4\n                      \n                                                                                                                    \n  \n              \n              \n                      \n      Modalités d'organisation et de suivi  :\n                                                    \n        \n      Objectifs pédagogiques visés :\n                        \n            Objectifs d'apprentissage :\n                          Apprendre à préparer une candidature pour un stage\n                      \n                                \n            Programme/plan/contenus :\n                          Il s'agit d'un atelier de technique d'insertion professionnel visant à aider les étudiants à préparer leur candidature en stage\n                      \n                                \n            Pré-requis :\n                          Néant\n                      \n                                \n            Semestre calendaire :\n                          S3 ou 4"
+    }
+  ]

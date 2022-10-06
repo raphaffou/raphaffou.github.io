@@ -1,0 +1,510 @@
+{
+    "div": {
+      "@class": "tab-content tabs__content",
+      "@id": "group_tabs-panes",
+      "div": [
+        {
+          "@class": "tab-pane fade active show",
+          "@id": "presentation",
+          "@role": "tabpanel",
+          "@aria-labelledby": "presentation-tab",
+          "div": [
+            {
+              "@class": "d-none d-print-block bg-secondary text-white mt-5 p-4 h2",
+              "#text": "Présentation"
+            },
+            {
+              "div": [
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-objectives content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Objectifs"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": [
+                        "Cette Licence Double-Diplôme offre une formation solide et équilibrée en informatique et en mathématiques, pour préparer ensuite dans d’excellentes conditions un Master dans l’une des deux disciplines ou aux interfaces. Elle permet également de préparer l’entrée sur dossier dans des grandes écoles.\r\n          Mathématiques et Informatique sont au coeur de la transition numérique qui impacte et transforme l’ensemble des activités et des métiers. Les étudiant.e.s sont formés à modéliser des problèmes, chercher et trouver des solutions, les coder efficacement. Ils acquièrent les bases disciplinaires et abordent les domaines de l’apprentissage automatique et de la science des données, fondements de l’intelligence artificielle.",
+                        "La formation fait une large place aux projets interdisciplinaires qui permettent de développer curiosité et créativité et de s’initier à la recherche et au travail en équipe.",
+                        "L’accent est mis sur la maitrise d’une communication scientifique écrite et orale, en français et en anglais."
+                      ]
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-organisation-generale content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Organisation générale"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "Le parcours Informatique, Mathématiques est spécifique dès l'entrée en première année de licence. L'enseignement se décompose en deux blocs disciplinaires, l'un en mathématiques (commun avec les autres licences double diplome de mathématiques) et l'autre en informatique. Ces blocs disciplinaires sont complétés d'un bloc transverse (anglais, connaissance de l'entreprise et des enjeux sociétaux) et d'un bloc complémentaire qui permet un choix d'options à caractère scientifique, culturel et sportif, de projets ainsi que des oraux de mathématiques pour travailler la communication scientifique.\r\n             Après une double formation mathématiques et informatique sur les deux premières années, la licence propose trois parcours pour la troisième année : le parcours bi-disciplinaire dans le prolongement des 2 premières années ou une spécialisation en mathématiques ou en informatique (première année des magistères dans chacune de ces disciplines sur candidature)."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-formation-recherche content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Formation par la recherche"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "L’initiation à la recherche se fait au travers de projets complexes interdisciplinaires et de stages. Les stages peuvent se faire de manière libre en première et deuxième année et sont intégrés au cursus de troisième année."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-i13nprog content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Ouverture internationale et interculturelle"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "Il est possible de réaliser un semestre en 2ème année dans une université étrangère, dans le cadre de partenariats avec l’Université Paris-Saclay, mais également d’effectuer une année de césure à l’étranger, entre la licence et le master. L’apprentissage de l’anglais se poursuit jusqu’au premier semestre de 3ème année et une seconde langue vivante peut être suivie de manière optionnelle."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-public-target content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Public visé"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "La formation est ouverte aux bacheliers à dominante scientifique : spécialité mathématiques en terminale, la spécialité NSI constitue une bonne préparation sans être obligatoire.\r\n          Une admission est possible au second semestre parmi les étudiants de L1 Portail Mathématiques-Informatique ayant obtenu de bons résultats au premier semestre, de même à la fin de la première année de portail.\r\n          L'admission directement en L2 et L3 reste exceptionnelle et s'adresse à des étudiants qui ont suivi une formation solide bi-disciplinaire et présentent un projet d'études adapté."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-amenagement-etudes content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Aménagement d’études"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "Que vous soyez étudiant engagé dans la vie active ou assumant des responsabilités particulières dans la vie universitaire, la vie étudiante ou associative, femme enceinte, étudiant chargé de famille, étudiant engagé dans plusieurs cursus, étudiant handicapé, artiste ou sportif de haut niveau, l’Université Paris-Saclay vous aide à suivre vos études en mettant en place des modalités pédagogiques adaptées en application de l’article 10 du nouveau cadre national des formations. Prenez contact avec votre secrétariat pédagogique, votre directeur d’études ou votre responsable pédagogique.\r\n          Si votre demande est validée, un contrat pédagogique spécifique vous sera proposé.   Des aménagements d'études peuvent également être proposés dans le cadre d'un contrat pédagogique individuel et/ou du dispositif d'accompagnement personnalisé suivi."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@class": "tab-pane fade",
+          "@id": "competences",
+          "@role": "tabpanel",
+          "@aria-labelledby": "competences-tab",
+          "div": [
+            {
+              "@class": "d-none d-print-block bg-secondary text-white mt-5 p-4 h2",
+              "#text": "Compétences"
+            },
+            {
+              "div": [
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-qualification content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Compétences de la formation"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "A l’issu de la formation, les étudiants auront acquis les compétences suivantes :",
+                      "ul": {
+                        "li": [
+                          "Connaître et se servir aisément des bases mathématiques : logique, analyse, algèbre et géométrie ; organiser un raisonnement mathématique et le rédiger de manière synthétique et rigoureuse.",
+                          "Connaître les bases d’analyse numérique et de modélisation aléatoire pour résoudre numériquement un problème posé.",
+                          "Connaître les bases informatiques pour mener des grands projets : modèles théoriques, conception d’algorithmes, programmation à large échelle, optimisation, intégration d‘objets communicants, sureté et sécurité des programmes.",
+                          "Mettre en oeuvre la double compétence informatique et mathématiques sur des sujets aux interfaces: IA, Science des données, Systèmes complexes, Informatique théorique.",
+                          "Savoir travailler en équipe.",
+                          "Savoir communiquer à l’oral ou à l’écrit, en anglais et en français."
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-competences-3rd content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Compétences par parcours en troisième année"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "div": {
+                        "@class": "pt-5",
+                        "h3": "LDD3 Informatique"
+                      },
+                      "ul": {
+                        "@ns3": "http://cdm-fr.fr/2012/CDM",
+                        "@ns2": "http://cdm-fr.fr/2012/CDM-frSchema",
+                        "@listtype": "bulleted",
+                        "li": [
+                          "Maîtriser des modèles, concepts et notions fondamentaux de l'informatique",
+                          "Analyser des problèmes complexes et savoir formuler des solutions informatiques",
+                          "Manipuler des outils et des environnements de développement et savoir déploier des applications logicielles",
+                          "Savoir travailler en équipe",
+                          "Savoir communiquer à l'oral ou à l écrit en anglais et en français"
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@class": "tab-pane fade ",
+          "@id": "debouches",
+          "@role": "tabpanel",
+          "@aria-labelledby": "debouches-tab",
+          "div": [
+            {
+              "@class": "d-none d-print-block bg-secondary text-white mt-5 p-4 h2",
+              "#text": "Débouchés et orientation"
+            },
+            {
+              "div": [
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-debouches-poursuite content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Débouchés et poursuite d’études"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": [
+                        "L'explosion des données et les besoins associés de les traiter et les analyser, le développement de l'Intelligence Artificielle pour faire réaliser aux ordinateurs des tâches toujours plus complexes dans tous les champs professionnels, les enjeux associés de sécurité informatique sont autant de domaines qui nécessitent les compétences avancées aux interfaces des mathématiques et de l'informatique développées dans cette formation. Les métiers cible sont ceux de la science des données, de la modélisation numérique, des bio-statistiques, de l'ingénierie et des sciences du numérique.",
+                        "L’insertion directe à Bac+3 n’est pas la finalité d’une Licence Double-Diplôme, mais elle reste possible et même facilitée par la double compétence en Modélisation et en Informatique, elle se prépare au travers des stages en particulier en 3ème année.\r\n             La spécialisation professionnelle se fait en général au niveau du master.",
+                        {
+                          "strong": [
+                            "Master Informatique",
+                            "Master Mathématiques et Applications",
+                            "masters MEEF",
+                            "master Bio-informatique",
+                            "grandes écoles"
+                          ],
+                          "#text": [
+                            "La formation débouche naturellement sur une poursuite en master, puis possiblement en doctorat.\r\n             L'offre de l'Université Paris-Saclay est large avec notament les spécialités suivantes\r\n             en",
+                            ":\r\n             Artificial Intelligence (AI) ; Data Science (DS) ; Quantum and Distributed Computer Science (QDCS) ; Advanced Networks and Opimisation (ANO) ; Human Computer Interaction (HCI) ; MPRI (Fondements de l'informatique)\r\n             en",
+                            ":\r\n             Mathématiques de l’Intelligence Artificielle; Mathématiques de l’Aléatoire; Mathématiques, Vision, Apprentissage; Optimisation; Mathématiques pour les Sciences du Vivant; Data Science.\r\n             D’autres débouchés sont possibles :\r\n             Les étudiant.e.s intéressés par les métiers de l’enseignement (CAPES et agrégation en mathématiques ou en informatique) pourront s’orienter vers les voies menant à la préparation de ces concours (en particulier",
+                            ").\r\n             Le",
+                            "à l’Université Paris-Saclay qui forme aux métiers de Recherche et Développement en bioinformatique, biostatistiques et biotechnologies est aussi accessible à partir de cette licence.\r\n             Les étudiant.e.s peuvent préparer l’entrée aux",
+                            "sur les voies réservées aux universitaires et bénéficier d’une voie spécifique à l’Université Paris-Saclay pour l’accès à CentraleSupélec."
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-passerelles content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Passerelles"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "Les étudiants du portail Mathématiques-Informatique de la première année de licence de l'Ecole Universitaire peuvent rejoindre la LDD Informatique, Mathématiques à l'issue du premier ou du second semestre.\r\n                   Des passerelles sont possibles après un semestre vers les LDD Math-Physique et LDD Eco-Math.\r\n                   Des passerelles existent également après la première ou la seconde année vers la licence d'Informatique ou la licence de Mathématiques de l'Ecole Universitaire;"
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-accompagnement content-rte field-spacing",
+                    "h2": {
+                      "@class": "field__label font-weight-bold section__title",
+                      "#text": "Accompagnement personnalisé"
+                    },
+                    "div": {
+                      "@class": "field__item",
+                      "p": "Les étudiants bénéficient d'un suivi et d'un accompagnement tout au long de leur parcours. Des oraux de mathématiques proposés de manière obligatoire en deuxième année et optionnelle en 3ème année facilitent la préparation de candidatures aux grandes écoles."
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@class": "tab-pane fade ",
+          "@id": "parcours",
+          "@role": "tabpanel",
+          "@aria-labelledby": "parcours-tab",
+          "div": [
+            {
+              "@class": "d-none d-print-block bg-secondary text-white mt-5 p-4 h2",
+              "#text": "Parcours"
+            },
+            {
+              "div": [
+                {
+                  "@class": "field-spacing",
+                  "div": {
+                    "@class": "licence__field-parcours content-rte field-spacing",
+                    "div": {
+                      "@class": "field__item",
+                      "div": {
+                        "@class": "views-element-container",
+                        "div": {
+                          "@class": "js-view-dom-id-3625d0fa81caefead065bd696d2e7dc9c70ae1ea0c45af8ad62e3ce3c064fd9a",
+                          "div": [
+                            {
+                              "@class": "field-spacing",
+                              "h2": {
+                                "@class": "field__label font-weight-bold section__title",
+                                "#text": "L1"
+                              },
+                              "div": {
+                                "@class": "row row-spacing",
+                                "div": {
+                                  "@class": "col-md-4 col-12 thumbnail__col",
+                                  "article": {
+                                    "@role": "article",
+                                    "@about": "/formation/licence-double-diplome/informatique-mathematiques/ldd1-informatique-mathematiques",
+                                    "@class": "node thumbnail prof",
+                                    "div": [
+                                      {
+                                        "@class": "thumbnail__body",
+                                        "h3": {
+                                          "@class": "h4 thumbnail__title",
+                                          "a": {
+                                            "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd1-informatique-mathematiques",
+                                            "#text": "LDD1 Informatique, Mathématiques"
+                                          }
+                                        },
+                                        "p": {
+                                          "@class": "thumbnail__text",
+                                          "#text": "Ce parcours est la première année de la licence double diplome Informatique, Mathématiques. Ces deux disciplines sont au..."
+                                        }
+                                      },
+                                      {
+                                        "@class": "thumbnail__footer",
+                                        "a": {
+                                          "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd1-informatique-mathematiques",
+                                          "@class": "read-more__link--footer",
+                                          "i": {
+                                            "@class": "ico-link-chevron",
+                                            "@aria-hidden": "true"
+                                          },
+                                          "span": "Lire la suite"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "@class": "field-spacing",
+                              "h2": {
+                                "@class": "field__label font-weight-bold section__title",
+                                "#text": "L2"
+                              },
+                              "div": {
+                                "@class": "row row-spacing",
+                                "div": {
+                                  "@class": "col-md-4 col-12 thumbnail__col",
+                                  "article": {
+                                    "@role": "article",
+                                    "@about": "/formation/licence-double-diplome/informatique-mathematiques/ldd2-informatique-mathematiques",
+                                    "@class": "node thumbnail prof",
+                                    "div": [
+                                      {
+                                        "@class": "thumbnail__body",
+                                        "h3": {
+                                          "@class": "h4 thumbnail__title",
+                                          "a": {
+                                            "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd2-informatique-mathematiques",
+                                            "#text": "LDD2 Informatique, Mathématiques"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "@class": "thumbnail__footer",
+                                        "a": {
+                                          "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd2-informatique-mathematiques",
+                                          "@class": "read-more__link--footer",
+                                          "i": {
+                                            "@class": "ico-link-chevron",
+                                            "@aria-hidden": "true"
+                                          },
+                                          "span": "Lire la suite"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "@class": "field-spacing",
+                              "h2": {
+                                "@class": "field__label font-weight-bold section__title",
+                                "#text": "L3"
+                              },
+                              "div": {
+                                "@class": "row row-spacing",
+                                "div": [
+                                  {
+                                    "@class": "col-md-4 col-12 thumbnail__col",
+                                    "article": {
+                                      "@role": "article",
+                                      "@about": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique",
+                                      "@class": "node thumbnail prof",
+                                      "div": [
+                                        {
+                                          "@class": "thumbnail__body",
+                                          "h3": {
+                                            "@class": "h4 thumbnail__title",
+                                            "a": {
+                                              "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique",
+                                              "#text": "LDD3 Informatique"
+                                            }
+                                          },
+                                          "p": {
+                                            "@class": "thumbnail__text",
+                                            "#text": "Le parcours Informatique (3ème année de Licence) est un parcours monodisciplinaire qui s'appuie sur les compétences et..."
+                                          }
+                                        },
+                                        {
+                                          "@class": "thumbnail__footer",
+                                          "a": {
+                                            "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique",
+                                            "@class": "read-more__link--footer",
+                                            "i": {
+                                              "@class": "ico-link-chevron",
+                                              "@aria-hidden": "true"
+                                            },
+                                            "span": "Lire la suite"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "@class": "col-md-4 col-12 thumbnail__col",
+                                    "article": {
+                                      "@role": "article",
+                                      "@about": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique-mathematiques",
+                                      "@class": "node thumbnail prof",
+                                      "div": [
+                                        {
+                                          "@class": "thumbnail__body",
+                                          "h3": {
+                                            "@class": "h4 thumbnail__title",
+                                            "a": {
+                                              "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique-mathematiques",
+                                              "#text": "LDD3 Informatique, Mathématiques"
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "@class": "thumbnail__footer",
+                                          "a": {
+                                            "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique-mathematiques",
+                                            "@class": "read-more__link--footer",
+                                            "i": {
+                                              "@class": "ico-link-chevron",
+                                              "@aria-hidden": "true"
+                                            },
+                                            "span": "Lire la suite"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "@class": "col-md-4 col-12 thumbnail__col",
+                                    "article": {
+                                      "@role": "article",
+                                      "@about": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-mathematiques",
+                                      "@class": "node thumbnail prof",
+                                      "div": [
+                                        {
+                                          "@class": "thumbnail__body",
+                                          "h3": {
+                                            "@class": "h4 thumbnail__title",
+                                            "a": {
+                                              "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-mathematiques",
+                                              "#text": "LDD3 Mathématiques"
+                                            }
+                                          }
+                                        },
+                                        {
+                                          "@class": "thumbnail__footer",
+                                          "a": {
+                                            "@href": "/formation/licence-double-diplome/informatique-mathematiques/ldd3-mathematiques",
+                                            "@class": "read-more__link--footer",
+                                            "i": {
+                                              "@class": "ico-link-chevron",
+                                              "@aria-hidden": "true"
+                                            },
+                                            "span": "Lire la suite"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "@class": "field-spacing"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
