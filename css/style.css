@@ -39,6 +39,7 @@ ul.first:hover li.first{
 }
 *{
     font-family: 'Noto Sans Mono', monospace;
+    filter : blur(3px);
 }
 body{
     padding:0px;
