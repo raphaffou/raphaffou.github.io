@@ -21,9 +21,14 @@ function includeHTML() {
         xhttp.open("GET", file, true);
         xhttp.send();
         /*exit the function:*/
+        
         return;
       }
     }
   };
-  includeHTML();
-  setInterval(includeHTML, 100);
+  function routine() {
+    includeHTML();
+    noref();
+  }
+  routine();
+  setInterval(routine, 300);

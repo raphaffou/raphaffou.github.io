@@ -7,4 +7,3 @@ function noref() {
         }
     }
 }
-setInterval(noref, 500);

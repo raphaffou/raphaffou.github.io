@@ -9,16 +9,13 @@ ul.first li{
     display: none;
     padding:5px;
     color:#fff;
-    border-left:solid #0f0;
+    border-left:solid #aaa;
 }
 ul.first:hover li{
     display: block;
 }
 li.first ul, ul.first{
-    height:1.2em;
-    transition:all;
     overflow:hidden;
-    transition-duration: 0.3s;
 }
 ul.first{
     width:100%;
@@ -27,12 +24,7 @@ ul.first{
     display:inline-block;
     padding:5px;
     text-align:center;
-    background:#0004;
-}
-ul.first:hover, li.first ul{
-    height:10em;
-    transition:all;
-    transition-duration: 0.3s;
+    background:#000;
 }
 ul.first:hover li.first{
     display:block;
@@ -44,14 +36,16 @@ body{
     padding:0px;
     margin:0px;
     background: black;
+    overflow-y: scroll;
 }
 .links{
-    max-width:50%;
-    min-width: 60em;
+    width:75%;
+    max-width: 200mm;
     position:absolute;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
+    filter :blur(0.5px);
 }
 .menubar{
     top:0px;
@@ -61,14 +55,12 @@ body{
     color:#fff;
     z-index:1;
     font-weight:100;
-    width:50%;
     left:50%;
     transform: translateX(-50%);
-
 }
 .name{
-    color:white;
-    background:#0004;
+    color:#000;
+    background:#fff;
     display:inline-block;
     padding:5px;
     margin:auto;
@@ -94,6 +86,9 @@ body{
 li::content, #menuIco {
     filter : blur(0.5px);
 }
+#menuIco{
+    cursor:pointer;
+}
 @media screen and (max-width: 640px) {
     .links{
         min-width:0px;
@@ -107,3 +102,10 @@ li::content, #menuIco {
         width:100%;
     }
   }
+
+
+@media screen and (min-width: 460mm) {
+    .links, .name, #main, li::content, #menuIco{
+        filter : blur(0px);
+    }
+}
