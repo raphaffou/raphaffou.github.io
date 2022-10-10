@@ -114,6 +114,16 @@ li::content, #menuIco {
     li.top{
         margin-top: 20px;
     }
+    #main{
+        overflow:scroll;
+        text-align: center;
+    }
+    #main table tr{
+        display:none;
+    }
+    #main table:hover tr{
+        display:table-row;
+    }
   }
 
 
