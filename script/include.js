@@ -15,6 +15,7 @@ function includeHTML() {
             if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
             /*remove the attribute, and call this function once more:*/
             elmnt.removeAttribute("w3-include-html");
+            nodeScriptReplace(document.getElementsByTagName("body")[0]);
             includeHTML();
           }
         }      
@@ -26,6 +27,33 @@ function includeHTML() {
       }
     }
   };
+  function nodeScriptReplace(node) {
+    if ( nodeScriptIs(node) === true ) {
+            node.parentNode.replaceChild( nodeScriptClone(node) , node );
+    }
+    else {
+            var i = -1, children = node.childNodes;
+            while ( ++i < children.length ) {
+                  nodeScriptReplace( children[i] );
+            }
+    }
+
+    return node;
+}
+function nodeScriptClone(node){
+    var script  = document.createElement("script");
+    script.text = node.innerHTML;
+
+    var i = -1, attrs = node.attributes, attr;
+    while ( ++i < attrs.length ) {                                    
+          script.setAttribute( (attr = attrs[i]).name, attr.value );
+    }
+    return script;
+}
+
+function nodeScriptIs(node) {
+    return node.tagName === 'SCRIPT';
+}
   function routine() {
     includeHTML();
     noref();

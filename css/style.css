@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
-ul li.link{
+.link{
     cursor :pointer;
     font-weight:300;
     border-bottom:dashed 1px white;
@@ -17,6 +17,7 @@ ul.first:hover li{
 li.first ul, ul.first{
     overflow:hidden;
 }
+
 ul.first{
     width:100%;
     margin:0px;
@@ -89,7 +90,16 @@ li::content, #menuIco {
 #menuIco{
     cursor:pointer;
 }
+
+.summaryTable{
+    width:100%;
+}
+.summaryTable th{
+    background: white;
+    color:black;
+}
 @media screen and (max-width: 640px) {
+    /*phones*/
     .links{
         min-width:0px;
         max-width:100%;
@@ -101,10 +111,14 @@ li::content, #menuIco {
     ul.first{
         width:100%;
     }
+    li.top{
+        margin-top: 20px;
+    }
   }
 
 
-@media screen and (min-width: 460mm) {
+@media screen and (min-width: 4600mm) {
+    /*large screens*/
     .links, .name, #main, li::content, #menuIco{
         filter : blur(0px);
     }
