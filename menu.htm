@@ -1,19 +1,75 @@
-<div class="menubar">
-    <div class="namediv">
-        <h1 class="name">Raphaël Thieffry</h1>
+
+  <div id="nom">
+    <div id="clicker">
+      <h1>>Raphael Thieffry<</h1>
+      <span class="small">click to toggle menu</span>
     </div>
-    <div class="links">
-        <ul class="first">
-            <span id="menuIco">menu</span>
-            <li class="link first top" src="aboutme.htm">About me</li>
-            <li class="first">
-                Paris-Saclay studies
-                <ul class="second">
-                    <li class="link second" src="l1.htm">Licence double diplome 1(LDD1-IM)</li>
-                    <li class="link second" src="l2.htm">Licence double diplome 2(LDD2-IM)</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div class="categories"></div>
+      <nav id="menu">
+      <ul>
+        <li><span class="link" src="projets.html">Projets</span></li>
+        <li><span class="link" src="l1.htm">Formation</span></li>
+        <li><span class="link" src="l2.htm">Exp pro</span></li>
+        <li><span class="link" src="projets.html">Autres</span></li>
+      </ul>
+    </nav>
+  </div>
+  <main>
+  </main>
+  <footer>
+  </footer>
+  <script>
+    const pos = { x : 0, y : 0 };
+    var clicked = false;
+
+
+    document.documentElement.style.setProperty('--w', window.innerWidth);
+    document.documentElement.style.setProperty('--h', window.innerHeight);
+    const saveCursorPosition = function(x, y) {
+        pos.x = (x).toFixed(2);
+        pos.y = (y).toFixed(2);
+        document.documentElement.style.setProperty('--x', pos.x);
+        document.documentElement.style.setProperty('--y', pos.y);
+    }
+    document.addEventListener('mousemove', e => { 
+      if(!clicked){
+        saveCursorPosition((e.clientX+window.scrollX), e.clientY+window.scrollY);
+      }
+    });
+    const nameH = parseInt(document.getElementById("clicker").offsetHeight);
+    const ulH = parseInt(document.getElementById("menu").offsetHeight);
+    const nameW = parseInt(document.getElementById("clicker").offsetWidth);
+    const ulW = parseInt(document.getElementById("menu").offsetWidth);
+    document.getElementById("nom").setAttribute("style", 'height: '+String(nameH)+'px;');
+    
+    const marginH = 100;
+
+    document.addEventListener('scroll', e =>{
+      if(clicked){
+        if(pos.y-((nameH+ulH)/2) - window.scrollY < 0){
+          pos.y = window.scrollY+((nameH+ulH)/2);
+          document.documentElement.style.setProperty('--y', pos.y);
+        }
+        if(pos.y + ((nameH+ulH)/2) > window.scrollY + window.innerHeight){
+          pos.y = window.scrollY + window.innerHeight - ((nameH+ulH)/2);
+          document.documentElement.style.setProperty('--y', pos.y);
+        }
+        if(pos.x-((nameW)/2) < window.scrollX +marginH){
+          pos.x = window.scrollX+((nameW)/2) + marginH;
+          document.documentElement.style.setProperty('--x', pos.x);
+        }
+        if(pos.x + ((nameW)/2) > window.scrollX + window.innerWidth - marginH){
+          pos.x = window.scrollX + window.innerWidth - ((nameW)/2)-marginH;
+          document.documentElement.style.setProperty('--x', pos.x); 
+        }
+      }
+    });
+    document.getElementById("nom").onclick = function () { 
+      clicked = !clicked;
+      if(!clicked){
+        document.getElementById("nom").setAttribute("style", 'height: '+String(nameH)+'px;');
+      }else{
+        document.getElementById("nom").setAttribute("style", 'height: '+ String((nameH + ulH)) +'px;');
+      }
+    }
+  </script>
 </div>

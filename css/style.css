@@ -1,135 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
-.link{
-    cursor :pointer;
-    font-weight:300;
-    border-bottom:dashed 1px white;
+@import url(https://fonts.googleapis.com/css2?family=Cantata+One&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Ruge+Boogie&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap);
 
-}
-ul.first li{
-    display: none;
-    padding:5px;
-    color:#fff;
-    border-left:solid #aaa;
-}
-ul.first:hover li{
-    display: block;
-}
-li.first ul, ul.first{
-    overflow:hidden;
-}
-
-ul.first{
-    width:100%;
-    margin:0px;
-    color:white;
-    display:inline-block;
-    padding:5px;
-    text-align:center;
-    background:#000;
-}
-ul.first:hover li.first{
-    display:block;
-}
-*{
-    font-family: 'Noto Sans Mono', monospace;
+:root {
+    --w:1920;
+    --h:1080
+    --x: 0.5;
+    --y: 0.5;
 }
 body{
-    padding:0px;
-    margin:0px;
+    /*background-image: url("https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1574024073167-PRLTM8P9IEOI4Q6EZQYO/Desert.gif");
+    background-origin:center;
+    background-attachment: fixed;
+    background-size: cover;*/
+    padding : 0px;
+    margin : 0px;
+    image-rendering: pixelated;
+    min-height:100%;
     background: black;
-    overflow-y: scroll;
-}
-.links{
-    width:75%;
-    max-width: 200mm;
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    filter :blur(0.5px);
-}
-.menubar{
-    top:0px;
-    position:fixed;
-    width:100%;
-    height: 100px;
-    color:#fff;
-    z-index:1;
-    font-weight:100;
-    left:50%;
-    transform: translateX(-50%);
-}
-.name{
-    color:#000;
-    background:#fff;
-    display:inline-block;
-    padding:5px;
-    margin:auto;
-    filter : blur(0.5px);
-}
-.namediv{
-    text-align:center;
-    margin:5px;
-}
-#main{    
-    text-align:justify;
     color:white;
-    /*background: url(../images/background.png);*/
-    padding: 10px;
-    padding-top: 100px;
-    transition: all;
-    transition-duration: 0.3s;
-    background-origin: center;
-    background-size: 100%;
-    min-height:500px;
-    filter : blur(0.5px);
 }
-li::content, #menuIco {
-    filter : blur(0.5px);
+#clicker{
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+    background-size: 400% 400%;
+    animation: gradient 5s infinite;
 }
-#menuIco{
-    cursor:pointer;
+#nom{
+    font-family: 'Rubik Mono One', sans-serif;
+    color: white;
+    position: absolute;
+    z-index:999;
+    left: 0%;
+    top: 0%;
+    transform: translate(calc(-50% + 1px * var(--x)), calc(-50% + 1px * var(--y)));
+    transition: transform 0.0s;
+    transition: height ease 0.3s;
+    padding:0px;
+    overflow:hidden;
+    
 }
-
-.summaryTable{
+#nom .small{
+    font-size:smaller;
+    display: block;
     width:100%;
+    text-align: center;
+    text-justify:auto;
+    margin:0px;
 }
-.summaryTable th{
-    background: white;
-    color:black;
+::selection{
+    background: none;
 }
-@media screen and (max-width: 640px) {
-    /*phones*/
-    .links{
-        min-width:0px;
-        max-width:100%;
-        width:90%;
+#nom h1{
+    font-size: medium;
+    text-justify:auto;
+    cursor: pointer;
+    background:black;
+    background-color: blue;
+    mix-blend-mode: exclusion;
+    color:white;
+    margin:0px;
+}
+nav{
+    /*border : solid 1px white;*/
+    background :black;
+    color: white;
+    margin:0px;
+}
+nav .link{
+    text-decoration: none;
+    color: white;
+    transition : all 0.3s;
+}
+nav ul{
+    margin : 0;
+    list-style-type: kannada;
+    padding-top: 10px;
+    padding-bottom:10px;
+}
+nav li:hover .link{
+    text-decoration: underline;
+    margin-left:5%;
+}
+@keyframes gradient {
+    0% {
+        background-position: -200% 50%;
+        animation-timing-function:linear;
     }
-    .menubar{
-        width:100%;
-    }
-    ul.first{
-        width:100%;
-    }
-    li.top{
-        margin-top: 20px;
-    }
-    #main{
-        overflow:scroll;
-        text-align: center;
-    }
-    #main table tr{
-        display:none;
-    }
-    #main table:hover tr{
-        display:table-row;
-    }
-  }
-
-
-@media screen and (min-width: 4600mm) {
-    /*large screens*/
-    .links, .name, #main, li::content, #menuIco{
-        filter : blur(0px);
+    100% {
+        background-position: 200% 50%;
+        animation-timing-function:cubic-bezier(1, 0, 0, 1);
     }
 }
