@@ -18,6 +18,7 @@ body{
     image-rendering: pixelated;
     background: black;
     color:white;
+    transition: margin-top 0.3s;
 }
 #clicker{
     background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);

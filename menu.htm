@@ -76,7 +76,7 @@
         }
         });
     }
-    document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH+ulH)+'px;');
+    if(mobileAndTabletCheck()) {document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH+ulH)+'px;')};
     document.getElementById("nom").onclick = function () { 
       clicked = !clicked;
       if(!clicked){
