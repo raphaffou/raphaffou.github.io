@@ -91,3 +91,9 @@ nav li:hover .link{
         animation-timing-function:cubic-bezier(1, 0, 0, 1);
     }
 }
+@media screen and (max-width : 640px) {
+    #nom{
+        position: fixed;
+        top:0px;
+    }
+}
