@@ -5,8 +5,8 @@
 :root {
     --w:1920;
     --h:1080
-    --x: 0.5;
-    --y: 0.5;
+    --x: 0.0;
+    --y: 0.0;
 }
 body{
     /*background-image: url("https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1574024073167-PRLTM8P9IEOI4Q6EZQYO/Desert.gif");
@@ -16,7 +16,6 @@ body{
     padding : 0px;
     margin : 0px;
     image-rendering: pixelated;
-    min-height:100%;
     background: black;
     color:white;
 }
@@ -32,8 +31,6 @@ body{
     z-index:999;
     left: 0%;
     top: 0%;
-    transform: translate(calc(-50% + 1px * var(--x)), calc(-50% + 1px * var(--y)));
-    transition: transform 0.0s;
     transition: height ease 0.3s;
     padding:0px;
     overflow:hidden;
@@ -93,7 +90,20 @@ nav li:hover .link{
 }
 @media screen and (max-width : 640px) {
     #nom{
-        position: fixed;
+        width:calc(1px * var(--w));
+        position:static;
+    }
+    #menuWrap{
+        position:fixed;
         top:0px;
+    }
+    #clicker{
+        text-align: center;
+    }
+}
+@media screen and (min-width : 641px){
+    #nom{
+        transform: translate(calc(-50% + 1px * var(--x)), calc(-50% + 1px * var(--y)));
+        transition: transform 0.0s;
     }
 }
