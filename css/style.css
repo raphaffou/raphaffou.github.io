@@ -19,6 +19,10 @@ body{
     background: black;
     color:white;
     transition: margin-top 0.3s;
+    overflow:hidden;
+}
+main{
+    overflow:scroll;
 }
 #clicker{
     background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
