@@ -19,7 +19,7 @@ body{
     background: black;
     color:white;
     transition: margin-top 0.3s;
-    overflow:hidden;
+    overflow-x:hidden;
 }
 main{
     overflow:scroll;
