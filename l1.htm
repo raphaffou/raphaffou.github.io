@@ -1,17 +1,3 @@
-<script type="text/javascript">
-    fetch('json/mathsL1.json')
-    .then((response) => response.json())
-    .then((json) => traitementJson(json,"mathyearcontent","Matièresmaths"));
-    fetch('json/infoL1.json')
-    .then((response) => response.json())
-    .then((json) => traitementJson(json,"infoyearcontent","Matièresinfo"));
-    fetch('json/transL1.json')
-    .then((response) => response.json())
-    .then((json) => traitementJson(json,"transyearcontent","Matièrestrans"));
-    fetch('json/compL1.json')
-    .then((response) => response.json())
-    .then((json) => traitementJson(json,"compyearcontent","Matièrescomp"));
-</script>
 <table id="mathyearcontent" class="summaryTable" border="1" cellspacing="0">
     <caption>Mathematiques</caption>
     <tr id="Matièresmaths">
@@ -32,3 +18,19 @@
     <tr id="Matièrescomp">
     </tr>
 </table>
+    <script type="text/javascript">
+        if(document.getElementById("rowmathyearcontent1Matières") == null){
+            fetch('json/mathsL1.json')
+            .then((response) => response.json())
+            .then((json) => traitementJson(json,"mathyearcontent","Matièresmaths"));
+            fetch('json/infoL1.json')
+            .then((response) => response.json())
+            .then((json) => traitementJson(json,"infoyearcontent","Matièresinfo"));
+            fetch('json/transL1.json')
+            .then((response) => response.json())
+            .then((json) => traitementJson(json,"transyearcontent","Matièrestrans"));
+            fetch('json/compL1.json')
+            .then((response) => response.json())
+            .then((json) => traitementJson(json,"compyearcontent","Matièrescomp"));
+        }
+    </script>
