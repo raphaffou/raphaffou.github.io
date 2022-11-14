@@ -8,6 +8,12 @@
     --x: 0.0;
     --y: 0.0;
 }
+*{
+    box-sizing: border-box;
+}
+footer{
+    height : calc(var(--h)/2 * 1px);
+}
 body{
     /*background-image: url("https://images.squarespace-cdn.com/content/v1/551a19f8e4b0e8322a93850a/1574024073167-PRLTM8P9IEOI4Q6EZQYO/Desert.gif");
     background-origin:center;
@@ -21,9 +27,6 @@ body{
     transition: margin-top 0.3s;
     overflow-x:hidden;
 }
-main{
-    overflow:scroll;
-}
 #clicker{
     background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
     background-size: 400% 400%;
@@ -33,13 +36,13 @@ main{
     font-family: 'Rubik Mono One', sans-serif;
     color: white;
     position: absolute;
-    z-index:999;
+    z-index:99;
     left: 0%;
     top: 0%;
     transition: height ease 0.3s;
     padding:0px;
     overflow:hidden;
-    
+    background:black;
 }
 #nom .small{
     font-size:smaller;
@@ -79,10 +82,90 @@ nav ul{
     padding-top: 10px;
     padding-bottom:10px;
 }
+.link{
+    cursor: pointer;
+}
 nav li:hover .link{
     text-decoration: underline;
     margin-left:5%;
 }
+#centered{
+    z-index:0;
+    width:50%;
+    font-family: 'Rubik Mono One', sans-serif;
+    position: relative;
+    top : calc((var(--h)/2) * 1px);
+    left : calc((var(--w)/2) * 1px);
+    transform: translate(-50%, -50%);
+}
+#centered h1{
+    text-align: center;
+}
+#centered h3{
+    text-align: justify;
+    color: lightgrey;
+}
+
+#content{
+    font-family: 'Rubik Mono One', sans-serif;
+    position: relative;
+    top : calc((var(--h)) * 1px);
+}
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+.search-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+.search-wrapper label {
+	font-size: 2rem;
+	font-weight: 600;
+}
+#search {
+	max-width: 30em;
+	height: 2.5rem;
+	background-color: #222;
+	outline: none;
+	border: none;
+	border-radius: 8px;
+	padding: 0.5em 1em;
+	font-size: 1rem;
+	color: white;
+	transition: all 200ms ease-in-out;
+}
+#search:focus {
+	background-color: #333;
+}
+.cards-wrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 1em;
+	margin-top: 3em;
+}
+.card {
+	background-color: #333;
+	border-radius: 8px;
+	padding: 1em;
+	display: grid;
+	gap: 0.25rem;
+}
+.name {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+.card p {
+	font-size: 0.8rem;
+	color: #aaa;
+}
+.hide {
+	display: none;
+}
+
 @keyframes gradient {
     0% {
         background-position: -200% 50%;
@@ -94,11 +177,18 @@ nav li:hover .link{
     }
 }
 @media screen and (max-width : 640px) {
+    .container {
+        padding: 2em;
+    }
+    #centered{
+        width:90%;
+    }
     #nom{
         width:calc(1px * var(--w));
         position:static;
     }
     #menuWrap{
+        z-index:99;
         position:fixed;
         top:0px;
     }
@@ -109,6 +199,6 @@ nav li:hover .link{
 @media screen and (min-width : 641px){
     #nom{
         transform: translate(calc(-50% + 1px * var(--x)), calc(-50% + 1px * var(--y)));
-        transition: transform 0.0s;
+        transition: all ease 0.1s;
     }
 }

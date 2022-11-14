@@ -1,0 +1,53 @@
+<div id="centered">
+    <h1>Projets</h1>
+    <h3>Ce que j'ai fait, et ce que je suis en train de faire</h3>
+    <div style="text-align: center; color: lightgrey;"><i class="fa fa-chevron-down" style="font-size: 25px;"></i></div>
+</div>
+<div id="content">
+    <div class="container">
+        <div class="search-wrapper">
+            <label for="search">Rechercher un projet :</label>
+            <input autocomplete="off" type="text" placeholder="Type here..." id="search">
+        </div>
+        <div id="cards-wrapper" class="cards-wrapper">
+        </div>
+        <template id="card-template">
+            <div class="card">
+                <header id="name" class="name"></header>
+                <p id="email"></p>
+            </div>
+        </template>
+    </div>
+</div>
+<script>
+    const projetCardTemplate = document.getElementById("card-template");
+    let details = [];
+    const getprojets = async () => {
+        const res = await fetch("json/projets.json");
+        const projets = await res.json();
+        details = projets.map((projet, i) => {
+            const card = projetCardTemplate.content.cloneNode(true);
+            card.getElementById("name").innerText = projet.name;
+            card.getElementById("email").innerText = projet.email;
+            document.getElementById("cards-wrapper").append(card);
+            return {
+                name: projet.name.toLowerCase(),
+                email: projet.email.toLowerCase(),
+                ele: document.querySelectorAll(".card")[i]
+            };
+        });
+    };
+
+    getprojets();
+
+    const input = document.getElementById("search");
+
+    input.addEventListener("input", (e) => {
+        let query = e.target.value.toLowerCase();
+        details.forEach((projet) => {
+            const isVisible = projet.name.includes(query) || projet.email.includes(query);
+            projet.ele.classList.toggle("hide", !isVisible);
+        });
+    });
+
+</script>

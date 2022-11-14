@@ -7,6 +7,7 @@ function noref() {
         }
     }
 }
+/* ne marche pas correctement
 function traitementJson(data,idtable,idhead) {
     var titles = document.getElementById(idhead);
     var table = document.getElementById(idtable);
@@ -25,4 +26,4 @@ function traitementJson(data,idtable,idhead) {
         }
         
     }
-}
+}*/

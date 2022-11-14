@@ -7,9 +7,9 @@
       <nav id="menu">
       <ul>
         <li><span class="link" src="projets.html">Projets</span></li>
-        <li><span class="link" src="l1.htm">Formation</span></li>
-        <li><span class="link" src="l2.htm">Exp pro</span></li>
-        <li><span class="link" src="projets.html">Autres</span></li>
+        <li><span class="link" src="formation.html">Formation</span></li>
+        <li><span class="link" src="exp.html">Exp pro</span></li>
+        <li><span class="link" src="autres.html">Autres</span></li>
       </ul>
     </nav>
   </div>
@@ -72,18 +72,24 @@
         }
         });
     }
-    if(mobileAndTabletCheck()) {document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH+ulH)+'px;')};
-    document.getElementById("clicker").onclick = function () { 
+    if(mobileAndTabletCheck()) {document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH)+'px;')};
+    document.getElementById("clicker").onclick = function (e) { 
       clicked = !clicked;
       if(!clicked){
         document.getElementById("nom").setAttribute("style", 'height: '+String(nameH)+'px;');
         if(mobileAndTabletCheck()){
             document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH)+'px;');
+        }else{
+            pos.y = e.clientY + window.scrollY;
+            document.documentElement.style.setProperty('--y', pos.y); 
         }
       }else{
         document.getElementById("nom").setAttribute("style", 'height: '+ String((nameH + ulH)) +'px;');
         if(mobileAndTabletCheck()){
             document.getElementsByTagName("body")[0].setAttribute("style", 'margin-top: '+String(nameH+ulH)+'px;');
+        }else{
+            pos.y = e.clientY + window.scrollY + parseInt((ulH)/2);
+            document.documentElement.style.setProperty('--y', pos.y); 
         }
       }
     }
