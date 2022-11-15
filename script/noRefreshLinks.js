@@ -1,12 +1,29 @@
-const collection1 = document.getElementsByClassName("link");
 var content = document.getElementById("main");
+/* obsolete
+const collection1 = document.getElementsByClassName("link");
 function noref() {
     for (let i = 0; i < collection1.length; i++) {
         collection1[i].onclick = function() {
             content.innerHTML = "<div w3-include-html=\""+collection1[i].getAttribute("src")+"\"></div>";
         }
     }
+} */
+
+function interceptClickEvent(e) {
+    var href;
+    var target = e.target || e.srcElement;
+    if (target.tagName === 'A' && target.getAttribute('target') != '_BLANK') {
+        href = target.getAttribute('href');
+        content.innerHTML = "<div w3-include-html=\""+href+"\"></div>";
+        if (true) {
+           //tell the browser not to respond to the link click
+           e.preventDefault();
+        }
+    }
 }
+
+
+
 /* ne marche pas correctement
 function traitementJson(data,idtable,idhead) {
     var titles = document.getElementById(idhead);

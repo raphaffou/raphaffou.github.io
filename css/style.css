@@ -71,7 +71,7 @@ nav{
     color: white;
     margin:0px;
 }
-nav .link{
+nav a{
     text-decoration: none;
     color: white;
     transition : all 0.3s;
@@ -82,10 +82,7 @@ nav ul{
     padding-top: 10px;
     padding-bottom:10px;
 }
-.link{
-    cursor: pointer;
-}
-nav li:hover .link{
+nav li:hover a{
     text-decoration: underline;
     margin-left:5%;
 }

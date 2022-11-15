@@ -14,12 +14,18 @@
         <template id="card-template">
             <div class="card">
                 <header id="name" class="name"></header>
-                <p id="email"></p>
+                <p id="date"></p>
+                <p id="projtext"></p>
             </div>
         </template>
     </div>
 </div>
 <script>
+    //trouve un moyen d'executer les fonctions 1 fois mais de faire fonctionner ce bordel à chaque chargement de page
+
+    function date_to_String(date){
+        return String(date.day) + "/" + String(date.month) + "/" + String(date.year);
+    }
     const projetCardTemplate = document.getElementById("card-template");
     let details = [];
     const getprojets = async () => {
@@ -28,11 +34,12 @@
         details = projets.map((projet, i) => {
             const card = projetCardTemplate.content.cloneNode(true);
             card.getElementById("name").innerText = projet.name;
-            card.getElementById("email").innerText = projet.email;
+            card.getElementById("date").innerText = date_to_String(projet.date);
+            card.getElementById("projtext").innerText = projet.text.substring(0, 50) + "...";
             document.getElementById("cards-wrapper").append(card);
             return {
                 name: projet.name.toLowerCase(),
-                email: projet.email.toLowerCase(),
+                text: projet.text.toLowerCase(),
                 ele: document.querySelectorAll(".card")[i]
             };
         });
@@ -45,7 +52,7 @@
     input.addEventListener("input", (e) => {
         let query = e.target.value.toLowerCase();
         details.forEach((projet) => {
-            const isVisible = projet.name.includes(query) || projet.email.includes(query);
+            const isVisible = projet.name.includes(query) || projet.text.includes(query);
             projet.ele.classList.toggle("hide", !isVisible);
         });
     });

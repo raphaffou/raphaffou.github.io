@@ -27,15 +27,19 @@ function includeHTML() {
       }
     }
   };
+  const execScripts = [];
   function nodeScriptReplace(node) {
-    if ( nodeScriptIs(node) === true ) {
-            node.parentNode.replaceChild( nodeScriptClone(node) , node );
-    }
-    else {
-            var i = -1, children = node.childNodes;
-            while ( ++i < children.length ) {
-                  nodeScriptReplace( children[i] );
-            }
+    if(!execScripts.includes(node.innerHTML)){
+      if ( nodeScriptIs(node) === true ) {
+        execScripts.push(node.innerHTML);
+        node.parentNode.replaceChild( nodeScriptClone(node) , node );
+      }
+      else {
+        var i = -1, children = node.childNodes;
+        while ( ++i < children.length ) {
+          nodeScriptReplace( children[i] );
+        }
+      }
     }
 
     return node;
@@ -45,7 +49,7 @@ function nodeScriptClone(node){
     script.text = node.innerHTML;
 
     var i = -1, attrs = node.attributes, attr;
-    while ( ++i < attrs.length ) {                                    
+    while ( ++i < attrs.length ) { 
           script.setAttribute( (attr = attrs[i]).name, attr.value );
     }
     return script;
@@ -54,9 +58,15 @@ function nodeScriptClone(node){
 function nodeScriptIs(node) {
     return node.tagName === 'SCRIPT';
 }
+
   function routine() {
     includeHTML();
-    noref();
   }
   routine();
   setInterval(routine, 300);
+  //listen for link click events at the document level
+if (document.addEventListener) {
+  document.addEventListener('click',interceptClickEvent);
+}else if(document.attachEvent) {
+  document.attachEvent('onclick', interceptClickEvent);
+}
