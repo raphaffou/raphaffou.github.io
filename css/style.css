@@ -129,11 +129,12 @@ nav li:hover .link{
 #search {
 	max-width: 30em;
 	height: 2.5rem;
-	background-color: #222;
+	background-color: #FFF0;
 	outline: none;
 	border: none;
-	border-radius: 8px;
+    border-bottom:solid white 1px;
 	padding: 0.5em 1em;
+    font-family: 'Rubik Mono One', sans-serif;
 	font-size: 1rem;
 	color: white;
 	transition: all 200ms ease-in-out;
@@ -149,7 +150,6 @@ nav li:hover .link{
 }
 .card {
 	background-color: #333;
-	border-radius: 8px;
 	padding: 1em;
 	display: grid;
 	gap: 0.25rem;
