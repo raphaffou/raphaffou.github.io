@@ -17,9 +17,13 @@
     const pos = { x : 0, y : 0 };
     var clicked = false;
 
-
     document.documentElement.style.setProperty('--w', window.innerWidth);
     document.documentElement.style.setProperty('--h', window.innerHeight);
+
+    window.addEventListener('resize', e => {
+      document.documentElement.style.setProperty('--w', window.innerWidth);
+      document.documentElement.style.setProperty('--h', window.innerHeight);
+  });
 
     const mobileAndTabletCheck = function() {
         let check = false;

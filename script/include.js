@@ -27,11 +27,9 @@ function includeHTML() {
       }
     }
   };
-  const execScripts = [];
+
   function nodeScriptReplace(node) {
-    if(!execScripts.includes(node.innerHTML)){
       if ( nodeScriptIs(node) === true ) {
-        execScripts.push(node.innerHTML);
         node.parentNode.replaceChild( nodeScriptClone(node) , node );
       }
       else {
@@ -40,7 +38,6 @@ function includeHTML() {
           nodeScriptReplace( children[i] );
         }
       }
-    }
 
     return node;
 }
@@ -64,9 +61,9 @@ function nodeScriptIs(node) {
   }
   routine();
   setInterval(routine, 300);
-  //listen for link click events at the document level
-if (document.addEventListener) {
-  document.addEventListener('click',interceptClickEvent);
-}else if(document.attachEvent) {
-  document.attachEvent('onclick', interceptClickEvent);
-}
+  
+  if (document.addEventListener) {
+    document.addEventListener('click',interceptClickEvent);
+  }else if(document.attachEvent) {
+    document.attachEvent('onclick', interceptClickEvent);
+  }

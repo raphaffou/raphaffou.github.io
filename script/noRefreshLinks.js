@@ -15,10 +15,9 @@ function interceptClickEvent(e) {
     if (target.tagName === 'A' && target.getAttribute('target') != '_BLANK') {
         href = target.getAttribute('href');
         content.innerHTML = "<div w3-include-html=\""+href+"\"></div>";
-        if (true) {
-           //tell the browser not to respond to the link click
-           e.preventDefault();
-        }
+        //tell the browser not to respond to the link click
+        e.preventDefault();
+        console.log("j'ai bien intercepté !");
     }
 }
 
