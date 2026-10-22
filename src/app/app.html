@@ -1,0 +1,39 @@
+<a class="skip" href="#main" (click)="skip($event)">Skip to content</a>
+
+<div class="page">
+  <header class="side">
+    <p class="name">
+      <a routerLink="/" [attr.aria-label]="person.name + ', home'" [attr.aria-current]="current('/')"
+        >RAPHA<span class="e"><span class="base">Ë</span><span class="dots" aria-hidden="true">Ë</span></span>L THIEFFRY</a
+      >
+    </p>
+    <p class="role">{{ person.jobTitle }}</p>
+    <nav aria-label="Main">
+      <ul>
+        @for (item of nav; track item.path) {
+          <li>
+            <a class="fx" [routerLink]="item.path" [attr.aria-current]="current(item.path)"
+              ><span class="num" aria-hidden="true">{{ item.num }}</span><span [t]="item.label"></span
+            ></a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <router-outlet />
+
+    <footer class="foot">
+      <p>
+        This site is generated from one Turtle file:
+        <a class="fx inline" href="/data/portfolio.ttl"><span [t]="'portfolio.ttl'"></span></a>
+        (also as <a class="fx inline" href="/data/portfolio.jsonld"><span [t]="'JSON-LD'"></span></a>).
+        Built with Angular and prerendered; no cookies, no tracking.
+      </p>
+      <p>© {{ year }} {{ person.name }}</p>
+    </footer>
+  </main>
+</div>
+
+<div class="toast" [class.on]="toast.visible()" role="status" aria-live="polite">{{ toast.message() }}</div>

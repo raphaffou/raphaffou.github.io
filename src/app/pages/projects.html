@@ -1,0 +1,33 @@
+<h1>Projects</h1>
+<p class="lead">Things I built, mostly for myself and sometimes for a course. The first four have a page of their own.</p>
+
+<section aria-labelledby="h-selected">
+  <h2 id="h-selected">Selected</h2>
+  @for (p of featured; track p.slug) {
+    <article class="item">
+      <h3><a class="fx" [routerLink]="['/projects', p.slug]"><span [t]="p.name"></span></a></h3>
+      <p class="meta">{{ p.date }} · {{ p.stack.join(', ') }}</p>
+      <p>{{ p.summary }}</p>
+    </article>
+  }
+</section>
+
+<section aria-labelledby="h-archive">
+  <h2 id="h-archive">Archive</h2>
+  <p class="section-intro">Smaller, older or school projects.</p>
+  <ul class="archive">
+    @for (p of archive; track p.name) {
+      <li>
+        <p class="archive-head">
+          @if (p.repo) {
+            <a class="fx" [href]="p.repo"><span [t]="p.name"></span></a>
+          } @else {
+            <span class="plain-title">{{ p.name }}</span>
+          }
+          <span class="meta">{{ p.date }} · {{ p.stack.join(', ') }}</span>
+        </p>
+        <p>{{ p.summary }}@if (!p.repo) {{{ ' ' }}<span class="muted">(no public code)</span>}</p>
+      </li>
+    }
+  </ul>
+</section>

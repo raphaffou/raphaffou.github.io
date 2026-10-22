@@ -1,0 +1,48 @@
+@let p = project();
+<p class="back"><a class="fx" routerLink="/projects"><span aria-hidden="true">← </span><span [t]="'Projects'"></span></a></p>
+
+<article [attr.aria-labelledby]="'title-' + p.slug">
+  <h1 [id]="'title-' + p.slug">{{ p.name }}</h1>
+  <p class="meta">{{ p.date }}</p>
+  <p class="lead">{{ p.summary }}</p>
+
+  @if (p.repo || p.demo) {
+    <ul class="link-row">
+      @if (p.repo) { <li><a class="fx inline" [href]="p.repo"><span [t]="'Source code'"></span></a></li> }
+      @if (p.demo) { <li><a class="fx inline" [href]="p.demo"><span [t]="'Live demo'"></span></a></li> }
+    </ul>
+  }
+
+  <h2>Problem</h2>
+  <p>{{ p.problem }}</p>
+  <h2>Approach</h2>
+  <p>{{ p.approach }}</p>
+  <h2>Result</h2>
+  <p>{{ p.result }}</p>
+  @if (p.role) {
+    <h2>My part</h2>
+    <p>{{ p.role }}</p>
+  }
+
+  <h2>Tools</h2>
+  <ul class="stack">
+    @for (s of p.stack; track s) { <li>{{ s }}</li> }
+  </ul>
+
+  @if (p.topics.length) {
+    <h2>Topics</h2>
+    <ul class="link-row">
+      @for (t of p.topics; track t.id) {
+        <li><a class="fx inline" routerLink="/graph" [fragment]="'topic-' + t.id"><span [t]="t.name"></span></a></li>
+      }
+    </ul>
+  }
+</article>
+
+@if (next().slug !== p.slug) {
+  <nav class="next" aria-label="Next project">
+    <a class="fx" [routerLink]="['/projects', next().slug]"
+      ><span class="meta">Next</span> <span [t]="next().name"></span><span aria-hidden="true"> →</span></a
+    >
+  </nav>
+}

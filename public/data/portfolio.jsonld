@@ -1,0 +1,272 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://raphaffou.github.io/#me",
+      "@type": "Person",
+      "name": "Raphaël Thieffry",
+      "jobTitle": "M2 student in Hybrid AI — knowledge graphs & NLP",
+      "description": "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD.",
+      "email": "raphael.thieffry@gmail.com",
+      "address": "Paris-Saclay, France",
+      "sameAs": [
+        "https://github.com/raphaffou",
+        "https://bit.ly/4a04L7l"
+      ],
+      "affiliation": {
+        "@id": "https://raphaffou.github.io/#paris-saclay"
+      },
+      "alumniOf": [
+        {
+          "@id": "https://raphaffou.github.io/#polytech"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#paris-saclay"
+        }
+      ],
+      "knowsAbout": [
+        {
+          "@id": "https://raphaffou.github.io/#knowledge-graphs"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#nlp"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#llms"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#machine-learning"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#graph-layout"
+        }
+      ]
+    },
+    {
+      "@id": "https://raphaffou.github.io/#paris-saclay",
+      "@type": "CollegeOrUniversity",
+      "name": "Université Paris-Saclay",
+      "url": "https://www.universite-paris-saclay.fr/en"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#polytech",
+      "@type": "CollegeOrUniversity",
+      "name": "Polytech Paris-Saclay",
+      "url": "https://www.polytech.universite-paris-saclay.fr/en"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#jsi",
+      "@type": "ResearchOrganization",
+      "name": "Jožef Stefan Institute",
+      "address": "Ljubljana, Slovenia",
+      "url": "https://www.ijs.si/ijsw/JSI"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#knowledge-graphs",
+      "@type": "DefinedTerm",
+      "name": "Knowledge graphs"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#nlp",
+      "@type": "DefinedTerm",
+      "name": "NLP"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#llms",
+      "@type": "DefinedTerm",
+      "name": "LLMs"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#machine-learning",
+      "@type": "DefinedTerm",
+      "name": "Machine learning"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#graph-layout",
+      "@type": "DefinedTerm",
+      "name": "Graph layout"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#japanese",
+      "@type": "DefinedTerm",
+      "name": "Japanese"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#mobile",
+      "@type": "DefinedTerm",
+      "name": "Mobile apps"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#web",
+      "@type": "DefinedTerm",
+      "name": "Web"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#jsi-internship",
+      "@type": "Role",
+      "name": "Research internship in NLP",
+      "startDate": "2026-06",
+      "endDate": "2026-08",
+      "memberOf": {
+        "@id": "https://raphaffou.github.io/#jsi"
+      },
+      "description": "Summer 2026 in the Knowledge Laboratory of the Jožef Stefan Institute, working with Matej Martinc on readability assessment with large language models."
+    },
+    {
+      "@id": "https://raphaffou.github.io/#readability-paper",
+      "@type": "ScholarlyArticle",
+      "name": "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting",
+      "author": [
+        "Raphaël Thieffry",
+        "Matej Martinc"
+      ],
+      "datePublished": "2026-09",
+      "url": "https://arxiv.org/abs/2609.24650",
+      "isPartOf": {
+        "@id": "https://raphaffou.github.io/#jsi-internship"
+      },
+      "about": [
+        {
+          "@id": "https://raphaffou.github.io/#nlp"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#llms"
+        }
+      ],
+      "mainEntityOfPage": "https://raphaffou.github.io/research/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#kanji-graph",
+      "@type": "SoftwareSourceCode",
+      "name": "Kanji Graph",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Kanji-Map",
+      "about": [
+        {
+          "@id": "https://raphaffou.github.io/#graph-layout"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#japanese"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#knowledge-graphs"
+        }
+      ],
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/kanji-graph/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#awabi",
+      "@type": "SoftwareSourceCode",
+      "name": "Awabi",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Awabi",
+      "about": [
+        {
+          "@id": "https://raphaffou.github.io/#japanese"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#mobile"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#nlp"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#llms"
+        }
+      ],
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/awabi/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#rent-prediction",
+      "@type": "SoftwareSourceCode",
+      "name": "Rent prediction",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Pr-diction-Immobili-re",
+      "about": {
+        "@id": "https://raphaffou.github.io/#machine-learning"
+      },
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/rent-prediction/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#web-shop",
+      "@type": "SoftwareSourceCode",
+      "name": "3D web shop",
+      "dateCreated": "2023–2024",
+      "codeRepository": "https://github.com/raphaffou/projetWebPoly",
+      "url": "https://projet-web-poly.vercel.app",
+      "about": {
+        "@id": "https://raphaffou.github.io/#web"
+      },
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/web-shop/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#claude-android",
+      "@type": "SoftwareSourceCode",
+      "name": "Claude Code for Android",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Claude-Code-for-Android",
+      "about": [
+        {
+          "@id": "https://raphaffou.github.io/#mobile"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#llms"
+        }
+      ]
+    },
+    {
+      "@id": "https://raphaffou.github.io/#numerical-methods",
+      "@type": "SoftwareSourceCode",
+      "name": "Numerical methods",
+      "dateCreated": "2024",
+      "codeRepository": "https://github.com/raphaffou/Methodes-numeriques"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#compiler",
+      "@type": "SoftwareSourceCode",
+      "name": "C compiler",
+      "dateCreated": "2024"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#forbidden-desert",
+      "@type": "SoftwareSourceCode",
+      "name": "Forbidden Desert",
+      "dateCreated": "2023",
+      "codeRepository": "https://github.com/raphaffou/desertinterdit"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#huffman",
+      "@type": "SoftwareSourceCode",
+      "name": "Huffman compression",
+      "dateCreated": "2022–2023"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#quadtrees",
+      "@type": "SoftwareSourceCode",
+      "name": "Lists and quadtrees",
+      "dateCreated": "2022–2023",
+      "codeRepository": "https://github.com/raphaffou/projetalgos3"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#maze",
+      "@type": "SoftwareSourceCode",
+      "name": "Mazes",
+      "dateCreated": "2022",
+      "codeRepository": "https://gitlab.com/l2945/labyrinthe"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#sms-router",
+      "@type": "SoftwareSourceCode",
+      "name": "SMS through a 4G router",
+      "dateCreated": "2022",
+      "codeRepository": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#old-portfolio",
+      "@type": "SoftwareSourceCode",
+      "name": "First portfolio",
+      "dateCreated": "2022",
+      "codeRepository": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2"
+    }
+  ]
+}

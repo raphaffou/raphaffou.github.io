@@ -1,0 +1,50 @@
+<h1>Research</h1>
+
+@for (p of papers; track p.slug) {
+  <article class="paper" [attr.aria-labelledby]="'paper-' + p.slug">
+    <h2 class="paper-title" [id]="'paper-' + p.slug">{{ p.title }}</h2>
+    <p class="authors">
+      @for (a of p.authors; track a; let last = $last) {
+        @if (a === me) { <strong>{{ a }}</strong> } @else { {{ a }} }{{ last ? '' : ', ' }}
+      }
+    </p>
+    <p class="meta">
+      @if (p.context) { {{ p.context.org }}@if (p.context.place) {, {{ p.context.place }}} · }
+      <time [attr.datetime]="p.date">{{ p.dateLabel }}</time>
+    </p>
+    <p class="status">{{ p.status }}</p>
+    <ul class="link-row">
+      <li><a class="fx inline" [href]="p.url"><span [t]="p.arxiv ? 'arXiv:' + p.arxiv : 'Paper'"></span></a></li>
+      @if (p.venueUrl && p.venue) {
+        <li><a class="fx inline" [href]="p.venueUrl"><span [t]="p.venue"></span></a></li>
+      }
+      @if (p.codeUrl) {
+        <li><a class="fx inline" [href]="p.codeUrl"><span [t]="'Code'"></span></a></li>
+      }
+    </ul>
+
+    <p class="lead">{{ p.summary }}</p>
+
+    <h3>Problem</h3>
+    <p>{{ p.problem }}</p>
+    <h3>Approach</h3>
+    <p>{{ p.approach }}</p>
+    <h3>Results</h3>
+    <p>{{ p.result }}</p>
+
+    <h3>Tools</h3>
+    <ul class="stack">
+      @for (s of p.stack; track s) { <li>{{ s }}</li> }
+    </ul>
+    @if (p.codeNote) { <p class="note">{{ p.codeNote }}</p> }
+
+    <h3>Cite</h3>
+    <pre class="bibtex" tabindex="0" [attr.aria-label]="'BibTeX for ' + p.title"><code>{{ p.bibtex }}</code></pre>
+    <button class="btn fx" type="button" (click)="copyBibtex(p.bibtex)"><span [t]="'Copy BibTeX'"></span></button>
+
+    @if (p.context) {
+      <h3>Context</h3>
+      <p>{{ p.context.description }}</p>
+    }
+  </article>
+}

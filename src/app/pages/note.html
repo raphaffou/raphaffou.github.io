@@ -1,0 +1,7 @@
+@let n = note();
+<p class="back"><a class="fx" routerLink="/notes"><span aria-hidden="true">← </span><span [t]="'Notes'"></span></a></p>
+<article class="prose" [attr.aria-labelledby]="'title-' + n.slug">
+  <h1 [id]="'title-' + n.slug">{{ n.headline }}</h1>
+  <p class="meta"><time [attr.datetime]="n.date">{{ n.dateLabel }}</time></p>
+  <div [innerHTML]="body()"></div>
+</article>

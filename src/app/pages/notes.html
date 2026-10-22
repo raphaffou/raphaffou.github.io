@@ -1,0 +1,12 @@
+<h1>Notes</h1>
+<p class="lead">Longer write-ups: the home lab, experiments, things I learned along the way.</p>
+
+@for (n of notes; track n.slug) {
+  <article class="item">
+    <h2 class="item-title"><a class="fx" [routerLink]="['/notes', n.slug]"><span [t]="n.headline"></span></a></h2>
+    <p class="meta"><time [attr.datetime]="n.date">{{ n.dateLabel }}</time></p>
+    @if (n.summary) { <p>{{ n.summary }}</p> }
+  </article>
+} @empty {
+  <p class="empty">Nothing here yet. The first notes, on building my home lab, are on their way.</p>
+}

@@ -1,0 +1,55 @@
+<h1>About</h1>
+@for (para of person.bio; track $index; let first = $first) {
+  <p [class.lead]="first">{{ para }}</p>
+}
+
+<section aria-labelledby="h-path">
+  <h2 id="h-path">Path</h2>
+  <ol class="path">
+    @for (step of person.path; track step.name) {
+      <li>
+        <span class="period">{{ step.period }}</span>
+        <div>
+          <p class="path-name">{{ step.name }}</p>
+          @if (step.description) { <p>{{ step.description }}</p> }
+        </div>
+      </li>
+    }
+  </ol>
+</section>
+
+<section aria-labelledby="h-skills">
+  <h2 id="h-skills">Skills</h2>
+  <dl class="skills">
+    @for (g of person.skills; track g.name) {
+      <div>
+        <dt>{{ g.name }}</dt>
+        <dd>{{ g.items.join(' · ') }}</dd>
+      </div>
+    }
+  </dl>
+</section>
+
+<section aria-labelledby="h-languages">
+  <h2 id="h-languages">Languages</h2>
+  <ul class="plain">
+    @for (l of person.languages; track l) { <li>{{ l }}</li> }
+  </ul>
+</section>
+
+<section aria-labelledby="h-interests">
+  <h2 id="h-interests">Outside work</h2>
+  <ul class="plain">
+    @for (i of person.interests; track i) { <li>{{ i }}</li> }
+  </ul>
+</section>
+
+<section aria-labelledby="h-contact">
+  <h2 id="h-contact">Contact</h2>
+  <p>
+    Email:
+    <a class="fx inline" [href]="'mailto:' + person.email"><span [t]="person.email"></span></a>
+  </p>
+  <p class="avail">{{ person.availability }}.</p>
+  <app-contacts />
+</section>

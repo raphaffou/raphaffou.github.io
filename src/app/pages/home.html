@@ -1,0 +1,48 @@
+<h1 class="vh">{{ person.name }}</h1>
+<p class="lead">{{ person.description }}</p>
+<app-contacts />
+<p class="avail">{{ person.address }} · {{ person.availability }}</p>
+
+<section aria-labelledby="h-research">
+  <h2 id="h-research">Research</h2>
+  @for (p of papers; track p.slug) {
+    <article class="item">
+      <h3><a class="fx" routerLink="/research"><span [t]="p.title"></span></a></h3>
+      <p class="meta">
+        @if (coAuthors(p).length) { with {{ coAuthors(p).join(', ') }} · }
+        @if (p.context) { {{ p.context.org }} · }
+        {{ p.year }}
+      </p>
+      <p>{{ p.summary }}</p>
+      <p class="links">
+        <a class="fx inline" [href]="p.url"><span [t]="p.arxiv ? 'arXiv:' + p.arxiv : 'Paper'"></span></a>
+        <span class="status">{{ p.status }}</span>
+      </p>
+    </article>
+  }
+</section>
+
+<section aria-labelledby="h-projects">
+  <h2 id="h-projects">Selected projects</h2>
+  @for (p of projects; track p.slug) {
+    <article class="item">
+      <h3><a class="fx" [routerLink]="['/projects', p.slug]"><span [t]="p.name"></span></a></h3>
+      <p class="meta">{{ p.date }} · {{ p.stack.slice(0, 3).join(', ') }}</p>
+      <p>{{ p.summary }}</p>
+    </article>
+  }
+  <p class="more"><a class="fx" routerLink="/projects"><span [t]="'All projects, including older ones'"></span><span aria-hidden="true"> →</span></a></p>
+</section>
+
+@if (notes.length) {
+  <section aria-labelledby="h-notes">
+    <h2 id="h-notes">Notes</h2>
+    @for (n of notes; track n.slug) {
+      <article class="item">
+        <h3><a class="fx" [routerLink]="['/notes', n.slug]"><span [t]="n.headline"></span></a></h3>
+        <p class="meta"><time [attr.datetime]="n.date">{{ n.dateLabel }}</time></p>
+        @if (n.summary) { <p>{{ n.summary }}</p> }
+      </article>
+    }
+  </section>
+}

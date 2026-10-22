@@ -1,0 +1,40 @@
+{
+  "name": "raphaffou-portfolio",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "content": "node scripts/build-content.mjs",
+    "start": "node scripts/dev.mjs",
+    "prebuild": "npm run content",
+    "build": "ng build",
+    "postbuild": "node scripts/postbuild.mjs",
+    "preview": "npm run build && npx --yes http-server dist/portfolio/browser -p 4300 -c-1"
+  },
+  "private": true,
+  "packageManager": "npm@10.9.4",
+  "dependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/platform-server": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "@angular/ssr": "^21.2.28",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.2.28",
+    "@angular/cli": "^21.2.28",
+    "@angular/compiler-cli": "^21.2.0",
+    "@types/node": "^20.17.19",
+    "d3-force": "^3.0.0",
+    "n3": "^2.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  }
+}

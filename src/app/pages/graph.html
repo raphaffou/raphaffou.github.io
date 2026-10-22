@@ -1,0 +1,79 @@
+<h1>Graph</h1>
+<p class="lead">
+  Everything on this site, linked by topic. The same links are listed below the graph, and the data behind it is
+  published as <a class="fx inline" href="/data/portfolio.ttl"><span [t]="'Turtle'"></span></a> and
+  <a class="fx inline" href="/data/portfolio.jsonld"><span [t]="'JSON-LD'"></span></a>.
+</p>
+<p class="skip-graph">
+  <a class="fx inline" routerLink="/graph" fragment="list"><span [t]="'Skip the graph and go to the list'"></span></a>
+</p>
+
+<figure class="graph">
+  <div class="graph-wrap">
+    <svg
+      [attr.viewBox]="'0 0 ' + g.width + ' ' + g.height"
+      [attr.width]="g.width"
+      [attr.height]="g.height"
+      role="group"
+      aria-label="Graph of topics, papers and projects"
+    >
+      <defs>
+        <linearGradient id="inv" x1="0" y1="0" x2="1" y2="0">
+          <!-- colours from styles.css, so they follow the light/dark theme -->
+          <stop offset="0" style="stop-color: var(--c1)" />
+          <stop offset=".17" style="stop-color: var(--c2)" />
+          <stop offset=".33" style="stop-color: var(--c3)" />
+          <stop offset=".5" style="stop-color: var(--c4)" />
+          <stop offset=".67" style="stop-color: var(--c5)" />
+          <stop offset=".83" style="stop-color: var(--c6)" />
+          <stop offset="1" style="stop-color: var(--c7)" />
+        </linearGradient>
+      </defs>
+      <g class="edges" aria-hidden="true">
+        @for (e of g.edges; track e.source + e.target) {
+          <line [attr.x1]="e.x1" [attr.y1]="e.y1" [attr.x2]="e.x2" [attr.y2]="e.y2" />
+        }
+      </g>
+      @for (n of nodes; track n.id) {
+        @if (n.external) {
+          <a [attr.href]="n.href" [attr.class]="'node k-' + n.kind" [attr.aria-label]="n.aria">
+            <rect class="ring" [attr.x]="n.x - n.w / 2" [attr.y]="n.y - n.r - 5" [attr.width]="n.w" [attr.height]="n.h + 4" rx="4" />
+            <circle [attr.cx]="n.x" [attr.cy]="n.y" [attr.r]="n.r" />
+            <text [attr.x]="n.x" [attr.y]="n.y + n.r + 17">{{ n.label }}</text>
+          </a>
+        } @else {
+          <a [routerLink]="n.path" [fragment]="n.fragment" [attr.class]="'node k-' + n.kind" [attr.aria-label]="n.aria">
+            <rect class="ring" [attr.x]="n.x - n.w / 2" [attr.y]="n.y - n.r - 5" [attr.width]="n.w" [attr.height]="n.h + 4" rx="4" />
+            <circle [attr.cx]="n.x" [attr.cy]="n.y" [attr.r]="n.r" />
+            <text [attr.x]="n.x" [attr.y]="n.y + n.r + 17">{{ n.label }}</text>
+          </a>
+        }
+      }
+    </svg>
+  </div>
+  <p class="graph-hint" aria-hidden="true">The graph scrolls sideways on small screens; the list below has the same links.</p>
+  <figcaption class="legend" aria-hidden="true">
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="lg-topic" /></svg> topic</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="4" class="lg-work" /></svg> paper or project</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="6" class="lg-me" /></svg> me</span>
+  </figcaption>
+</figure>
+
+<section id="list" aria-labelledby="h-list">
+  <h2 id="h-list">By topic</h2>
+  @for (grp of groups; track grp.topic.id) {
+    <h3 class="topic" [id]="'topic-' + grp.topic.id">{{ grp.topic.name }}</h3>
+    <ul class="topic-list">
+      @for (w of grp.works; track w.name) {
+        <li>
+          @if (w.external) {
+            <a class="fx inline" [href]="w.link"><span [t]="w.name"></span></a>
+          } @else {
+            <a class="fx inline" [routerLink]="w.link"><span [t]="w.name"></span></a>
+          }
+          <span class="meta"> · {{ w.kind }}</span>
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -1,0 +1,307 @@
+# =============================================================================
+#  portfolio.ttl — the single source of content for raphaffou.github.io
+#
+#  Edit this file, then run `npm run build` (or `npm start` while developing).
+#  scripts/build-content.mjs turns it into:
+#    - the pages of the site (src/app/content/content.generated.ts)
+#    - JSON-LD for search engines (public/data/portfolio.jsonld)
+#    - this file itself, published at /data/portfolio.ttl
+#    - the Graph page (src/app/content/graph.generated.ts)
+#
+#  Vocabulary: schema.org for what it already describes, plus a small `site:`
+#  namespace for what only this site needs (order, slugs, case-study fields).
+#  Texts are in English. Keep summaries to 2–3 sentences.
+#
+#  Order of values: when a property has several values ("Python", "C", …),
+#  the site shows them in the order written here.
+#  Optional site:label gives a shorter name for the Graph page.
+# =============================================================================
+
+@prefix :       <https://raphaffou.github.io/#> .
+@prefix schema: <https://schema.org/> .
+@prefix site:   <https://raphaffou.github.io/ns#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------------------------------------
+#  Me
+# -----------------------------------------------------------------------------
+
+:me a schema:Person ;
+    schema:name "Raphaël Thieffry" ;
+    schema:jobTitle "M2 student in Hybrid AI — knowledge graphs & NLP" ;
+    schema:description "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD." ;
+    schema:email "raphael.thieffry@gmail.com" ;
+    schema:address "Paris-Saclay, France" ;
+    site:availability "Open to research internships (from March 2027) and PhD positions" ;
+    site:cv </cv/Raphael_Thieffry_CV.pdf> ;
+    site:github <https://github.com/raphaffou> ;
+    site:linkedin <https://bit.ly/4a04L7l> ;
+    schema:sameAs <https://github.com/raphaffou>, <https://bit.ly/4a04L7l> ;
+    schema:affiliation :paris-saclay ;
+    schema:alumniOf :polytech, :paris-saclay ;
+    schema:knowsAbout :knowledge-graphs, :nlp, :llms, :machine-learning, :graph-layout ;
+    site:bio """I studied mathematics and computer science at Université Paris-Saclay, then spent three years as an apprentice engineer in industry, working on Linux infrastructure and data mining, while completing an engineering degree at Polytech Paris-Saclay (17/20).
+
+In 2026 I chose to move into research: a summer at the Jožef Stefan Institute in Ljubljana, where I wrote my first paper on LLMs and readability, then the M2 Data, Knowledge and Hybrid AI at Université Paris-Saclay.
+
+What I want to work on sits where symbolic and statistical AI meet: knowledge graphs and ontologies that language models can use, and language models that help build them.""" .
+
+# -----------------------------------------------------------------------------
+#  Organisations
+# -----------------------------------------------------------------------------
+
+:paris-saclay a schema:CollegeOrUniversity ;
+    schema:name "Université Paris-Saclay" ;
+    schema:url <https://www.universite-paris-saclay.fr/en> .
+
+:polytech a schema:CollegeOrUniversity ;
+    schema:name "Polytech Paris-Saclay" ;
+    schema:url <https://www.polytech.universite-paris-saclay.fr/en> .
+
+:jsi a schema:ResearchOrganization ;
+    schema:name "Jožef Stefan Institute" ;
+    schema:address "Ljubljana, Slovenia" ;
+    schema:url <https://www.ijs.si/ijsw/JSI> .
+
+# -----------------------------------------------------------------------------
+#  Topics (they become the hubs of the Graph page)
+# -----------------------------------------------------------------------------
+
+:knowledge-graphs  a schema:DefinedTerm ; schema:name "Knowledge graphs" .
+:nlp               a schema:DefinedTerm ; schema:name "NLP" .
+:llms              a schema:DefinedTerm ; schema:name "LLMs" .
+:machine-learning  a schema:DefinedTerm ; schema:name "Machine learning" .
+:graph-layout      a schema:DefinedTerm ; schema:name "Graph layout" .
+:japanese          a schema:DefinedTerm ; schema:name "Japanese" .
+:mobile            a schema:DefinedTerm ; schema:name "Mobile apps" .
+:web               a schema:DefinedTerm ; schema:name "Web" .
+
+# -----------------------------------------------------------------------------
+#  Research
+# -----------------------------------------------------------------------------
+
+:jsi-internship a schema:Role ;
+    schema:name "Research internship in NLP" ;
+    schema:startDate "2026-06"^^xsd:gYearMonth ;
+    schema:endDate "2026-08"^^xsd:gYearMonth ;
+    schema:memberOf :jsi ;
+    schema:description "Summer 2026 in the Knowledge Laboratory of the Jožef Stefan Institute, working with Matej Martinc on readability assessment with large language models." .
+
+:readability-paper a schema:ScholarlyArticle ;
+    site:slug "readability-llms" ;
+    site:order 1 ;
+    site:label "Readability with LLMs" ;
+    schema:name "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting" ;
+    schema:author ( "Raphaël Thieffry" "Matej Martinc" ) ;
+    schema:datePublished "2026-09"^^xsd:gYearMonth ;
+    schema:url <https://arxiv.org/abs/2609.24650> ;
+    site:status "Preprint on arXiv · submitted to ECIR 2027, under review" ;
+    site:venue "ECIR 2027" ;
+    site:venueUrl <https://www.ecir2027.co.uk/> ;
+    schema:isPartOf :jsi-internship ;
+    schema:about :nlp, :llms ;
+    site:summary "A systematic benchmark of open-source LLMs for readability assessment in English and Slovenian, the first to study how explicit reasoning and few-shot prompting change their predictions of discrete readability levels." ;
+    site:problem "Readability formulas transfer poorly across genres and languages, and supervised models need annotated corpora that rarely exist for less-resourced languages such as Slovenian." ;
+    site:approach "Five open-weight LLMs, four corpora (three English, one Slovenian), no training at all: we vary only the prompt — its format, zero to three labelled examples per level, and whether the model answers directly or reasons first — and compare the best configuration with classical formulas and supervised models." ;
+    site:result "Reasoning before answering brings large gains, especially for models that reason natively, and the first labelled example per level carries most of the few-shot benefit. The best configuration, with no training, beats every classical formula on the Slovenian textbook corpus and on WeeBit." ;
+    site:stack "Python", "vLLM", "open-weight LLMs", "chain-of-thought", "few-shot prompting" ;
+    site:codeNote "Code will be released after the review period." .
+
+# -----------------------------------------------------------------------------
+#  Projects (site:featured true → home page and Projects page; false → archive)
+# -----------------------------------------------------------------------------
+
+:kanji-graph a schema:SoftwareSourceCode ;
+    site:slug "kanji-graph" ;
+    site:order 1 ;
+    site:featured true ;
+    schema:name "Kanji Graph" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Kanji-Map> ;
+    schema:about :graph-layout, :japanese, :knowledge-graphs ;
+    site:summary "An interactive map of the whole Japanese vocabulary: the 175,312 JMdict words that contain a kanji, all on screen at once, with continuous zoom, search, readings and translations." ;
+    site:problem "Linking two words whenever they share a kanji gives about 1.6 × 10⁸ edges: a graph that can be neither built nor drawn." ;
+    site:approach "The geometry is precomputed instead: the kanji co-occurrence graph (5,022 nodes) is sparsified, split into 337 Louvain communities and laid out community by community; each word lands at the barycentre of its kanji, weighted towards the rarest. Edges are only computed, in C, for the words visible on screen." ;
+    site:result "Drawing all 175k words takes about 2 ms per frame, thanks to ForceAtlas2 with a Barnes-Hut quadtree and OpenMP in a small C library." ;
+    site:role "Solo project." ;
+    site:stack "Python", "C (OpenMP)", "NumPy", "NetworkX", "Tk", "JMdict / KANJIDIC2" .
+
+:awabi a schema:SoftwareSourceCode ;
+    site:slug "awabi" ;
+    site:order 2 ;
+    site:featured true ;
+    schema:name "Awabi" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Awabi> ;
+    schema:about :japanese, :mobile, :nlp, :llms ;
+    site:summary "An Android overlay that reads the screen while you play games, watch anime or read manga in Japanese, and quietly collects the vocabulary for you." ;
+    site:problem "Looking words up while reading or playing breaks the flow, and building flashcards afterwards is tedious." ;
+    site:approach "A floating bubble captures the screen; on-device OCR and the accessibility service extract the text, a longest-match segmentation finds the words in an offline JMdict (about 170k entries), and an optional LLM explains the grammar, tailored to a profile the learner writes." ;
+    site:result "Fully offline lookup with JLPT levels, and a long press adds a word to an Anki deck exported as a .apkg file." ;
+    site:role "Solo project." ;
+    site:stack "Kotlin", "MVVM + Hilt", "Room", "ML Kit OCR", "JMdict", "LLM APIs" .
+
+:rent-prediction a schema:SoftwareSourceCode ;
+    site:slug "rent-prediction" ;
+    site:order 3 ;
+    site:featured true ;
+    schema:name "Rent prediction" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Pr-diction-Immobili-re> ;
+    schema:about :machine-learning ;
+    site:summary "Predicting the rent of housing listings from their characteristics, for the machine learning course of my last year at Polytech Paris-Saclay." ;
+    site:problem "About 4,500 rental listings with heterogeneous, partly missing features, and a price to predict." ;
+    site:approach "Parsing and feature engineering, then scikit-learn pipelines comparing linear and ensemble models, with automated training runs." ;
+    site:result "One of the best results of the class." ;
+    site:role "Team of three. I designed the overall approach and wrote the main training logic; Antonin Russac did the visualisation and feature engineering, and Ethan Puyaubreau the training automation." ;
+    site:stack "Python", "pandas", "scikit-learn", "Jupyter" .
+
+:web-shop a schema:SoftwareSourceCode ;
+    site:slug "web-shop" ;
+    site:order 4 ;
+    site:featured true ;
+    schema:name "3D web shop" ;
+    schema:dateCreated "2023–2024" ;
+    schema:codeRepository <https://github.com/raphaffou/projetWebPoly> ;
+    schema:url <https://projet-web-poly.vercel.app> ;
+    schema:about :web ;
+    site:summary "An online shop with 3D product scenes and animated pages, built for the web course at Polytech Paris-Saclay." ;
+    site:problem "Build a complete shop, from the design in Figma to a working cart, with a real backend." ;
+    site:approach "Angular front end with Three.js scenes and GSAP animations, one generated page per product, and an Express API backed by MariaDB." ;
+    site:result "A live demo, deployed on Vercel." ;
+    site:role "Course project." ;
+    site:stack "Angular", "TypeScript", "Three.js", "GSAP", "Express", "MariaDB" .
+
+# --- Archive: smaller, older or school projects -------------------------------
+
+:claude-android a schema:SoftwareSourceCode ;
+    site:order 10 ; site:featured false ;
+    schema:name "Claude Code for Android" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Claude-Code-for-Android> ;
+    schema:about :mobile, :llms ;
+    site:summary "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone — not to be taken seriously." ;
+    site:stack "Kotlin", "Python (asyncio)", "WebSocket" .
+
+:numerical-methods a schema:SoftwareSourceCode ;
+    site:order 11 ; site:featured false ;
+    schema:name "Numerical methods" ;
+    schema:dateCreated "2024" ;
+    schema:codeRepository <https://github.com/raphaffou/Methodes-numeriques> ;
+    site:summary "Course notebooks on the power method and the singular value decomposition, with image compression as an application." ;
+    site:stack "Python", "Jupyter" .
+
+:compiler a schema:SoftwareSourceCode ;
+    site:order 12 ; site:featured false ;
+    schema:name "C compiler" ;
+    schema:dateCreated "2024" ;
+    site:summary "A minimal compiler for a subset of C, written in OCaml." ;
+    site:stack "OCaml" .
+
+:forbidden-desert a schema:SoftwareSourceCode ;
+    site:order 13 ; site:featured false ;
+    schema:name "Forbidden Desert" ;
+    schema:dateCreated "2023" ;
+    schema:codeRepository <https://github.com/raphaffou/desertinterdit> ;
+    site:summary "The cooperative board game in Java and Swing, for the object-oriented programming course: an MVC architecture, most of the rules and roles, and unit tests." ;
+    site:stack "Java", "Swing" .
+
+:huffman a schema:SoftwareSourceCode ;
+    site:order 14 ; site:featured false ;
+    schema:name "Huffman compression" ;
+    schema:dateCreated "2022–2023" ;
+    site:summary "Text compression with Huffman coding, written in OCaml for the functional programming course." ;
+    site:stack "OCaml" .
+
+:quadtrees a schema:SoftwareSourceCode ;
+    site:order 15 ; site:featured false ;
+    schema:name "Lists and quadtrees" ;
+    schema:dateCreated "2022–2023" ;
+    schema:codeRepository <https://github.com/raphaffou/projetalgos3> ;
+    site:summary "Algorithms on linked lists and quadtrees for the advanced algorithms course." ;
+    site:stack "C" .
+
+:maze a schema:SoftwareSourceCode ;
+    site:order 16 ; site:featured false ;
+    schema:name "Mazes" ;
+    schema:dateCreated "2022" ;
+    schema:codeRepository <https://gitlab.com/l2945/labyrinthe> ;
+    site:summary "A small library to generate and study connected, acyclic mazes: my first time with graphs, and with Git." ;
+    site:stack "Python", "Jupyter" .
+
+:sms-router a schema:SoftwareSourceCode ;
+    site:order 17 ; site:featured false ;
+    schema:name "SMS through a 4G router" ;
+    schema:dateCreated "2022" ;
+    schema:codeRepository <https://github.com/raphaffou/tp-link-MR6400-SMS-handler> ;
+    site:summary "A Selenium script that reads and sends SMS through the web interface of a TP-Link 4G router. Absolutely not stable." ;
+    site:stack "Python", "Selenium" .
+
+:old-portfolio a schema:SoftwareSourceCode ;
+    site:order 18 ; site:featured false ;
+    schema:name "First portfolio" ;
+    schema:dateCreated "2022" ;
+    schema:codeRepository <https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2> ;
+    site:summary "The previous version of this site: plain JavaScript faking AJAX page loads and a JSON “database”, with a menu that followed the mouse." ;
+    site:stack "JavaScript", "HTML", "CSS" .
+
+# -----------------------------------------------------------------------------
+#  Notes (the “blog”). Add a note like this:
+#
+#  :homelab-1 a schema:BlogPosting ;
+#      site:slug "homelab-gpu-server" ;
+#      schema:headline "Building a GPU server from eight V100s" ;
+#      schema:datePublished "2026-11-02"^^xsd:date ;
+#      schema:about :llms ;
+#      site:summary "One or two sentences shown in the list." ;
+#      schema:articleBody """Paragraphs separated by a blank line.
+#
+#  Second paragraph.""" .
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+#  About: path (newest first, by site:order)
+# -----------------------------------------------------------------------------
+
+:me site:pathItem :path-dkai, :path-jsi, :path-polytech, :path-apprentice, :path-ldd .
+
+:path-dkai a site:PathItem ; site:order 1 ; site:period "2026–2027" ;
+    schema:name "M2 Data, Knowledge and Hybrid AI (DKAI)" ;
+    schema:description "Université Paris-Saclay. From symbolic to neurosymbolic AI, knowledge discovery in graph data, hybrid and explainable AI." .
+:path-jsi a site:PathItem ; site:order 2 ; site:period "Summer 2026" ;
+    schema:name "Research internship in NLP" ;
+    schema:description "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Readability assessment with LLMs." .
+:path-polytech a site:PathItem ; site:order 3 ; site:period "2023–2026" ;
+    schema:name "Engineering degree in Computer Science" ;
+    schema:description "Polytech Paris-Saclay, apprenticeship track, average 17/20. Tutored lower-year students at the request of the teaching staff." .
+:path-apprentice a site:PathItem ; site:order 4 ; site:period "2023–2026" ;
+    schema:name "Apprentice engineer in industry" ;
+    schema:description "Three years in an IT department: Linux infrastructure, containerisation, and a data-mining project on graph representations of support tickets." .
+:path-ldd a site:PathItem ; site:order 5 ; site:period "2021–2023" ;
+    schema:name "Double degree in Computer Science and Mathematics" ;
+    schema:description "Université Paris-Saclay." .
+
+# -----------------------------------------------------------------------------
+#  About: skills, languages and interests
+# -----------------------------------------------------------------------------
+
+:me site:skillGroup :skills-ai, :skills-code, :skills-systems .
+
+:skills-ai a site:SkillGroup ; site:order 1 ; schema:name "AI & data" ;
+    site:items "Machine learning", "NLP and LLMs (prompting, evaluation)", "Knowledge graphs and the Semantic Web (RDF, OWL, SPARQL)", "Data mining, graph analytics and layout" .
+:skills-code a site:SkillGroup ; site:order 2 ; schema:name "Programming" ;
+    site:items "Python", "Java, Kotlin", "C, C++", "OCaml", "TypeScript, JavaScript, Angular", "PHP, SQL, Bash", "LaTeX" .
+:skills-systems a site:SkillGroup ; site:order 3 ; schema:name "Systems" ;
+    site:items "Linux", "Docker, Kubernetes", "Ansible, Nginx", "Git", "MySQL, MariaDB", "Dataiku" .
+
+:me site:spokenLanguage
+    "French — native",
+    "English — C1 (TOEIC 975/990)",
+    "Japanese — learning, estimated JLPT N4",
+    "Chinese — one year of study" .
+
+:me site:interest
+    "Japanese, through apps I build for myself",
+    "Collecting and reviving old computer hardware",
+    "Cooking",
+    "Contemporary art" .
