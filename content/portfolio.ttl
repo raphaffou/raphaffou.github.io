@@ -39,7 +39,7 @@
     schema:sameAs <https://github.com/raphaffou>, <https://bit.ly/4a04L7l> ;
     schema:affiliation :paris-saclay ;
     schema:alumniOf :polytech, :paris-saclay ;
-    schema:knowsAbout :knowledge-graphs, :nlp, :llms, :machine-learning, :graph-layout ;
+    schema:knowsAbout :knowledge-graphs, :nlp, :llms, :machine-learning ;
     site:bio """I studied mathematics and computer science at Université Paris-Saclay, then spent three years as an apprentice engineer in industry, working on Linux infrastructure and data mining, while completing an engineering degree at Polytech Paris-Saclay (17/20).
 
 In 2026 I chose to move into research: a summer at the Jožef Stefan Institute in Ljubljana, where I wrote my first paper on LLMs and readability, then the M2 Data, Knowledge and Hybrid AI at Université Paris-Saclay.
@@ -71,9 +71,6 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
 :nlp               a schema:DefinedTerm ; schema:name "NLP" .
 :llms              a schema:DefinedTerm ; schema:name "LLMs" .
 :machine-learning  a schema:DefinedTerm ; schema:name "Machine learning" .
-:graph-layout      a schema:DefinedTerm ; schema:name "Graph layout" .
-:japanese          a schema:DefinedTerm ; schema:name "Japanese" .
-:mobile            a schema:DefinedTerm ; schema:name "Mobile apps" .
 :web               a schema:DefinedTerm ; schema:name "Web" .
 
 # -----------------------------------------------------------------------------
@@ -108,42 +105,13 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
     site:codeNote "Code will be released after the review period." .
 
 # -----------------------------------------------------------------------------
-#  Projects (site:featured true → home page and Projects page; false → archive)
+#  Projects (site:featured true → home page and Projects page; false → archive;
+#  site:aiAssisted true → the AI-assisted section)
 # -----------------------------------------------------------------------------
-
-:kanji-graph a schema:SoftwareSourceCode ;
-    site:slug "kanji-graph" ;
-    site:order 1 ;
-    site:featured true ;
-    schema:name "Kanji Graph" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Kanji-Map> ;
-    schema:about :graph-layout, :japanese, :knowledge-graphs ;
-    site:summary "An interactive map of the whole Japanese vocabulary: the 175,312 JMdict words that contain a kanji, all on screen at once, with continuous zoom, search, readings and translations." ;
-    site:problem "Linking two words whenever they share a kanji gives about 1.6 × 10⁸ edges: a graph that can be neither built nor drawn." ;
-    site:approach "The geometry is precomputed instead: the kanji co-occurrence graph (5,022 nodes) is sparsified, split into 337 Louvain communities and laid out community by community; each word lands at the barycentre of its kanji, weighted towards the rarest. Edges are only computed, in C, for the words visible on screen." ;
-    site:result "Drawing all 175k words takes about 2 ms per frame, thanks to ForceAtlas2 with a Barnes-Hut quadtree and OpenMP in a small C library." ;
-    site:role "Solo project." ;
-    site:stack "Python", "C (OpenMP)", "NumPy", "NetworkX", "Tk", "JMdict / KANJIDIC2" .
-
-:awabi a schema:SoftwareSourceCode ;
-    site:slug "awabi" ;
-    site:order 2 ;
-    site:featured true ;
-    schema:name "Awabi" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Awabi> ;
-    schema:about :japanese, :mobile, :nlp, :llms ;
-    site:summary "An Android overlay that reads the screen while you play games, watch anime or read manga in Japanese, and quietly collects the vocabulary for you." ;
-    site:problem "Looking words up while reading or playing breaks the flow, and building flashcards afterwards is tedious." ;
-    site:approach "A floating bubble captures the screen; on-device OCR and the accessibility service extract the text, a longest-match segmentation finds the words in an offline JMdict (about 170k entries), and an optional LLM explains the grammar, tailored to a profile the learner writes." ;
-    site:result "Fully offline lookup with JLPT levels, and a long press adds a word to an Anki deck exported as a .apkg file." ;
-    site:role "Solo project." ;
-    site:stack "Kotlin", "MVVM + Hilt", "Room", "ML Kit OCR", "JMdict", "LLM APIs" .
 
 :rent-prediction a schema:SoftwareSourceCode ;
     site:slug "rent-prediction" ;
-    site:order 3 ;
+    site:order 1 ;
     site:featured true ;
     schema:name "Rent prediction" ;
     schema:dateCreated "2026" ;
@@ -158,7 +126,7 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
 
 :web-shop a schema:SoftwareSourceCode ;
     site:slug "web-shop" ;
-    site:order 4 ;
+    site:order 2 ;
     site:featured true ;
     schema:name "3D web shop" ;
     schema:dateCreated "2023–2024" ;
@@ -173,15 +141,6 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
     site:stack "Angular", "TypeScript", "Three.js", "GSAP", "Express", "MariaDB" .
 
 # --- Archive: smaller, older or school projects -------------------------------
-
-:claude-android a schema:SoftwareSourceCode ;
-    site:order 10 ; site:featured false ;
-    schema:name "Claude Code for Android" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Claude-Code-for-Android> ;
-    schema:about :mobile, :llms ;
-    site:summary "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone — not to be taken seriously." ;
-    site:stack "Kotlin", "Python (asyncio)", "WebSocket" .
 
 :numerical-methods a schema:SoftwareSourceCode ;
     site:order 11 ; site:featured false ;
@@ -245,6 +204,35 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
     site:summary "The previous version of this site: plain JavaScript faking AJAX page loads and a JSON “database”, with a menu that followed the mouse." ;
     site:stack "JavaScript", "HTML", "CSS" .
 
+# --- AI-assisted side projects ------------------------------------------------
+#  Written mostly with an AI coding agent (site:aiAssisted true). They are listed
+#  in their own section of the Projects page, never featured, and left out of
+#  the Graph page, so they don't mix with the projects written by hand.
+
+:kanji-graph a schema:SoftwareSourceCode ;
+    site:order 20 ; site:featured false ; site:aiAssisted true ;
+    schema:name "Kanji Graph" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Kanji-Map> ;
+    site:summary "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words." ;
+    site:stack "Python", "C (OpenMP)", "NumPy", "NetworkX", "Tk" .
+
+:awabi a schema:SoftwareSourceCode ;
+    site:order 21 ; site:featured false ; site:aiAssisted true ;
+    schema:name "Awabi" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Awabi> ;
+    site:summary "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press." ;
+    site:stack "Kotlin", "Room", "ML Kit OCR", "JMdict" .
+
+:claude-android a schema:SoftwareSourceCode ;
+    site:order 22 ; site:featured false ; site:aiAssisted true ;
+    schema:name "Claude Code for Android" ;
+    schema:dateCreated "2026" ;
+    schema:codeRepository <https://github.com/raphaffou/Claude-Code-for-Android> ;
+    site:summary "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone." ;
+    site:stack "Kotlin", "Python (asyncio)", "WebSocket" .
+
 # -----------------------------------------------------------------------------
 #  Notes (the “blog”). Add a note like this:
 #
@@ -301,7 +289,7 @@ What I want to work on sits where symbolic and statistical AI meet: knowledge gr
     "Chinese — one year of study" .
 
 :me site:interest
-    "Japanese, through apps I build for myself",
+    "Japanese",
     "Collecting and reviving old computer hardware",
     "Cooking",
     "Contemporary art" .

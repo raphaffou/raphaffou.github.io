@@ -21,7 +21,7 @@ const noteDescription: ResolveFn<string> = (route) => noteBySlug(route.paramMap.
 export const routes: Routes = [
   { path: '', component: Home, data: { description: person.description } },
   { path: 'research', component: Research, title: 'Research', data: { description: 'Research by Raphaël Thieffry: LLMs and readability assessment.' } },
-  { path: 'projects', component: Projects, title: 'Projects', data: { description: 'Projects by Raphaël Thieffry: graph layout, NLP tools, machine learning, web and mobile apps.' } },
+  { path: 'projects', component: Projects, title: 'Projects', data: { description: 'Projects by Raphaël Thieffry: machine learning, web, compilers, algorithms and more.' } },
   {
     path: 'projects/:slug',
     component: ProjectPage,

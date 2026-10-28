@@ -36,9 +36,6 @@
         },
         {
           "@id": "https://raphaffou.github.io/#machine-learning"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#graph-layout"
         }
       ]
     },
@@ -82,21 +79,6 @@
       "name": "Machine learning"
     },
     {
-      "@id": "https://raphaffou.github.io/#graph-layout",
-      "@type": "DefinedTerm",
-      "name": "Graph layout"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#japanese",
-      "@type": "DefinedTerm",
-      "name": "Japanese"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#mobile",
-      "@type": "DefinedTerm",
-      "name": "Mobile apps"
-    },
-    {
       "@id": "https://raphaffou.github.io/#web",
       "@type": "DefinedTerm",
       "name": "Web"
@@ -136,47 +118,6 @@
       "mainEntityOfPage": "https://raphaffou.github.io/research/"
     },
     {
-      "@id": "https://raphaffou.github.io/#kanji-graph",
-      "@type": "SoftwareSourceCode",
-      "name": "Kanji Graph",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Kanji-Map",
-      "about": [
-        {
-          "@id": "https://raphaffou.github.io/#graph-layout"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#japanese"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#knowledge-graphs"
-        }
-      ],
-      "mainEntityOfPage": "https://raphaffou.github.io/projects/kanji-graph/"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#awabi",
-      "@type": "SoftwareSourceCode",
-      "name": "Awabi",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Awabi",
-      "about": [
-        {
-          "@id": "https://raphaffou.github.io/#japanese"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#mobile"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#nlp"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#llms"
-        }
-      ],
-      "mainEntityOfPage": "https://raphaffou.github.io/projects/awabi/"
-    },
-    {
       "@id": "https://raphaffou.github.io/#rent-prediction",
       "@type": "SoftwareSourceCode",
       "name": "Rent prediction",
@@ -198,21 +139,6 @@
         "@id": "https://raphaffou.github.io/#web"
       },
       "mainEntityOfPage": "https://raphaffou.github.io/projects/web-shop/"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#claude-android",
-      "@type": "SoftwareSourceCode",
-      "name": "Claude Code for Android",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Claude-Code-for-Android",
-      "about": [
-        {
-          "@id": "https://raphaffou.github.io/#mobile"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#llms"
-        }
-      ]
     },
     {
       "@id": "https://raphaffou.github.io/#numerical-methods",
@@ -267,6 +193,27 @@
       "name": "First portfolio",
       "dateCreated": "2022",
       "codeRepository": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#kanji-graph",
+      "@type": "SoftwareSourceCode",
+      "name": "Kanji Graph",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Kanji-Map"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#awabi",
+      "@type": "SoftwareSourceCode",
+      "name": "Awabi",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Awabi"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#claude-android",
+      "@type": "SoftwareSourceCode",
+      "name": "Claude Code for Android",
+      "dateCreated": "2026",
+      "codeRepository": "https://github.com/raphaffou/Claude-Code-for-Android"
     }
   ]
 }

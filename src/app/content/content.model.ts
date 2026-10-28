@@ -62,6 +62,8 @@ export interface Paper {
 export interface Project {
   slug?: string;
   featured: boolean;
+  /** Written mostly with an AI coding agent: listed on its own, never featured. */
+  aiAssisted: boolean;
   name: string;
   date: string;
   repo?: string;

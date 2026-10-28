@@ -22,7 +22,7 @@ const XSD = 'http://www.w3.org/2001/XMLSchema#';
 
 // site: properties the generator understands. Anything else is reported, to catch typos.
 const KNOWN_SITE = new Set([
-  'availability', 'cv', 'github', 'linkedin', 'bio', 'slug', 'order', 'featured', 'label',
+  'availability', 'cv', 'github', 'linkedin', 'bio', 'slug', 'order', 'featured', 'aiAssisted', 'label',
   'venue', 'venueUrl', 'status', 'summary', 'problem', 'approach', 'result', 'role', 'stack', 'codeNote',
   'skillGroup', 'items', 'spokenLanguage', 'interest', 'pathItem', 'period',
 ]);
@@ -275,6 +275,7 @@ function buildContent(r, quads) {
     return {
       slug: slug(s, featured),
       featured,
+      aiAssisted: r.bool(s, T('aiAssisted')),
       name: r.value(s, S('name'), true),
       date: r.value(s, S('dateCreated')) ?? '',
       repo: r.value(s, S('codeRepository')),
@@ -390,7 +391,7 @@ function buildGraph(r, c) {
     const iri = r.ofType(S('ScholarlyArticle')).find((s) => r.value(s, SITE + 'slug') === p.slug);
     work('p-' + p.slug, r.value(iri, SITE + 'label') ?? p.title, 'paper', '/research', false, p.topics);
   }
-  for (const p of c.projects) {
+  for (const p of c.projects.filter((p) => !p.aiAssisted)) { // kept apart from the rest, as on the Projects page
     const label = r.value(p._iri, SITE + 'label') ?? p.name;
     if (p.featured) work('w-' + p.slug, label, 'project', `/projects/${p.slug}`, false, p.topics);
     else if (p.repo) work('w-' + r.local(p._iri), label, 'project', p.repo, true, p.topics);

@@ -85,7 +85,7 @@ export const content: Content = {
       "Chinese — one year of study"
     ],
     "interests": [
-      "Japanese, through apps I build for myself",
+      "Japanese",
       "Collecting and reviving old computer hardware",
       "Cooking",
       "Contemporary art"
@@ -140,80 +140,9 @@ export const content: Content = {
   ],
   "projects": [
     {
-      "slug": "kanji-graph",
-      "featured": true,
-      "name": "Kanji Graph",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Kanji-Map",
-      "summary": "An interactive map of the whole Japanese vocabulary: the 175,312 JMdict words that contain a kanji, all on screen at once, with continuous zoom, search, readings and translations.",
-      "problem": "Linking two words whenever they share a kanji gives about 1.6 × 10⁸ edges: a graph that can be neither built nor drawn.",
-      "approach": "The geometry is precomputed instead: the kanji co-occurrence graph (5,022 nodes) is sparsified, split into 337 Louvain communities and laid out community by community; each word lands at the barycentre of its kanji, weighted towards the rarest. Edges are only computed, in C, for the words visible on screen.",
-      "result": "Drawing all 175k words takes about 2 ms per frame, thanks to ForceAtlas2 with a Barnes-Hut quadtree and OpenMP in a small C library.",
-      "role": "Solo project.",
-      "stack": [
-        "Python",
-        "C (OpenMP)",
-        "NumPy",
-        "NetworkX",
-        "Tk",
-        "JMdict / KANJIDIC2"
-      ],
-      "topics": [
-        {
-          "id": "graph-layout",
-          "name": "Graph layout"
-        },
-        {
-          "id": "japanese",
-          "name": "Japanese"
-        },
-        {
-          "id": "knowledge-graphs",
-          "name": "Knowledge graphs"
-        }
-      ]
-    },
-    {
-      "slug": "awabi",
-      "featured": true,
-      "name": "Awabi",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Awabi",
-      "summary": "An Android overlay that reads the screen while you play games, watch anime or read manga in Japanese, and quietly collects the vocabulary for you.",
-      "problem": "Looking words up while reading or playing breaks the flow, and building flashcards afterwards is tedious.",
-      "approach": "A floating bubble captures the screen; on-device OCR and the accessibility service extract the text, a longest-match segmentation finds the words in an offline JMdict (about 170k entries), and an optional LLM explains the grammar, tailored to a profile the learner writes.",
-      "result": "Fully offline lookup with JLPT levels, and a long press adds a word to an Anki deck exported as a .apkg file.",
-      "role": "Solo project.",
-      "stack": [
-        "Kotlin",
-        "MVVM + Hilt",
-        "Room",
-        "ML Kit OCR",
-        "JMdict",
-        "LLM APIs"
-      ],
-      "topics": [
-        {
-          "id": "japanese",
-          "name": "Japanese"
-        },
-        {
-          "id": "mobile",
-          "name": "Mobile apps"
-        },
-        {
-          "id": "nlp",
-          "name": "NLP"
-        },
-        {
-          "id": "llms",
-          "name": "LLMs"
-        }
-      ]
-    },
-    {
       "slug": "rent-prediction",
       "featured": true,
+      "aiAssisted": false,
       "name": "Rent prediction",
       "date": "2026",
       "repo": "https://github.com/raphaffou/Pr-diction-Immobili-re",
@@ -238,6 +167,7 @@ export const content: Content = {
     {
       "slug": "web-shop",
       "featured": true,
+      "aiAssisted": false,
       "name": "3D web shop",
       "date": "2023–2024",
       "repo": "https://github.com/raphaffou/projetWebPoly",
@@ -264,28 +194,7 @@ export const content: Content = {
     },
     {
       "featured": false,
-      "name": "Claude Code for Android",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Claude-Code-for-Android",
-      "summary": "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone — not to be taken seriously.",
-      "stack": [
-        "Kotlin",
-        "Python (asyncio)",
-        "WebSocket"
-      ],
-      "topics": [
-        {
-          "id": "mobile",
-          "name": "Mobile apps"
-        },
-        {
-          "id": "llms",
-          "name": "LLMs"
-        }
-      ]
-    },
-    {
-      "featured": false,
+      "aiAssisted": false,
       "name": "Numerical methods",
       "date": "2024",
       "repo": "https://github.com/raphaffou/Methodes-numeriques",
@@ -298,6 +207,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "C compiler",
       "date": "2024",
       "summary": "A minimal compiler for a subset of C, written in OCaml.",
@@ -308,6 +218,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "Forbidden Desert",
       "date": "2023",
       "repo": "https://github.com/raphaffou/desertinterdit",
@@ -320,6 +231,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "Huffman compression",
       "date": "2022–2023",
       "summary": "Text compression with Huffman coding, written in OCaml for the functional programming course.",
@@ -330,6 +242,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "Lists and quadtrees",
       "date": "2022–2023",
       "repo": "https://github.com/raphaffou/projetalgos3",
@@ -341,6 +254,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "Mazes",
       "date": "2022",
       "repo": "https://gitlab.com/l2945/labyrinthe",
@@ -353,6 +267,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "SMS through a 4G router",
       "date": "2022",
       "repo": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler",
@@ -365,6 +280,7 @@ export const content: Content = {
     },
     {
       "featured": false,
+      "aiAssisted": false,
       "name": "First portfolio",
       "date": "2022",
       "repo": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2",
@@ -373,6 +289,51 @@ export const content: Content = {
         "JavaScript",
         "HTML",
         "CSS"
+      ],
+      "topics": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "name": "Kanji Graph",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Kanji-Map",
+      "summary": "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words.",
+      "stack": [
+        "Python",
+        "C (OpenMP)",
+        "NumPy",
+        "NetworkX",
+        "Tk"
+      ],
+      "topics": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "name": "Awabi",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Awabi",
+      "summary": "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press.",
+      "stack": [
+        "Kotlin",
+        "Room",
+        "ML Kit OCR",
+        "JMdict"
+      ],
+      "topics": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "name": "Claude Code for Android",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Claude-Code-for-Android",
+      "summary": "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone.",
+      "stack": [
+        "Kotlin",
+        "Python (asyncio)",
+        "WebSocket"
       ],
       "topics": []
     }
@@ -394,18 +355,6 @@ export const content: Content = {
     {
       "id": "machine-learning",
       "name": "Machine learning"
-    },
-    {
-      "id": "graph-layout",
-      "name": "Graph layout"
-    },
-    {
-      "id": "japanese",
-      "name": "Japanese"
-    },
-    {
-      "id": "mobile",
-      "name": "Mobile apps"
     },
     {
       "id": "web",

@@ -1,5 +1,5 @@
 <h1>Projects</h1>
-<p class="lead">Things I built, mostly for myself and sometimes for a course. The first four have a page of their own.</p>
+<p class="lead">Things I built, mostly for a course and sometimes for myself. The selected ones have a page of their own.</p>
 
 <section aria-labelledby="h-selected">
   <h2 id="h-selected">Selected</h2>
@@ -15,8 +15,18 @@
 <section aria-labelledby="h-archive">
   <h2 id="h-archive">Archive</h2>
   <p class="section-intro">Smaller, older or school projects.</p>
+  <ng-container *ngTemplateOutlet="list; context: { $implicit: archive }" />
+</section>
+
+<section aria-labelledby="h-ai">
+  <h2 id="h-ai">AI-assisted side projects</h2>
+  <p class="section-intro">Personal tools written mostly with an AI coding agent: I designed and directed them, but most of the code is not mine.</p>
+  <ng-container *ngTemplateOutlet="list; context: { $implicit: ai }" />
+</section>
+
+<ng-template #list let-projects>
   <ul class="archive">
-    @for (p of archive; track p.name) {
+    @for (p of projects; track p.name) {
       <li>
         <p class="archive-head">
           @if (p.repo) {
@@ -30,4 +40,4 @@
       </li>
     }
   </ul>
-</section>
+</ng-template>

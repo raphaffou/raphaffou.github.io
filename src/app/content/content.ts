@@ -8,8 +8,9 @@ export const SITE_URL = 'https://raphaffou.github.io';
 
 export const person = content.person;
 export const papers: Paper[] = content.papers;
-export const featuredProjects: Project[] = content.projects.filter((p) => p.featured);
-export const archiveProjects: Project[] = content.projects.filter((p) => !p.featured);
+export const featuredProjects: Project[] = content.projects.filter((p) => p.featured && !p.aiAssisted);
+export const archiveProjects: Project[] = content.projects.filter((p) => !p.featured && !p.aiAssisted);
+export const aiProjects: Project[] = content.projects.filter((p) => p.aiAssisted);
 export const notes: Note[] = content.notes;
 
 export const projectBySlug = (slug: string | null | undefined) => featuredProjects.find((p) => p.slug === slug);
@@ -26,10 +27,10 @@ export function worksByTopic() {
       works: [
         ...papers.filter((p) => p.topics.some((t) => t.id === topic.id)).map((p) => ({ name: p.title, kind: 'Paper', link: '/research', external: false })),
         ...content.projects
-          .filter((p) => p.topics.some((t) => t.id === topic.id))
+          .filter((p) => !p.aiAssisted && p.topics.some((t) => t.id === topic.id))
           .map((p) => ({
             name: p.name,
-            kind: p.featured ? 'Project' : 'Archive',
+            kind: p.featured ? 'Project' : p.aiAssisted ? 'AI-assisted' : 'Archive',
             link: p.featured ? `/projects/${p.slug}` : (p.repo ?? ''),
             external: !p.featured,
           })),
