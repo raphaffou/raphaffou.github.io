@@ -1,10 +1,11 @@
-# Builds the site and publishes it on GitHub Pages at every push to main.
-# One-time setup on GitHub: Settings → Pages → Source: "GitHub Actions".
+# Builds the site and publishes it on GitHub Pages at every push to new.
+# One-time setup on GitHub: Settings → Pages → Source: "GitHub Actions",
+# and Settings → Environments → github-pages → allow deployments from `new`.
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [new]
   workflow_dispatch:
 
 permissions:

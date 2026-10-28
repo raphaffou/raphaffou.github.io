@@ -47,4 +47,4 @@ npm run preview      # build, then serve the static site on http://localhost:430
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and publishes at every push to `main`. One-time setup: *Settings → Pages → Build and deployment → Source: GitHub Actions*.
+`.github/workflows/deploy.yml` builds and publishes at every push to `new` (`main` keeps the old site's history, untouched). One-time setup: *Settings → Pages → Build and deployment → Source: GitHub Actions*, and *Settings → Environments → github-pages → Deployment branches*: add `new`.
