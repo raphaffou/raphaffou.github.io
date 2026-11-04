@@ -35,7 +35,7 @@ export const routes: Routes = [
     ? [{ path: 'notes/:slug', component: NotePage, canMatch: [noteExists], title: noteTitle, resolve: { description: noteDescription } }]
     : []),
   { path: 'about', component: About, title: 'About', data: { description: 'About Raphaël Thieffry: path, skills, languages and contact.' } },
-  { path: 'graph', component: GraphPage, title: 'Graph', data: { description: 'Everything on this site, linked by topic.' } },
+  { path: 'graph', component: GraphPage, title: 'Graph', data: { description: 'The content of this site as linked data: the ontology and the data, as an interactive graph.' } },
   { path: '404', component: NotFound, title: 'Page not found', data: { noindex: true } },
   { path: '**', component: NotFound, title: 'Page not found', data: { noindex: true } },
 ];

@@ -1,0 +1,181 @@
+# shapes.ttl — SHACL shapes for portfolio.ttl: which properties each kind of
+# entry takes and needs. They are closed: a property they do not list is an
+# error, which catches typos; they ignore rdf:type and the owl:top… properties
+# a reasoner adds in Protégé. Ordered texts (tools, skills, languages,
+# interests, authors) are one value, items separated by semicolons.
+# See content/README.md.
+#   pyshacl -s content/shapes.ttl content/portfolio.ttl
+
+@prefix site:    <https://raphaffou.github.io/ns#> .
+@prefix schema:  <https://schema.org/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+
+site:DateShape a sh:NodeShape ;
+    sh:or ( [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) .
+
+site:OrganizationRefShape a sh:NodeShape ;
+    sh:or ( [ sh:class schema:CollegeOrUniversity ] [ sh:class schema:ResearchOrganization ] [ sh:class schema:Organization ] ) .
+
+site:PersonShape a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path schema:name ;         sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:jobTitle ;     sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:description ;  sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:email ;        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:address ;      sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:availability ;   sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:cv ;             sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path site:github ;         sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path site:linkedin ;       sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path schema:sameAs ;       sh:datatype xsd:anyURI ] ,
+        [ sh:path schema:affiliation ;  sh:node site:OrganizationRefShape ] ,
+        [ sh:path schema:alumniOf ;     sh:node site:OrganizationRefShape ] ,
+        [ sh:path schema:knowsAbout ;   sh:class schema:DefinedTerm ] ,
+        [ sh:path site:bio ;            sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:pathItem ;       sh:class site:PathItem ] ,
+        [ sh:path site:skillGroup ;     sh:class site:SkillGroup ] ,
+        [ sh:path site:spokenLanguage ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:interest ;       sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+site:OrganizationShape a sh:NodeShape ;
+    sh:targetClass schema:Organization, schema:CollegeOrUniversity, schema:ResearchOrganization ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path schema:name ;    sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:address ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:url ;     sh:maxCount 1 ; sh:datatype xsd:anyURI ] .
+
+site:TopicShape a sh:NodeShape ;
+    sh:targetClass schema:DefinedTerm ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+# A position can also be a step of the path (both types on one node), so the
+# two shapes accept each other's properties.
+site:RoleShape a sh:NodeShape ;
+    sh:targetClass schema:Role ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path schema:name ;        sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:startDate ;   sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:endDate ;     sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:memberOf ;    sh:maxCount 1 ; sh:node site:OrganizationRefShape ] ,
+        [ sh:path schema:description ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:order ;         sh:maxCount 1 ; sh:datatype xsd:integer ] ,
+        [ sh:path site:period ;        sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+site:PaperShape a sh:NodeShape ;
+    sh:targetClass schema:ScholarlyArticle ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path site:slug ;              sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[a-z0-9]+(-[a-z0-9]+)*$" ] ,
+        [ sh:path site:order ;             sh:maxCount 1 ; sh:datatype xsd:integer ] ,
+        [ sh:path site:label ;             sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:name ;            sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:author ;          sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:datePublished ;   sh:minCount 1 ; sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:url ;             sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path site:status ;            sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:venue ;             sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:venueUrl ;          sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path schema:isPartOf ;        sh:maxCount 1 ; sh:class schema:Role ] ,
+        [ sh:path schema:about ;           sh:class schema:DefinedTerm ] ,
+        [ sh:path site:summary ;           sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:problem ;           sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:approach ;          sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:result ;            sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:stack ;             sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:codeRepository ;  sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path site:codeNote ;          sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+site:ProjectShape a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path site:slug ;              sh:maxCount 1 ; sh:pattern "^[a-z0-9]+(-[a-z0-9]+)*$" ] ,
+        [ sh:path site:order ;             sh:maxCount 1 ; sh:datatype xsd:integer ] ,
+        [ sh:path site:featured ;          sh:maxCount 1 ; sh:datatype xsd:boolean ] ,
+        [ sh:path site:aiAssisted ;        sh:maxCount 1 ; sh:datatype xsd:boolean ] ,
+        [ sh:path site:archived ;          sh:maxCount 1 ; sh:datatype xsd:boolean ] ,
+        [ sh:path site:context ;           sh:minCount 1 ; sh:in ( site:Course site:Work site:Personal ) ] ,
+        [ sh:path site:label ;             sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:name ;            sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:dateCreated ;     sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:codeRepository ;  sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path schema:url ;             sh:maxCount 1 ; sh:datatype xsd:anyURI ] ,
+        [ sh:path schema:about ;           sh:class schema:DefinedTerm ] ,
+        [ sh:path site:summary ;           sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:problem ;           sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:approach ;          sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:result ;            sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:role ;              sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:stack ;             sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+site:FeaturedProjectShape a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode ;
+    sh:message "A featured project needs site:slug, site:problem, site:approach and site:result." ;
+    sh:or (
+        [ sh:not [ sh:property [ sh:path site:featured ; sh:hasValue true ] ] ]
+        [ sh:property
+            [ sh:path site:slug ; sh:minCount 1 ] ,
+            [ sh:path site:problem ; sh:minCount 1 ] ,
+            [ sh:path site:approach ; sh:minCount 1 ] ,
+            [ sh:path site:result ; sh:minCount 1 ] ]
+    ) .
+
+# Boilerplate values start with TODO. A project or a note that still has one is a
+# draft: the build leaves it out of the site, and this shape lists what is left to do.
+site:PlaceholderShape a sh:NodeShape ;
+    sh:targetClass schema:SoftwareSourceCode , schema:BlogPosting ;
+    sh:property [
+        sh:path [ sh:alternativePath ( schema:name schema:dateCreated site:summary site:stack site:role site:problem site:approach site:result site:label schema:headline schema:articleBody ) ] ;
+        sh:not [ sh:pattern "^TODO" ] ;
+        sh:severity sh:Warning ;
+        sh:message "Still a TODO: fill it in, or delete the line if the field is optional." ] .
+
+site:NoteShape a sh:NodeShape ;
+    sh:targetClass schema:BlogPosting ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path site:slug ;             sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[a-z0-9]+(-[a-z0-9]+)*$" ] ,
+        [ sh:path schema:headline ;       sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:datePublished ;  sh:minCount 1 ; sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:about ;          sh:class schema:DefinedTerm ] ,
+        [ sh:path schema:mentions ;       sh:or ( [ sh:class schema:SoftwareSourceCode ] [ sh:class schema:ScholarlyArticle ] ) ] ,
+        [ sh:path site:summary ;          sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:articleBody ;    sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+site:PathItemShape a sh:NodeShape ;
+    sh:targetClass site:PathItem ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path site:order ;         sh:maxCount 1 ; sh:datatype xsd:integer ] ,
+        [ sh:path site:period ;        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:name ;        sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:description ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path schema:startDate ;   sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:endDate ;     sh:maxCount 1 ; sh:node site:DateShape ] ,
+        [ sh:path schema:memberOf ;    sh:maxCount 1 ; sh:node site:OrganizationRefShape ] .
+
+site:SkillGroupShape a sh:NodeShape ;
+    sh:targetClass site:SkillGroup ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type owl:topObjectProperty owl:topDataProperty ) ;
+    sh:property
+        [ sh:path site:order ;  sh:maxCount 1 ; sh:datatype xsd:integer ] ,
+        [ sh:path schema:name ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ,
+        [ sh:path site:items ;  sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .

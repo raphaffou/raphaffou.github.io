@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="440" viewBox="0 0 680 440" role="img" aria-labelledby="title desc">
+  <title id="title">Two independent paths to the server</title>
+  <desc id="desc">The phone app talks to a relay mini-PC on the local network over the tailnet: the relay arbitrates every power action, serves the web app and routes IPMI to the BMC, which powers the server on and off. The relay also follows each boot and pushes the models to the server. Separately, the app reaches the server over the tailnet: tailscale serve forwards HTTPS to the gateway, which runs in Docker, where other containers come and go. The gateway calls the model server and, through a Unix socket, a root host agent with a fixed list of actions; both run outside Docker.</desc>
+  <style>
+    .box { fill: none; stroke: #6a6a72; stroke-width: 1.5; }
+    .group { fill: none; stroke: #46464c; stroke-width: 1; stroke-dasharray: 4 4; }
+    .t { fill: #f4f2ee; font: 15px Georgia, 'Times New Roman', serif; text-anchor: middle; }
+    .s { fill: #a9a6a0; font: 13px Georgia, 'Times New Roman', serif; text-anchor: middle; }
+    .l { fill: #a9a6a0; font: italic 13px Georgia, 'Times New Roman', serif; }
+    .g { fill: #a9a6a0; font: 13px Georgia, 'Times New Roman', serif; }
+    .e { fill: none; stroke: #a9a6a0; stroke-width: 1.5; }
+    .d { stroke-dasharray: 5 4; }
+    .head { fill: #a9a6a0; }
+    @media (prefers-color-scheme: light) {
+      .box { stroke: #8d887f; }
+      .group { stroke: #b5b0a6; }
+      .t { fill: #141416; }
+      .s, .l, .g { fill: #5f5c57; }
+      .e { stroke: #5f5c57; }
+      .head { fill: #5f5c57; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="head" d="M0 0L10 5L0 10z" />
+    </marker>
+  </defs>
+
+  <!-- Path 1: power, through the relay and the BMC -->
+  <rect class="box" x="35" y="20" width="130" height="60" rx="6" />
+  <text class="t" x="100" y="46">Phone app</text>
+  <text class="s" x="100" y="66">Flutter</text>
+
+  <rect class="box" x="265" y="20" width="170" height="60" rx="6" />
+  <text class="t" x="350" y="46">Relay mini-PC</text>
+  <text class="s" x="350" y="66">power, web app, models</text>
+
+  <rect class="box" x="520" y="20" width="150" height="60" rx="6" />
+  <text class="t" x="595" y="46">BMC</text>
+  <text class="s" x="595" y="66">IPMI, works when off</text>
+
+  <path class="e" d="M165 50H261" marker-end="url(#a)" />
+  <text class="l" x="213" y="42" text-anchor="middle">HTTPS, IPMI</text>
+  <text class="l" x="213" y="68" text-anchor="middle">tailnet</text>
+  <path class="e" d="M435 50H516" marker-end="url(#a)" />
+  <text class="l" x="476" y="42" text-anchor="middle">IPMI · LAN</text>
+  <path class="e d" d="M333 80V136" marker-end="url(#a)" />
+  <text class="l" x="342" y="114">models, boot tracking</text>
+  <path class="e d" d="M595 80V136" marker-end="url(#a)" />
+  <text class="l" x="586" y="114" text-anchor="end">power on, off</text>
+
+  <!-- Path 2: everything else, straight to the server -->
+  <rect class="group" x="10" y="140" width="660" height="290" rx="8" />
+  <text class="g" x="24" y="418">Server · Debian · V100 GPUs</text>
+
+  <path class="e" d="M100 80V176" marker-end="url(#a)" />
+  <text class="l" x="109" y="114">HTTPS · tailnet</text>
+
+  <!-- Native services, run by systemd -->
+  <rect class="box" x="35" y="180" width="130" height="60" rx="6" />
+  <text class="t" x="100" y="206">tailscale serve</text>
+  <text class="s" x="100" y="226">HTTPS, SSH</text>
+
+  <rect class="box" x="190" y="180" width="130" height="60" rx="6" />
+  <text class="t" x="255" y="206">Model server</text>
+  <text class="s" x="255" y="226">llama.cpp, Ollama</text>
+
+  <rect class="box" x="345" y="180" width="130" height="60" rx="6" />
+  <text class="t" x="410" y="206">Host agent</text>
+  <text class="s" x="410" y="226">root, fixed actions</text>
+
+  <!-- Docker: the gateway, and containers started and stopped as needed -->
+  <rect class="group" x="20" y="268" width="640" height="120" rx="8" />
+  <text class="g" x="34" y="378">Docker</text>
+
+  <rect class="box" x="35" y="292" width="440" height="60" rx="6" />
+  <text class="t" x="255" y="318">Gateway</text>
+  <text class="s" x="255" y="338">FastAPI, plugins</text>
+
+  <path class="box d" d="M508 292V284H648V344H640" />
+  <rect class="box d" x="500" y="292" width="140" height="60" rx="6" />
+  <text class="t" x="570" y="318">Other containers</text>
+  <text class="s" x="570" y="338">come and go</text>
+
+  <path class="e" d="M100 240V288" marker-end="url(#a)" />
+  <path class="e" d="M255 292V244" marker-end="url(#a)" />
+  <text class="l" x="264" y="258">chat</text>
+  <path class="e" d="M410 292V244" marker-end="url(#a)" />
+  <text class="l" x="419" y="258">Unix socket</text>
+</svg>

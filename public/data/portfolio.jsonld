@@ -2,42 +2,171 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@id": "https://raphaffou.github.io/#awabi",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/Awabi",
+      "dateCreated": "2026",
+      "name": "Awabi"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#claude-android",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/Claude-Code-for-Android",
+      "dateCreated": "2026",
+      "name": "Claude Code for Android"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#compiler",
+      "@type": "SoftwareSourceCode",
+      "dateCreated": "2024",
+      "name": "C compiler"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#forbidden-desert",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/desertinterdit",
+      "dateCreated": "2023",
+      "name": "Forbidden Desert"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#home-ai-infra",
+      "@type": "SoftwareSourceCode",
+      "about": {
+        "@id": "https://raphaffou.github.io/#llms"
+      },
+      "dateCreated": 2026,
+      "name": "Home AI infrastructure",
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/home-ai-infra/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#home-ai-infra-note",
+      "@type": "BlogPosting",
+      "about": {
+        "@id": "https://raphaffou.github.io/#llms"
+      },
+      "articleBody": "So, I began this project some months ago. I had been thinking about building my own infrastructure for a long time, but the turning point was some offer I saw on leboncoin.\nMore specifically, I found an Inspur NF5288M5 at the very cheap price of about 4,800 €. This may sound absurdly expensive, but when you think about it, for less than the price of ONE Nvidia RTX 5090, I had the opportunity to get 8 Nvidia V100 cards, with 32 GB of VRAM each (256 GB of VRAM in total).\nThere's of course a decent CPU capacity on top of that (2x Intel Xeon), but the catch is I had to buy the RAM and storage myself (in this economy, 09/2026), and it draws a lot of current.\n\nAfter thinking quite a lot about it, I ended up buying the server. The buying process was something, because I had to manage this from abroad. But anyway, I managed to get it.\nMy thought about it is quite simple: until now, I didn't have any real compute capacity. The best GPU I ever had was a GTX 1060, which is pretty bad for anything AI-related. Just buying this unlocks quite a lot of possibilities for me, for various kinds of projects. However, these possibilities need to be tempered to avoid spending too much electricity. On top of that, the noise is terrible, so I need to find a better place than my 23 m² accommodation to house this enormous machine.\n\n## Architecture and problem solving\n\nI had to find solutions for these two problems:\nFor the **noise** and **space** problem, I decided, after a long discussion with my parents, to install it in their house. There's a garage which is separate from the main \"house living building\", and I installed it there to avoid the annoyance.\nBefore the installation, I knew I wouldn't have much time in my parents' house: they live quite far from Paris, and it's a 4-hour train ride just to get there. So I had to plan ahead and bring/buy some stuff in advance to prepare for the other problem: **energy**.\nI'm neither really rich nor really poor, but just to give you an idea, this machine draws 800 W at idle, and 1,500–2,000 W at peak. So let's say I just let it idle for a month: it comes to $(800 \\times 24 \\times 30) \\div 1000 \\times 0.21 \\approx 120$ € every month.\nThis will never be a profitable expense, but anyway I needed to plan a strategy to mitigate this.\n\nThe idea is simple: just install a small monitoring machine to turn the huge server on and off whenever you need it. I have many mini PCs at home, so it's a cheap, time-saving solution.\nWith a Claude subscription available, it is also not out of reach to build an Android app so that my parents can also turn this monster off (they may want to use their garage at some point).\n\nThe resulting architecture is this:\n\n![The phone app reaches a relay on the local network, which handles power through the BMC, and reaches the server directly over the tailnet for everything else](/images/home-ai-infra/architecture.svg \"Power goes through the relay and the BMC; everything else goes straight to the server\")\n\nWhile working on this, in practice I discovered that this \"mini relay machine\" can be more useful than just being a relay. It turns out the network in my parents' town is awful, and as such, downloads take DAYS to complete. This mini-machine thus turned into some kind of network cache to limit the amount of time the huge server has to be powered on with no worthwhile task to compute.\n\nInside the server, I designed the thing to be as modular as possible. In my experience, not designing something that'll last as modular is a profound mistake. So every capability of the server through the app is controlled by a modular API gateway in Docker, and Docker will be used in many projects anyway.\n\n## Safety, security, and user isolation\n\nSafety is kind of a major concern here. First, access to the machine is protected by Tailscale. This is **not** on the global internet.\nWith that said, I'm not planning on being the only one using this machine. The number of GPUs makes it imaginable that I'll share this thing with my family or some friends. I'm also thinking about giving the model it runs some agentic capabilities with access to the internet.\n\nThis raises some problems:\n\n- First, privacy. The whole purpose of buying a machine is to have control over your data. If another user can, let's say, see everything about your life, there's no point.\n- Second, agentic safety. Let's say the model gets badly corrupted and tries to do malicious things. How can I limit the risk?\n\nThe solution to the first problem is user identification, encryption and contained execution, and the solution to the second one is rights management and guard models.\n\nIdentification is ensured via the identity of your Tailscale account. This makes sure my mom can't trick the system into thinking she's me.\nBesides that, for the encryption, the idea is quite simple. Wherever the app is installed, you can store a private key. If you have multiple devices, you can have multiple private keys. These keys are linked to your 50 GB encrypted volume and, through a pairing process, any one of them can open the volume (see [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup)).\nThese volumes are opened by containers, and once containerized, a user is limited to what he's allowed to do inside it: he's isolated.\n\nOne limit to this is that when the volume is being actively used by a container, an admin on the bare-metal machine could potentially read everything. This volume can be locked/unlocked manually by the user whenever he feels like it.\n\nFor the second problem, I made sure that whatever the LLM model can act upon, it CAN'T access my parents' local network or the tailnet. This is enforced at the container level, and it only has internet access (for obvious reasons).\nBut let's say the model is highly intelligent, finds a vulnerability and wants to exploit it or something. Here comes the second protection: a guard model. The idea is that for each agentic action the model takes, a smaller model checks whether it's safe or not.\nAs a user, the idea is to be able to configure that: if you monitor the thing actively, why bother? If you're cooking in parallel and the guard has some doubts, it can ask you to check quickly. If it's an automated night task, make it conservative.\n\n![The agent loop runs outside the space; each action goes through a supervisor before it runs in the space, which can reach the internet but not the local network](/images/home-ai-infra/agent.svg \"The agent acts on its space, not in it\")\n\n\n\n## Current state\n\nRight now, the app is working: it can control the power and monitor the electricity consumption. There's a small model (Llama 3.3 70B Q3) that's deployed as a POC, but it's an old model, and not the best in its category.\nGLM-5.3 is coming and I have to deploy it. I also have to build some kind of task manager and UI modules for all agentic things to work properly. It's still a work in progress.\n\nI also have some hardware or GPU detection issues that I can't wrap my head around, so at the moment I'm capped at 4 GPUs (~128 GB of VRAM).\n\nYeah, this is a fun project.",
+      "datePublished": "2026-11-03",
+      "headline": "Details about my private AI infrastructure",
+      "mentions": {
+        "@id": "https://raphaffou.github.io/#home-ai-infra"
+      },
+      "url": "https://raphaffou.github.io/notes/home-ai-infra-specs/"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#huffman",
+      "@type": "SoftwareSourceCode",
+      "dateCreated": "2022–2023",
+      "name": "Huffman compression"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#infra-data-platform",
+      "@type": "SoftwareSourceCode",
+      "dateCreated": "2023-2026",
+      "name": "Infrastructure data management platform"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#jsi",
+      "@type": "ResearchOrganization",
+      "address": "Ljubljana, Slovenia",
+      "name": "Jožef Stefan Institute",
+      "url": "https://www.ijs.si/ijsw/JSI"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#jsi-internship",
+      "@type": "Role",
+      "description": "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Working with Matej Martinc on readability assessment with large language models.",
+      "endDate": "2026-08",
+      "memberOf": {
+        "@id": "https://raphaffou.github.io/#jsi"
+      },
+      "name": "Research internship in NLP",
+      "startDate": "2026-06"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#kanji-graph",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/Kanji-Map",
+      "dateCreated": "2026",
+      "name": "Kanji Graph"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#knowledge-graphs",
+      "@type": "DefinedTerm",
+      "name": "Knowledge graphs"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#llms",
+      "@type": "DefinedTerm",
+      "name": "LLMs"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#machine-learning",
+      "@type": "DefinedTerm",
+      "name": "Machine learning"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#maze",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://gitlab.com/l2945/labyrinthe",
+      "dateCreated": "2022",
+      "name": "Mazes"
+    },
+    {
       "@id": "https://raphaffou.github.io/#me",
       "@type": "Person",
-      "name": "Raphaël Thieffry",
-      "jobTitle": "M2 student in Hybrid AI — knowledge graphs & NLP",
-      "description": "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD.",
-      "email": "raphael.thieffry@gmail.com",
       "address": "Paris-Saclay, France",
-      "sameAs": [
-        "https://github.com/raphaffou",
-        "https://bit.ly/4a04L7l"
-      ],
       "affiliation": {
         "@id": "https://raphaffou.github.io/#paris-saclay"
       },
       "alumniOf": [
         {
-          "@id": "https://raphaffou.github.io/#polytech"
+          "@id": "https://raphaffou.github.io/#paris-saclay"
         },
         {
-          "@id": "https://raphaffou.github.io/#paris-saclay"
+          "@id": "https://raphaffou.github.io/#polytech"
         }
       ],
+      "description": "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD.",
+      "email": "raphael.thieffry@gmail.com",
+      "jobTitle": "M2 student in Hybrid AI — knowledge graphs & NLP",
       "knowsAbout": [
         {
           "@id": "https://raphaffou.github.io/#knowledge-graphs"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#nlp"
         },
         {
           "@id": "https://raphaffou.github.io/#llms"
         },
         {
           "@id": "https://raphaffou.github.io/#machine-learning"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#nlp"
         }
+      ],
+      "name": "Raphaël Thieffry",
+      "sameAs": [
+        "https://bit.ly/4a04L7l",
+        "https://github.com/raphaffou"
       ]
+    },
+    {
+      "@id": "https://raphaffou.github.io/#nlp",
+      "@type": "DefinedTerm",
+      "name": "NLP"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#numerical-methods",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/Methodes-numeriques",
+      "dateCreated": "2024",
+      "name": "Numerical methods"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#old-portfolio",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2",
+      "dateCreated": "2022",
+      "name": "First portfolio"
     },
     {
       "@id": "https://raphaffou.github.io/#paris-saclay",
@@ -52,31 +181,67 @@
       "url": "https://www.polytech.universite-paris-saclay.fr/en"
     },
     {
-      "@id": "https://raphaffou.github.io/#jsi",
-      "@type": "ResearchOrganization",
-      "name": "Jožef Stefan Institute",
-      "address": "Ljubljana, Slovenia",
-      "url": "https://www.ijs.si/ijsw/JSI"
+      "@id": "https://raphaffou.github.io/#quadtrees",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/projetalgos3",
+      "dateCreated": "2022–2023",
+      "name": "Lists and quadtrees"
     },
     {
-      "@id": "https://raphaffou.github.io/#knowledge-graphs",
-      "@type": "DefinedTerm",
-      "name": "Knowledge graphs"
+      "@id": "https://raphaffou.github.io/#readability-paper",
+      "@type": "ScholarlyArticle",
+      "about": [
+        {
+          "@id": "https://raphaffou.github.io/#llms"
+        },
+        {
+          "@id": "https://raphaffou.github.io/#nlp"
+        }
+      ],
+      "author": [
+        "Raphaël Thieffry",
+        "Matej Martinc"
+      ],
+      "datePublished": "2026-09",
+      "isPartOf": {
+        "@id": "https://raphaffou.github.io/#jsi-internship"
+      },
+      "name": "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting",
+      "url": "https://arxiv.org/abs/2609.24650",
+      "mainEntityOfPage": "https://raphaffou.github.io/research/"
     },
     {
-      "@id": "https://raphaffou.github.io/#nlp",
-      "@type": "DefinedTerm",
-      "name": "NLP"
+      "@id": "https://raphaffou.github.io/#rent-prediction",
+      "@type": "SoftwareSourceCode",
+      "about": {
+        "@id": "https://raphaffou.github.io/#machine-learning"
+      },
+      "codeRepository": "https://github.com/raphaffou/Pr-diction-Immobili-re",
+      "dateCreated": "2026",
+      "name": "Rent prediction",
+      "mainEntityOfPage": "https://raphaffou.github.io/projects/rent-prediction/"
     },
     {
-      "@id": "https://raphaffou.github.io/#llms",
-      "@type": "DefinedTerm",
-      "name": "LLMs"
+      "@id": "https://raphaffou.github.io/#sms-router",
+      "@type": "SoftwareSourceCode",
+      "codeRepository": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler",
+      "dateCreated": "2022",
+      "name": "SMS through a 4G router"
     },
     {
-      "@id": "https://raphaffou.github.io/#machine-learning",
-      "@type": "DefinedTerm",
-      "name": "Machine learning"
+      "@id": "https://raphaffou.github.io/#souffleur",
+      "@type": "SoftwareSourceCode",
+      "about": {
+        "@id": "https://raphaffou.github.io/#llms"
+      },
+      "dateCreated": "2026",
+      "name": "Souffleur"
+    },
+    {
+      "@id": "https://raphaffou.github.io/#ticket-graph-mining",
+      "@type": "SoftwareSourceCode",
+      "dateCreated": 2023,
+      "name": "Recurring and frequent problems identification using user tickets"
     },
     {
       "@id": "https://raphaffou.github.io/#web",
@@ -84,136 +249,16 @@
       "name": "Web"
     },
     {
-      "@id": "https://raphaffou.github.io/#jsi-internship",
-      "@type": "Role",
-      "name": "Research internship in NLP",
-      "startDate": "2026-06",
-      "endDate": "2026-08",
-      "memberOf": {
-        "@id": "https://raphaffou.github.io/#jsi"
-      },
-      "description": "Summer 2026 in the Knowledge Laboratory of the Jožef Stefan Institute, working with Matej Martinc on readability assessment with large language models."
-    },
-    {
-      "@id": "https://raphaffou.github.io/#readability-paper",
-      "@type": "ScholarlyArticle",
-      "name": "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting",
-      "author": [
-        "Raphaël Thieffry",
-        "Matej Martinc"
-      ],
-      "datePublished": "2026-09",
-      "url": "https://arxiv.org/abs/2609.24650",
-      "isPartOf": {
-        "@id": "https://raphaffou.github.io/#jsi-internship"
-      },
-      "about": [
-        {
-          "@id": "https://raphaffou.github.io/#nlp"
-        },
-        {
-          "@id": "https://raphaffou.github.io/#llms"
-        }
-      ],
-      "mainEntityOfPage": "https://raphaffou.github.io/research/"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#rent-prediction",
-      "@type": "SoftwareSourceCode",
-      "name": "Rent prediction",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Pr-diction-Immobili-re",
-      "about": {
-        "@id": "https://raphaffou.github.io/#machine-learning"
-      },
-      "mainEntityOfPage": "https://raphaffou.github.io/projects/rent-prediction/"
-    },
-    {
       "@id": "https://raphaffou.github.io/#web-shop",
       "@type": "SoftwareSourceCode",
-      "name": "3D web shop",
-      "dateCreated": "2023–2024",
-      "codeRepository": "https://github.com/raphaffou/projetWebPoly",
-      "url": "https://projet-web-poly.vercel.app",
       "about": {
         "@id": "https://raphaffou.github.io/#web"
       },
+      "codeRepository": "https://github.com/raphaffou/projetWebPoly",
+      "dateCreated": "2023–2024",
+      "name": "3D web shop",
+      "url": "https://projet-web-poly.vercel.app",
       "mainEntityOfPage": "https://raphaffou.github.io/projects/web-shop/"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#numerical-methods",
-      "@type": "SoftwareSourceCode",
-      "name": "Numerical methods",
-      "dateCreated": "2024",
-      "codeRepository": "https://github.com/raphaffou/Methodes-numeriques"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#compiler",
-      "@type": "SoftwareSourceCode",
-      "name": "C compiler",
-      "dateCreated": "2024"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#forbidden-desert",
-      "@type": "SoftwareSourceCode",
-      "name": "Forbidden Desert",
-      "dateCreated": "2023",
-      "codeRepository": "https://github.com/raphaffou/desertinterdit"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#huffman",
-      "@type": "SoftwareSourceCode",
-      "name": "Huffman compression",
-      "dateCreated": "2022–2023"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#quadtrees",
-      "@type": "SoftwareSourceCode",
-      "name": "Lists and quadtrees",
-      "dateCreated": "2022–2023",
-      "codeRepository": "https://github.com/raphaffou/projetalgos3"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#maze",
-      "@type": "SoftwareSourceCode",
-      "name": "Mazes",
-      "dateCreated": "2022",
-      "codeRepository": "https://gitlab.com/l2945/labyrinthe"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#sms-router",
-      "@type": "SoftwareSourceCode",
-      "name": "SMS through a 4G router",
-      "dateCreated": "2022",
-      "codeRepository": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#old-portfolio",
-      "@type": "SoftwareSourceCode",
-      "name": "First portfolio",
-      "dateCreated": "2022",
-      "codeRepository": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#kanji-graph",
-      "@type": "SoftwareSourceCode",
-      "name": "Kanji Graph",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Kanji-Map"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#awabi",
-      "@type": "SoftwareSourceCode",
-      "name": "Awabi",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Awabi"
-    },
-    {
-      "@id": "https://raphaffou.github.io/#claude-android",
-      "@type": "SoftwareSourceCode",
-      "name": "Claude Code for Android",
-      "dateCreated": "2026",
-      "codeRepository": "https://github.com/raphaffou/Claude-Code-for-Android"
     }
   ]
 }

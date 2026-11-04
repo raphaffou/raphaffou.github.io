@@ -1,295 +1,516 @@
-# =============================================================================
-#  portfolio.ttl — the single source of content for raphaffou.github.io
-#
-#  Edit this file, then run `npm run build` (or `npm start` while developing).
-#  scripts/build-content.mjs turns it into:
-#    - the pages of the site (src/app/content/content.generated.ts)
-#    - JSON-LD for search engines (public/data/portfolio.jsonld)
-#    - this file itself, published at /data/portfolio.ttl
-#    - the Graph page (src/app/content/graph.generated.ts)
-#
-#  Vocabulary: schema.org for what it already describes, plus a small `site:`
-#  namespace for what only this site needs (order, slugs, case-study fields).
-#  Texts are in English. Keep summaries to 2–3 sentences.
-#
-#  Order of values: when a property has several values ("Python", "C", …),
-#  the site shows them in the order written here.
-#  Optional site:label gives a shorter name for the Graph page.
-# =============================================================================
+@prefix : <https://raphaffou.github.io/data/portfolio.ttl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://raphaffou.github.io/data/portfolio.ttl#> .
 
-@prefix :       <https://raphaffou.github.io/#> .
-@prefix schema: <https://schema.org/> .
-@prefix site:   <https://raphaffou.github.io/ns#> .
-@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+<https://raphaffou.github.io/data/portfolio.ttl> rdf:type owl:Ontology ;
+                                                  owl:imports <https://raphaffou.github.io/ns> .
 
-# -----------------------------------------------------------------------------
-#  Me
-# -----------------------------------------------------------------------------
+#################################################################
+#    Individuals
+#################################################################
 
-:me a schema:Person ;
-    schema:name "Raphaël Thieffry" ;
-    schema:jobTitle "M2 student in Hybrid AI — knowledge graphs & NLP" ;
-    schema:description "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD." ;
-    schema:email "raphael.thieffry@gmail.com" ;
-    schema:address "Paris-Saclay, France" ;
-    site:availability "Open to research internships (from March 2027) and PhD positions" ;
-    site:cv </cv/Raphael_Thieffry_CV.pdf> ;
-    site:github <https://github.com/raphaffou> ;
-    site:linkedin <https://bit.ly/4a04L7l> ;
-    schema:sameAs <https://github.com/raphaffou>, <https://bit.ly/4a04L7l> ;
-    schema:affiliation :paris-saclay ;
-    schema:alumniOf :polytech, :paris-saclay ;
-    schema:knowsAbout :knowledge-graphs, :nlp, :llms, :machine-learning ;
-    site:bio """I studied mathematics and computer science at Université Paris-Saclay, then spent three years as an apprentice engineer in industry, working on Linux infrastructure and data mining, while completing an engineering degree at Polytech Paris-Saclay (17/20).
+###  https://raphaffou.github.io/#awabi
+<https://raphaffou.github.io/#awabi> rdf:type owl:NamedIndividual ,
+                                              <https://schema.org/SoftwareSourceCode> ;
+                                     <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                     <https://raphaffou.github.io/ns#aiAssisted> "true"^^xsd:boolean ;
+                                     <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                     <https://raphaffou.github.io/ns#order> 21 ;
+                                     <https://raphaffou.github.io/ns#stack> "Kotlin; Room; ML Kit OCR; JMdict" ;
+                                     <https://raphaffou.github.io/ns#summary> "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press." ;
+                                     <https://schema.org/codeRepository> "https://github.com/raphaffou/Awabi"^^xsd:anyURI ;
+                                     <https://schema.org/dateCreated> "2026" ;
+                                     <https://schema.org/name> "Awabi" .
+
+
+###  https://raphaffou.github.io/#claude-android
+<https://raphaffou.github.io/#claude-android> rdf:type owl:NamedIndividual ,
+                                                       <https://schema.org/SoftwareSourceCode> ;
+                                              <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                              <https://raphaffou.github.io/ns#aiAssisted> "true"^^xsd:boolean ;
+                                              <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                              <https://raphaffou.github.io/ns#order> 20 ;
+                                              <https://raphaffou.github.io/ns#stack> "Kotlin; Python (asyncio); WebSocket" ;
+                                              <https://raphaffou.github.io/ns#summary> "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone." ;
+                                              <https://schema.org/codeRepository> "https://github.com/raphaffou/Claude-Code-for-Android"^^xsd:anyURI ;
+                                              <https://schema.org/dateCreated> "2026" ;
+                                              <https://schema.org/name> "Claude Code for Android" .
+
+
+###  https://raphaffou.github.io/#compiler
+<https://raphaffou.github.io/#compiler> rdf:type owl:NamedIndividual ,
+                                                 <https://schema.org/SoftwareSourceCode> ;
+                                        <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                        <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                        <https://raphaffou.github.io/ns#order> 14 ;
+                                        <https://raphaffou.github.io/ns#stack> "OCaml" ;
+                                        <https://raphaffou.github.io/ns#summary> "A minimal compiler for a subset of C, written in OCaml." ;
+                                        <https://schema.org/dateCreated> "2024" ;
+                                        <https://schema.org/name> "C compiler" .
+
+
+###  https://raphaffou.github.io/#forbidden-desert
+<https://raphaffou.github.io/#forbidden-desert> rdf:type owl:NamedIndividual ,
+                                                         <https://schema.org/SoftwareSourceCode> ;
+                                                <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                                <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                                <https://raphaffou.github.io/ns#order> 13 ;
+                                                <https://raphaffou.github.io/ns#stack> "Java; Swing" ;
+                                                <https://raphaffou.github.io/ns#summary> "The cooperative board game in Java and Swing, for the object-oriented programming course: an MVC architecture, most of the rules and roles, and unit tests." ;
+                                                <https://schema.org/codeRepository> "https://github.com/raphaffou/desertinterdit"^^xsd:anyURI ;
+                                                <https://schema.org/dateCreated> "2023" ;
+                                                <https://schema.org/name> "Forbidden Desert" .
+
+
+###  https://raphaffou.github.io/#home-ai-infra
+<https://raphaffou.github.io/#home-ai-infra> rdf:type owl:NamedIndividual ,
+                                                      <https://schema.org/SoftwareSourceCode> ;
+                                             <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                             <https://schema.org/about> <https://raphaffou.github.io/#llms> ;
+                                             <https://raphaffou.github.io/ns#approach> "Hardware was chosen as a compromise between capabilities and price. Energy was only a second criterion, as the goal is not to be profitable but rather to open possibilities and allow for a privacy-enabled use of large compute resources. Software-wise, the idea was to have a single app that manages everything (thus the use of Flutter). Such a huge piece of software is impossible to build all alone in a few weeks (power control, energy monitoring, user isolation, encryption, AI guards...), so I tried an approach using a specific design I made (sequence diagrams, architecture diagrams, and needs description) given to Opus 5.5 and making step by step advancements to a modular scaffolding." ;
+                                             <https://raphaffou.github.io/ns#featured> "true"^^xsd:boolean ;
+                                             <https://raphaffou.github.io/ns#order> 10 ;
+                                             <https://raphaffou.github.io/ns#problem> "How to create a platform allowing easy management of a private GPU compute machine?" ;
+                                             <https://raphaffou.github.io/ns#result> """Currently in prototyping phase, basic models are there, and the whole scaffolding is done.
+Still debugging things at the moment""" ;
+                                             <https://raphaffou.github.io/ns#slug> "home-ai-infra" ;
+                                             <https://raphaffou.github.io/ns#stack> "Bash; Flutter; system (BMC, ipmitool, nvidia-smi); llama.cpp; OpenHands; Docker; Tailscale" ;
+                                             <https://raphaffou.github.io/ns#summary> """Home infrastructure (AI server, 8x Nvidia V100) system and architecture designed to allow for easy inference, training, fine-tuning and agentic AI.
+All of which while monitoring energy consumption, heat, and price.""" ;
+                                             <https://schema.org/dateCreated> 2026 ;
+                                             <https://schema.org/name> "Home AI infrastructure" .
+
+
+###  https://raphaffou.github.io/#home-ai-infra-note
+<https://raphaffou.github.io/#home-ai-infra-note> rdf:type owl:NamedIndividual ,
+                                                           <https://schema.org/BlogPosting> ;
+                                                  <https://schema.org/about> <https://raphaffou.github.io/#llms> ;
+                                                  <https://schema.org/mentions> <https://raphaffou.github.io/#home-ai-infra> ;
+                                                  <https://raphaffou.github.io/ns#slug> "home-ai-infra-specs" ;
+                                                  <https://raphaffou.github.io/ns#summary> "The brief I wrote so that Claude Code could build my home AI server: two independent control paths, an app my parents can use, and private spaces where an agent can't break anything." ;
+                                                  <https://schema.org/articleBody> """So, I began this project some months ago. I had been thinking about building my own infrastructure for a long time, but the turning point was some offer I saw on leboncoin.
+More specifically, I found an Inspur NF5288M5 at the very cheap price of about 4,800 €. This may sound absurdly expensive, but when you think about it, for less than the price of ONE Nvidia RTX 5090, I had the opportunity to get 8 Nvidia V100 cards, with 32 GB of VRAM each (256 GB of VRAM in total).
+There's of course a decent CPU capacity on top of that (2x Intel Xeon), but the catch is I had to buy the RAM and storage myself (in this economy, 09/2026), and it draws a lot of current.
+
+After thinking quite a lot about it, I ended up buying the server. The buying process was something, because I had to manage this from abroad. But anyway, I managed to get it.
+My thought about it is quite simple: until now, I didn't have any real compute capacity. The best GPU I ever had was a GTX 1060, which is pretty bad for anything AI-related. Just buying this unlocks quite a lot of possibilities for me, for various kinds of projects. However, these possibilities need to be tempered to avoid spending too much electricity. On top of that, the noise is terrible, so I need to find a better place than my 23 m² accommodation to house this enormous machine.
+
+## Architecture and problem solving
+
+I had to find solutions for these two problems:
+For the **noise** and **space** problem, I decided, after a long discussion with my parents, to install it in their house. There's a garage which is separate from the main \"house living building\", and I installed it there to avoid the annoyance.
+Before the installation, I knew I wouldn't have much time in my parents' house: they live quite far from Paris, and it's a 4-hour train ride just to get there. So I had to plan ahead and bring/buy some stuff in advance to prepare for the other problem: **energy**.
+I'm neither really rich nor really poor, but just to give you an idea, this machine draws 800 W at idle, and 1,500–2,000 W at peak. So let's say I just let it idle for a month: it comes to $(800 \\times 24 \\times 30) \\div 1000 \\times 0.21 \\approx 120$ € every month.
+This will never be a profitable expense, but anyway I needed to plan a strategy to mitigate this.
+
+The idea is simple: just install a small monitoring machine to turn the huge server on and off whenever you need it. I have many mini PCs at home, so it's a cheap, time-saving solution.
+With a Claude subscription available, it is also not out of reach to build an Android app so that my parents can also turn this monster off (they may want to use their garage at some point).
+
+The resulting architecture is this:
+
+![The phone app reaches a relay on the local network, which handles power through the BMC, and reaches the server directly over the tailnet for everything else](/images/home-ai-infra/architecture.svg \"Power goes through the relay and the BMC; everything else goes straight to the server\")
+
+While working on this, in practice I discovered that this \"mini relay machine\" can be more useful than just being a relay. It turns out the network in my parents' town is awful, and as such, downloads take DAYS to complete. This mini-machine thus turned into some kind of network cache to limit the amount of time the huge server has to be powered on with no worthwhile task to compute.
+
+Inside the server, I designed the thing to be as modular as possible. In my experience, not designing something that'll last as modular is a profound mistake. So every capability of the server through the app is controlled by a modular API gateway in Docker, and Docker will be used in many projects anyway.
+
+## Safety, security, and user isolation
+
+Safety is kind of a major concern here. First, access to the machine is protected by Tailscale. This is **not** on the global internet.
+With that said, I'm not planning on being the only one using this machine. The number of GPUs makes it imaginable that I'll share this thing with my family or some friends. I'm also thinking about giving the model it runs some agentic capabilities with access to the internet.
+
+This raises some problems:
+
+- First, privacy. The whole purpose of buying a machine is to have control over your data. If another user can, let's say, see everything about your life, there's no point.
+- Second, agentic safety. Let's say the model gets badly corrupted and tries to do malicious things. How can I limit the risk?
+
+The solution to the first problem is user identification, encryption and contained execution, and the solution to the second one is rights management and guard models.
+
+Identification is ensured via the identity of your Tailscale account. This makes sure my mom can't trick the system into thinking she's me.
+Besides that, for the encryption, the idea is quite simple. Wherever the app is installed, you can store a private key. If you have multiple devices, you can have multiple private keys. These keys are linked to your 50 GB encrypted volume and, through a pairing process, any one of them can open the volume (see [LUKS](https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup)).
+These volumes are opened by containers, and once containerized, a user is limited to what he's allowed to do inside it: he's isolated.
+
+One limit to this is that when the volume is being actively used by a container, an admin on the bare-metal machine could potentially read everything. This volume can be locked/unlocked manually by the user whenever he feels like it.
+
+For the second problem, I made sure that whatever the LLM model can act upon, it CAN'T access my parents' local network or the tailnet. This is enforced at the container level, and it only has internet access (for obvious reasons).
+But let's say the model is highly intelligent, finds a vulnerability and wants to exploit it or something. Here comes the second protection: a guard model. The idea is that for each agentic action the model takes, a smaller model checks whether it's safe or not.
+As a user, the idea is to be able to configure that: if you monitor the thing actively, why bother? If you're cooking in parallel and the guard has some doubts, it can ask you to check quickly. If it's an automated night task, make it conservative.
+
+![The agent loop runs outside the space; each action goes through a supervisor before it runs in the space, which can reach the internet but not the local network](/images/home-ai-infra/agent.svg \"The agent acts on its space, not in it\")
+
+
+
+## Current state
+
+Right now, the app is working: it can control the power and monitor the electricity consumption. There's a small model (Llama 3.3 70B Q3) that's deployed as a POC, but it's an old model, and not the best in its category.
+GLM-5.3 is coming and I have to deploy it. I also have to build some kind of task manager and UI modules for all agentic things to work properly. It's still a work in progress.
+
+I also have some hardware or GPU detection issues that I can't wrap my head around, so at the moment I'm capped at 4 GPUs (~128 GB of VRAM).
+
+Yeah, this is a fun project.""" ;
+                                                  <https://schema.org/datePublished> "2026-11-03"^^xsd:date ;
+                                                  <https://schema.org/headline> "Details about my private AI infrastructure" .
+
+
+###  https://raphaffou.github.io/#huffman
+<https://raphaffou.github.io/#huffman> rdf:type owl:NamedIndividual ,
+                                                <https://schema.org/SoftwareSourceCode> ;
+                                       <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                       <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                       <https://raphaffou.github.io/ns#order> 15 ;
+                                       <https://raphaffou.github.io/ns#stack> "OCaml" ;
+                                       <https://raphaffou.github.io/ns#summary> "Text compression with Huffman coding, written in OCaml for the functional programming course." ;
+                                       <https://schema.org/dateCreated> "2022–2023" ;
+                                       <https://schema.org/name> "Huffman compression" .
+
+
+###  https://raphaffou.github.io/#infra-data-platform
+<https://raphaffou.github.io/#infra-data-platform> rdf:type owl:NamedIndividual ,
+                                                            <https://schema.org/SoftwareSourceCode> ;
+                                                   <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Work> ;
+                                                   <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                                   <https://raphaffou.github.io/ns#order> 11 ;
+                                                   <https://raphaffou.github.io/ns#stack> "Python; Docker; Angular; TypeScript; REST API; Ansible; Bash; Kubernetes; CI/CD" ;
+                                                   <https://raphaffou.github.io/ns#summary> "Web platform and database to view, store, and collect information about the company's server infrastructure." ;
+                                                   <https://schema.org/dateCreated> "2023-2026" ;
+                                                   <https://schema.org/name> "Infrastructure data management platform" .
+
+
+###  https://raphaffou.github.io/#jsi
+<https://raphaffou.github.io/#jsi> rdf:type owl:NamedIndividual ,
+                                            <https://schema.org/ResearchOrganization> ;
+                                   <https://schema.org/address> "Ljubljana, Slovenia" ;
+                                   <https://schema.org/name> "Jožef Stefan Institute" ;
+                                   <https://schema.org/url> "https://www.ijs.si/ijsw/JSI"^^xsd:anyURI .
+
+
+###  https://raphaffou.github.io/#jsi-internship
+<https://raphaffou.github.io/#jsi-internship> rdf:type owl:NamedIndividual ,
+                                                       <https://raphaffou.github.io/ns#PathItem> ,
+                                                       <https://schema.org/Role> ;
+                                              <https://schema.org/memberOf> <https://raphaffou.github.io/#jsi> ;
+                                              <https://raphaffou.github.io/ns#order> 2 ;
+                                              <https://raphaffou.github.io/ns#period> "Summer 2026" ;
+                                              <https://schema.org/description> "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Working with Matej Martinc on readability assessment with large language models." ;
+                                              <https://schema.org/endDate> "2026-08"^^xsd:gYearMonth ;
+                                              <https://schema.org/name> "Research internship in NLP" ;
+                                              <https://schema.org/startDate> "2026-06"^^xsd:gYearMonth .
+
+
+###  https://raphaffou.github.io/#kanji-graph
+<https://raphaffou.github.io/#kanji-graph> rdf:type owl:NamedIndividual ,
+                                                    <https://schema.org/SoftwareSourceCode> ;
+                                           <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                           <https://raphaffou.github.io/ns#aiAssisted> "true"^^xsd:boolean ;
+                                           <https://raphaffou.github.io/ns#archived> "true"^^xsd:boolean ;
+                                           <https://raphaffou.github.io/ns#order> 30 ;
+                                           <https://raphaffou.github.io/ns#stack> "Python; C (OpenMP); NumPy; NetworkX; Tk" ;
+                                           <https://raphaffou.github.io/ns#summary> "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words." ;
+                                           <https://schema.org/codeRepository> "https://github.com/raphaffou/Kanji-Map"^^xsd:anyURI ;
+                                           <https://schema.org/dateCreated> "2026" ;
+                                           <https://schema.org/name> "Kanji Graph" .
+
+
+###  https://raphaffou.github.io/#knowledge-graphs
+<https://raphaffou.github.io/#knowledge-graphs> rdf:type owl:NamedIndividual ,
+                                                         <https://schema.org/DefinedTerm> ;
+                                                <https://schema.org/name> "Knowledge graphs" .
+
+
+###  https://raphaffou.github.io/#llms
+<https://raphaffou.github.io/#llms> rdf:type owl:NamedIndividual ,
+                                             <https://schema.org/DefinedTerm> ;
+                                    <https://schema.org/name> "LLMs" .
+
+
+###  https://raphaffou.github.io/#machine-learning
+<https://raphaffou.github.io/#machine-learning> rdf:type owl:NamedIndividual ,
+                                                         <https://schema.org/DefinedTerm> ;
+                                                <https://schema.org/name> "Machine learning" .
+
+
+###  https://raphaffou.github.io/#maze
+<https://raphaffou.github.io/#maze> rdf:type owl:NamedIndividual ,
+                                             <https://schema.org/SoftwareSourceCode> ;
+                                    <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                    <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                    <https://raphaffou.github.io/ns#order> 17 ;
+                                    <https://raphaffou.github.io/ns#stack> "Python; Jupyter" ;
+                                    <https://raphaffou.github.io/ns#summary> "A small library to generate and study connected, acyclic mazes: my first time with graphs, and with Git." ;
+                                    <https://schema.org/codeRepository> "https://gitlab.com/l2945/labyrinthe"^^xsd:anyURI ;
+                                    <https://schema.org/dateCreated> "2022" ;
+                                    <https://schema.org/name> "Mazes" .
+
+
+###  https://raphaffou.github.io/#me
+<https://raphaffou.github.io/#me> rdf:type owl:NamedIndividual ,
+                                           <https://schema.org/Person> ;
+                                  <https://raphaffou.github.io/ns#pathItem> <https://raphaffou.github.io/#jsi-internship> ,
+                                                                            <https://raphaffou.github.io/#path-apprentice> ,
+                                                                            <https://raphaffou.github.io/#path-dkai> ,
+                                                                            <https://raphaffou.github.io/#path-ldd> ,
+                                                                            <https://raphaffou.github.io/#path-polytech> ;
+                                  <https://raphaffou.github.io/ns#skillGroup> <https://raphaffou.github.io/#skills-ai> ,
+                                                                              <https://raphaffou.github.io/#skills-code> ,
+                                                                              <https://raphaffou.github.io/#skills-systems> ;
+                                  <https://schema.org/affiliation> <https://raphaffou.github.io/#paris-saclay> ;
+                                  <https://schema.org/alumniOf> <https://raphaffou.github.io/#paris-saclay> ,
+                                                                <https://raphaffou.github.io/#polytech> ;
+                                  <https://schema.org/knowsAbout> <https://raphaffou.github.io/#knowledge-graphs> ,
+                                                                  <https://raphaffou.github.io/#llms> ,
+                                                                  <https://raphaffou.github.io/#machine-learning> ,
+                                                                  <https://raphaffou.github.io/#nlp> ;
+                                  <https://raphaffou.github.io/ns#availability> "Open to research internships (from March 2027) and PhD positions" ;
+                                  <https://raphaffou.github.io/ns#bio> """I studied mathematics and computer science at Université Paris-Saclay, then spent three years as an apprentice engineer in industry, working on Linux infrastructure and data mining, while completing an engineering degree at Polytech Paris-Saclay (17/20).
 
 In 2026 I chose to move into research: a summer at the Jožef Stefan Institute in Ljubljana, where I wrote my first paper on LLMs and readability, then the M2 Data, Knowledge and Hybrid AI at Université Paris-Saclay.
 
-What I want to work on sits where symbolic and statistical AI meet: knowledge graphs and ontologies that language models can use, and language models that help build them.""" .
+What I want to work on sits where symbolic and statistical AI meet: knowledge graphs and ontologies that language models can use, and language models that help build them.
 
-# -----------------------------------------------------------------------------
-#  Organisations
-# -----------------------------------------------------------------------------
+I also have personal side projects involving my own AI infrastructure at home, check it out!""" ;
+                                  <https://raphaffou.github.io/ns#cv> "https://raphaffou.github.io/cv/Raphael_Thieffry_CV.pdf"^^xsd:anyURI ;
+                                  <https://raphaffou.github.io/ns#github> "https://github.com/raphaffou"^^xsd:anyURI ;
+                                  <https://raphaffou.github.io/ns#interest> "Japanese; Cooking; Contemporary art; Cinema; Animation; Sequential art (manga, European graphic novels); Maths" ;
+                                  <https://raphaffou.github.io/ns#linkedin> "https://bit.ly/4a04L7l"^^xsd:anyURI ;
+                                  <https://raphaffou.github.io/ns#spokenLanguage> "French — native; English — C1 (TOEIC 975/990); Japanese — learning, estimated JLPT N4; Chinese — one year of study" ;
+                                  <https://schema.org/address> "Paris-Saclay, France" ;
+                                  <https://schema.org/description> "I work on hybrid uses of symbolic and probabilistic AI: knowledge graphs, ontologies and language models. I am looking for a research internship from March 2027, and for a PhD." ;
+                                  <https://schema.org/email> "raphael.thieffry@gmail.com" ;
+                                  <https://schema.org/jobTitle> "M2 student in Hybrid AI — knowledge graphs & NLP" ;
+                                  <https://schema.org/name> "Raphaël Thieffry" ;
+                                  <https://schema.org/sameAs> "https://bit.ly/4a04L7l"^^xsd:anyURI ,
+                                                              "https://github.com/raphaffou"^^xsd:anyURI .
 
-:paris-saclay a schema:CollegeOrUniversity ;
-    schema:name "Université Paris-Saclay" ;
-    schema:url <https://www.universite-paris-saclay.fr/en> .
 
-:polytech a schema:CollegeOrUniversity ;
-    schema:name "Polytech Paris-Saclay" ;
-    schema:url <https://www.polytech.universite-paris-saclay.fr/en> .
+###  https://raphaffou.github.io/#nlp
+<https://raphaffou.github.io/#nlp> rdf:type owl:NamedIndividual ,
+                                            <https://schema.org/DefinedTerm> ;
+                                   <https://schema.org/name> "NLP" .
 
-:jsi a schema:ResearchOrganization ;
-    schema:name "Jožef Stefan Institute" ;
-    schema:address "Ljubljana, Slovenia" ;
-    schema:url <https://www.ijs.si/ijsw/JSI> .
 
-# -----------------------------------------------------------------------------
-#  Topics (they become the hubs of the Graph page)
-# -----------------------------------------------------------------------------
+###  https://raphaffou.github.io/#numerical-methods
+<https://raphaffou.github.io/#numerical-methods> rdf:type owl:NamedIndividual ,
+                                                          <https://schema.org/SoftwareSourceCode> ;
+                                                 <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                                 <https://raphaffou.github.io/ns#archived> "true"^^xsd:boolean ;
+                                                 <https://raphaffou.github.io/ns#order> 32 ;
+                                                 <https://raphaffou.github.io/ns#stack> "Python; Jupyter" ;
+                                                 <https://raphaffou.github.io/ns#summary> "Course notebooks on the power method and the singular value decomposition, with image compression as an application." ;
+                                                 <https://schema.org/codeRepository> "https://github.com/raphaffou/Methodes-numeriques"^^xsd:anyURI ;
+                                                 <https://schema.org/dateCreated> "2024" ;
+                                                 <https://schema.org/name> "Numerical methods" .
 
-:knowledge-graphs  a schema:DefinedTerm ; schema:name "Knowledge graphs" .
-:nlp               a schema:DefinedTerm ; schema:name "NLP" .
-:llms              a schema:DefinedTerm ; schema:name "LLMs" .
-:machine-learning  a schema:DefinedTerm ; schema:name "Machine learning" .
-:web               a schema:DefinedTerm ; schema:name "Web" .
 
-# -----------------------------------------------------------------------------
-#  Research
-# -----------------------------------------------------------------------------
+###  https://raphaffou.github.io/#old-portfolio
+<https://raphaffou.github.io/#old-portfolio> rdf:type owl:NamedIndividual ,
+                                                      <https://schema.org/SoftwareSourceCode> ;
+                                             <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                             <https://raphaffou.github.io/ns#archived> "true"^^xsd:boolean ;
+                                             <https://raphaffou.github.io/ns#order> 33 ;
+                                             <https://raphaffou.github.io/ns#stack> "JavaScript; HTML; CSS" ;
+                                             <https://raphaffou.github.io/ns#summary> "The previous version of this site: plain JavaScript faking AJAX page loads and a JSON “database”, with a menu that followed the mouse." ;
+                                             <https://schema.org/codeRepository> "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2"^^xsd:anyURI ;
+                                             <https://schema.org/dateCreated> "2022" ;
+                                             <https://schema.org/name> "First portfolio" .
 
-:jsi-internship a schema:Role ;
-    schema:name "Research internship in NLP" ;
-    schema:startDate "2026-06"^^xsd:gYearMonth ;
-    schema:endDate "2026-08"^^xsd:gYearMonth ;
-    schema:memberOf :jsi ;
-    schema:description "Summer 2026 in the Knowledge Laboratory of the Jožef Stefan Institute, working with Matej Martinc on readability assessment with large language models." .
 
-:readability-paper a schema:ScholarlyArticle ;
-    site:slug "readability-llms" ;
-    site:order 1 ;
-    site:label "Readability with LLMs" ;
-    schema:name "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting" ;
-    schema:author ( "Raphaël Thieffry" "Matej Martinc" ) ;
-    schema:datePublished "2026-09"^^xsd:gYearMonth ;
-    schema:url <https://arxiv.org/abs/2609.24650> ;
-    site:status "Preprint on arXiv · submitted to ECIR 2027, under review" ;
-    site:venue "ECIR 2027" ;
-    site:venueUrl <https://www.ecir2027.co.uk/> ;
-    schema:isPartOf :jsi-internship ;
-    schema:about :nlp, :llms ;
-    site:summary "A systematic benchmark of open-source LLMs for readability assessment in English and Slovenian, the first to study how explicit reasoning and few-shot prompting change their predictions of discrete readability levels." ;
-    site:problem "Readability formulas transfer poorly across genres and languages, and supervised models need annotated corpora that rarely exist for less-resourced languages such as Slovenian." ;
-    site:approach "Five open-weight LLMs, four corpora (three English, one Slovenian), no training at all: we vary only the prompt — its format, zero to three labelled examples per level, and whether the model answers directly or reasons first — and compare the best configuration with classical formulas and supervised models." ;
-    site:result "Reasoning before answering brings large gains, especially for models that reason natively, and the first labelled example per level carries most of the few-shot benefit. The best configuration, with no training, beats every classical formula on the Slovenian textbook corpus and on WeeBit." ;
-    site:stack "Python", "vLLM", "open-weight LLMs", "chain-of-thought", "few-shot prompting" ;
-    site:codeNote "Code will be released after the review period." .
+###  https://raphaffou.github.io/#paris-saclay
+<https://raphaffou.github.io/#paris-saclay> rdf:type owl:NamedIndividual ,
+                                                     <https://schema.org/CollegeOrUniversity> ;
+                                            <https://schema.org/name> "Université Paris-Saclay" ;
+                                            <https://schema.org/url> "https://www.universite-paris-saclay.fr/en"^^xsd:anyURI .
 
-# -----------------------------------------------------------------------------
-#  Projects (site:featured true → home page and Projects page; false → archive;
-#  site:aiAssisted true → the AI-assisted section)
-# -----------------------------------------------------------------------------
 
-:rent-prediction a schema:SoftwareSourceCode ;
-    site:slug "rent-prediction" ;
-    site:order 1 ;
-    site:featured true ;
-    schema:name "Rent prediction" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Pr-diction-Immobili-re> ;
-    schema:about :machine-learning ;
-    site:summary "Predicting the rent of housing listings from their characteristics, for the machine learning course of my last year at Polytech Paris-Saclay." ;
-    site:problem "About 4,500 rental listings with heterogeneous, partly missing features, and a price to predict." ;
-    site:approach "Parsing and feature engineering, then scikit-learn pipelines comparing linear and ensemble models, with automated training runs." ;
-    site:result "One of the best results of the class." ;
-    site:role "Team of three. I designed the overall approach and wrote the main training logic; Antonin Russac did the visualisation and feature engineering, and Ethan Puyaubreau the training automation." ;
-    site:stack "Python", "pandas", "scikit-learn", "Jupyter" .
+###  https://raphaffou.github.io/#path-apprentice
+<https://raphaffou.github.io/#path-apprentice> rdf:type owl:NamedIndividual ,
+                                                        <https://raphaffou.github.io/ns#PathItem> ;
+                                               <https://raphaffou.github.io/ns#order> 4 ;
+                                               <https://raphaffou.github.io/ns#period> "2023–2026" ;
+                                               <https://schema.org/description> "Three years in an IT department: Linux infrastructure, containerisation, infrastructure data management platform development and a data-mining project on graph representations of support tickets." ;
+                                               <https://schema.org/name> "Apprentice engineer in industry" .
 
-:web-shop a schema:SoftwareSourceCode ;
-    site:slug "web-shop" ;
-    site:order 2 ;
-    site:featured true ;
-    schema:name "3D web shop" ;
-    schema:dateCreated "2023–2024" ;
-    schema:codeRepository <https://github.com/raphaffou/projetWebPoly> ;
-    schema:url <https://projet-web-poly.vercel.app> ;
-    schema:about :web ;
-    site:summary "An online shop with 3D product scenes and animated pages, built for the web course at Polytech Paris-Saclay." ;
-    site:problem "Build a complete shop, from the design in Figma to a working cart, with a real backend." ;
-    site:approach "Angular front end with Three.js scenes and GSAP animations, one generated page per product, and an Express API backed by MariaDB." ;
-    site:result "A live demo, deployed on Vercel." ;
-    site:role "Course project." ;
-    site:stack "Angular", "TypeScript", "Three.js", "GSAP", "Express", "MariaDB" .
 
-# --- Archive: smaller, older or school projects -------------------------------
+###  https://raphaffou.github.io/#path-dkai
+<https://raphaffou.github.io/#path-dkai> rdf:type owl:NamedIndividual ,
+                                                  <https://raphaffou.github.io/ns#PathItem> ;
+                                         <https://raphaffou.github.io/ns#order> 1 ;
+                                         <https://raphaffou.github.io/ns#period> "2026–2027" ;
+                                         <https://schema.org/description> "Université Paris-Saclay. From symbolic to neurosymbolic AI, knowledge discovery in graph data, hybrid and explainable AI." ;
+                                         <https://schema.org/name> "M2 Data, Knowledge and Hybrid AI (DKAI)" .
 
-:numerical-methods a schema:SoftwareSourceCode ;
-    site:order 11 ; site:featured false ;
-    schema:name "Numerical methods" ;
-    schema:dateCreated "2024" ;
-    schema:codeRepository <https://github.com/raphaffou/Methodes-numeriques> ;
-    site:summary "Course notebooks on the power method and the singular value decomposition, with image compression as an application." ;
-    site:stack "Python", "Jupyter" .
 
-:compiler a schema:SoftwareSourceCode ;
-    site:order 12 ; site:featured false ;
-    schema:name "C compiler" ;
-    schema:dateCreated "2024" ;
-    site:summary "A minimal compiler for a subset of C, written in OCaml." ;
-    site:stack "OCaml" .
+###  https://raphaffou.github.io/#path-ldd
+<https://raphaffou.github.io/#path-ldd> rdf:type owl:NamedIndividual ,
+                                                 <https://raphaffou.github.io/ns#PathItem> ;
+                                        <https://raphaffou.github.io/ns#order> 5 ;
+                                        <https://raphaffou.github.io/ns#period> "2021–2023" ;
+                                        <https://schema.org/description> "Université Paris-Saclay." ;
+                                        <https://schema.org/name> "Double degree in Computer Science and Mathematics" .
 
-:forbidden-desert a schema:SoftwareSourceCode ;
-    site:order 13 ; site:featured false ;
-    schema:name "Forbidden Desert" ;
-    schema:dateCreated "2023" ;
-    schema:codeRepository <https://github.com/raphaffou/desertinterdit> ;
-    site:summary "The cooperative board game in Java and Swing, for the object-oriented programming course: an MVC architecture, most of the rules and roles, and unit tests." ;
-    site:stack "Java", "Swing" .
 
-:huffman a schema:SoftwareSourceCode ;
-    site:order 14 ; site:featured false ;
-    schema:name "Huffman compression" ;
-    schema:dateCreated "2022–2023" ;
-    site:summary "Text compression with Huffman coding, written in OCaml for the functional programming course." ;
-    site:stack "OCaml" .
+###  https://raphaffou.github.io/#path-polytech
+<https://raphaffou.github.io/#path-polytech> rdf:type owl:NamedIndividual ,
+                                                      <https://raphaffou.github.io/ns#PathItem> ;
+                                             <https://raphaffou.github.io/ns#order> 3 ;
+                                             <https://raphaffou.github.io/ns#period> "2023–2026" ;
+                                             <https://schema.org/description> "Polytech Paris-Saclay, apprenticeship track, average 17/20. Tutored lower-year students at the request of the teaching staff." ;
+                                             <https://schema.org/name> "Engineering degree in Computer Science" .
 
-:quadtrees a schema:SoftwareSourceCode ;
-    site:order 15 ; site:featured false ;
-    schema:name "Lists and quadtrees" ;
-    schema:dateCreated "2022–2023" ;
-    schema:codeRepository <https://github.com/raphaffou/projetalgos3> ;
-    site:summary "Algorithms on linked lists and quadtrees for the advanced algorithms course." ;
-    site:stack "C" .
 
-:maze a schema:SoftwareSourceCode ;
-    site:order 16 ; site:featured false ;
-    schema:name "Mazes" ;
-    schema:dateCreated "2022" ;
-    schema:codeRepository <https://gitlab.com/l2945/labyrinthe> ;
-    site:summary "A small library to generate and study connected, acyclic mazes: my first time with graphs, and with Git." ;
-    site:stack "Python", "Jupyter" .
+###  https://raphaffou.github.io/#polytech
+<https://raphaffou.github.io/#polytech> rdf:type owl:NamedIndividual ,
+                                                 <https://schema.org/CollegeOrUniversity> ;
+                                        <https://schema.org/name> "Polytech Paris-Saclay" ;
+                                        <https://schema.org/url> "https://www.polytech.universite-paris-saclay.fr/en"^^xsd:anyURI .
 
-:sms-router a schema:SoftwareSourceCode ;
-    site:order 17 ; site:featured false ;
-    schema:name "SMS through a 4G router" ;
-    schema:dateCreated "2022" ;
-    schema:codeRepository <https://github.com/raphaffou/tp-link-MR6400-SMS-handler> ;
-    site:summary "A Selenium script that reads and sends SMS through the web interface of a TP-Link 4G router. Absolutely not stable." ;
-    site:stack "Python", "Selenium" .
 
-:old-portfolio a schema:SoftwareSourceCode ;
-    site:order 18 ; site:featured false ;
-    schema:name "First portfolio" ;
-    schema:dateCreated "2022" ;
-    schema:codeRepository <https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2> ;
-    site:summary "The previous version of this site: plain JavaScript faking AJAX page loads and a JSON “database”, with a menu that followed the mouse." ;
-    site:stack "JavaScript", "HTML", "CSS" .
+###  https://raphaffou.github.io/#quadtrees
+<https://raphaffou.github.io/#quadtrees> rdf:type owl:NamedIndividual ,
+                                                  <https://schema.org/SoftwareSourceCode> ;
+                                         <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                         <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                         <https://raphaffou.github.io/ns#order> 16 ;
+                                         <https://raphaffou.github.io/ns#stack> "C" ;
+                                         <https://raphaffou.github.io/ns#summary> "Algorithms on linked lists and quadtrees for the advanced algorithms course." ;
+                                         <https://schema.org/codeRepository> "https://github.com/raphaffou/projetalgos3"^^xsd:anyURI ;
+                                         <https://schema.org/dateCreated> "2022–2023" ;
+                                         <https://schema.org/name> "Lists and quadtrees" .
 
-# --- AI-assisted side projects ------------------------------------------------
-#  Written mostly with an AI coding agent (site:aiAssisted true). They are listed
-#  in their own section of the Projects page, never featured, and left out of
-#  the Graph page, so they don't mix with the projects written by hand.
 
-:kanji-graph a schema:SoftwareSourceCode ;
-    site:order 20 ; site:featured false ; site:aiAssisted true ;
-    schema:name "Kanji Graph" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Kanji-Map> ;
-    site:summary "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words." ;
-    site:stack "Python", "C (OpenMP)", "NumPy", "NetworkX", "Tk" .
+###  https://raphaffou.github.io/#readability-paper
+<https://raphaffou.github.io/#readability-paper> rdf:type owl:NamedIndividual ,
+                                                          <https://schema.org/ScholarlyArticle> ;
+                                                 <https://schema.org/about> <https://raphaffou.github.io/#llms> ,
+                                                                            <https://raphaffou.github.io/#nlp> ;
+                                                 <https://schema.org/isPartOf> <https://raphaffou.github.io/#jsi-internship> ;
+                                                 <https://raphaffou.github.io/ns#approach> "Five open-weight LLMs, four corpora (three English, one Slovenian), no training at all: we vary only the prompt — its format, zero to three labelled examples per level, and whether the model answers directly or reasons first — and compare the best configuration with classical formulas and supervised models." ;
+                                                 <https://raphaffou.github.io/ns#codeNote> "Code will be released after the review period." ;
+                                                 <https://raphaffou.github.io/ns#label> "Readability with LLMs" ;
+                                                 <https://raphaffou.github.io/ns#order> 1 ;
+                                                 <https://raphaffou.github.io/ns#problem> "Readability formulas transfer poorly across genres and languages, and supervised models need annotated corpora that rarely exist for less-resourced languages such as Slovenian." ;
+                                                 <https://raphaffou.github.io/ns#result> "Reasoning before answering brings large gains, especially for models that reason natively, and the first labelled example per level carries most of the few-shot benefit. The best configuration, with no training, beats every classical formula on the Slovenian textbook corpus and on WeeBit." ;
+                                                 <https://raphaffou.github.io/ns#slug> "readability-llms" ;
+                                                 <https://raphaffou.github.io/ns#stack> "Python; vLLM; open-weight LLMs; chain-of-thought; few-shot prompting" ;
+                                                 <https://raphaffou.github.io/ns#status> "Preprint on arXiv · submitted to ECIR 2027, under review" ;
+                                                 <https://raphaffou.github.io/ns#summary> "A systematic benchmark of open-source LLMs for readability assessment in English and Slovenian, the first to study how explicit reasoning and few-shot prompting change their predictions of discrete readability levels." ;
+                                                 <https://raphaffou.github.io/ns#venue> "ECIR 2027" ;
+                                                 <https://raphaffou.github.io/ns#venueUrl> "https://www.ecir2027.co.uk/"^^xsd:anyURI ;
+                                                 <https://schema.org/author> "Raphaël Thieffry; Matej Martinc" ;
+                                                 <https://schema.org/datePublished> "2026-09"^^xsd:gYearMonth ;
+                                                 <https://schema.org/name> "Assessing Readability with LLMs: The Role of Reasoning and Few-Shot Prompting" ;
+                                                 <https://schema.org/url> "https://arxiv.org/abs/2609.24650"^^xsd:anyURI .
 
-:awabi a schema:SoftwareSourceCode ;
-    site:order 21 ; site:featured false ; site:aiAssisted true ;
-    schema:name "Awabi" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Awabi> ;
-    site:summary "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press." ;
-    site:stack "Kotlin", "Room", "ML Kit OCR", "JMdict" .
 
-:claude-android a schema:SoftwareSourceCode ;
-    site:order 22 ; site:featured false ; site:aiAssisted true ;
-    schema:name "Claude Code for Android" ;
-    schema:dateCreated "2026" ;
-    schema:codeRepository <https://github.com/raphaffou/Claude-Code-for-Android> ;
-    site:summary "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone." ;
-    site:stack "Kotlin", "Python (asyncio)", "WebSocket" .
+###  https://raphaffou.github.io/#rent-prediction
+<https://raphaffou.github.io/#rent-prediction> rdf:type owl:NamedIndividual ,
+                                                        <https://schema.org/SoftwareSourceCode> ;
+                                               <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                               <https://schema.org/about> <https://raphaffou.github.io/#machine-learning> ;
+                                               <https://raphaffou.github.io/ns#approach> "Parsing and feature engineering, then scikit-learn pipelines comparing linear and ensemble models, with automated training runs." ;
+                                               <https://raphaffou.github.io/ns#featured> "true"^^xsd:boolean ;
+                                               <https://raphaffou.github.io/ns#order> 1 ;
+                                               <https://raphaffou.github.io/ns#problem> "About 4,500 rental listings with heterogeneous, partly missing features, and a price to predict." ;
+                                               <https://raphaffou.github.io/ns#result> "One of the best results of the class." ;
+                                               <https://raphaffou.github.io/ns#role> "Team of three. I designed the overall approach and wrote the main training logic; Antonin Russac did the visualisation and feature engineering, and Ethan Puyaubreau the training automation." ;
+                                               <https://raphaffou.github.io/ns#slug> "rent-prediction" ;
+                                               <https://raphaffou.github.io/ns#stack> "Python; pandas; scikit-learn; Jupyter" ;
+                                               <https://raphaffou.github.io/ns#summary> "Predicting the rent of housing listings from their characteristics, for the machine learning course of my last year at Polytech Paris-Saclay." ;
+                                               <https://schema.org/codeRepository> "https://github.com/raphaffou/Pr-diction-Immobili-re"^^xsd:anyURI ;
+                                               <https://schema.org/dateCreated> "2026" ;
+                                               <https://schema.org/name> "Rent prediction" .
 
-# -----------------------------------------------------------------------------
-#  Notes (the “blog”). Add a note like this:
-#
-#  :homelab-1 a schema:BlogPosting ;
-#      site:slug "homelab-gpu-server" ;
-#      schema:headline "Building a GPU server from eight V100s" ;
-#      schema:datePublished "2026-11-02"^^xsd:date ;
-#      schema:about :llms ;
-#      site:summary "One or two sentences shown in the list." ;
-#      schema:articleBody """Paragraphs separated by a blank line.
-#
-#  Second paragraph.""" .
-# -----------------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-#  About: path (newest first, by site:order)
-# -----------------------------------------------------------------------------
+###  https://raphaffou.github.io/#skills-ai
+<https://raphaffou.github.io/#skills-ai> rdf:type owl:NamedIndividual ,
+                                                  <https://raphaffou.github.io/ns#SkillGroup> ;
+                                         <https://raphaffou.github.io/ns#items> "Machine learning; NLP and LLMs (prompting, evaluation); Knowledge graphs and the Semantic Web (RDF, OWL, SPARQL); Data mining, graph analytics and layout" ;
+                                         <https://raphaffou.github.io/ns#order> 1 ;
+                                         <https://schema.org/name> "AI & data" .
 
-:me site:pathItem :path-dkai, :path-jsi, :path-polytech, :path-apprentice, :path-ldd .
 
-:path-dkai a site:PathItem ; site:order 1 ; site:period "2026–2027" ;
-    schema:name "M2 Data, Knowledge and Hybrid AI (DKAI)" ;
-    schema:description "Université Paris-Saclay. From symbolic to neurosymbolic AI, knowledge discovery in graph data, hybrid and explainable AI." .
-:path-jsi a site:PathItem ; site:order 2 ; site:period "Summer 2026" ;
-    schema:name "Research internship in NLP" ;
-    schema:description "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Readability assessment with LLMs." .
-:path-polytech a site:PathItem ; site:order 3 ; site:period "2023–2026" ;
-    schema:name "Engineering degree in Computer Science" ;
-    schema:description "Polytech Paris-Saclay, apprenticeship track, average 17/20. Tutored lower-year students at the request of the teaching staff." .
-:path-apprentice a site:PathItem ; site:order 4 ; site:period "2023–2026" ;
-    schema:name "Apprentice engineer in industry" ;
-    schema:description "Three years in an IT department: Linux infrastructure, containerisation, and a data-mining project on graph representations of support tickets." .
-:path-ldd a site:PathItem ; site:order 5 ; site:period "2021–2023" ;
-    schema:name "Double degree in Computer Science and Mathematics" ;
-    schema:description "Université Paris-Saclay." .
+###  https://raphaffou.github.io/#skills-code
+<https://raphaffou.github.io/#skills-code> rdf:type owl:NamedIndividual ,
+                                                    <https://raphaffou.github.io/ns#SkillGroup> ;
+                                           <https://raphaffou.github.io/ns#items> "Python; Java, Kotlin; C, C++; OCaml; TypeScript, JavaScript, Angular; PHP, SQL, Bash; LaTeX" ;
+                                           <https://raphaffou.github.io/ns#order> 2 ;
+                                           <https://schema.org/name> "Programming" .
 
-# -----------------------------------------------------------------------------
-#  About: skills, languages and interests
-# -----------------------------------------------------------------------------
 
-:me site:skillGroup :skills-ai, :skills-code, :skills-systems .
+###  https://raphaffou.github.io/#skills-systems
+<https://raphaffou.github.io/#skills-systems> rdf:type owl:NamedIndividual ,
+                                                       <https://raphaffou.github.io/ns#SkillGroup> ;
+                                              <https://raphaffou.github.io/ns#items> "Linux; Docker, Kubernetes; Ansible, Nginx; Git; MySQL, MariaDB; Dataiku" ;
+                                              <https://raphaffou.github.io/ns#order> 3 ;
+                                              <https://schema.org/name> "Systems" .
 
-:skills-ai a site:SkillGroup ; site:order 1 ; schema:name "AI & data" ;
-    site:items "Machine learning", "NLP and LLMs (prompting, evaluation)", "Knowledge graphs and the Semantic Web (RDF, OWL, SPARQL)", "Data mining, graph analytics and layout" .
-:skills-code a site:SkillGroup ; site:order 2 ; schema:name "Programming" ;
-    site:items "Python", "Java, Kotlin", "C, C++", "OCaml", "TypeScript, JavaScript, Angular", "PHP, SQL, Bash", "LaTeX" .
-:skills-systems a site:SkillGroup ; site:order 3 ; schema:name "Systems" ;
-    site:items "Linux", "Docker, Kubernetes", "Ansible, Nginx", "Git", "MySQL, MariaDB", "Dataiku" .
 
-:me site:spokenLanguage
-    "French — native",
-    "English — C1 (TOEIC 975/990)",
-    "Japanese — learning, estimated JLPT N4",
-    "Chinese — one year of study" .
+###  https://raphaffou.github.io/#sms-router
+<https://raphaffou.github.io/#sms-router> rdf:type owl:NamedIndividual ,
+                                                   <https://schema.org/SoftwareSourceCode> ;
+                                          <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                          <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                          <https://raphaffou.github.io/ns#order> 18 ;
+                                          <https://raphaffou.github.io/ns#stack> "Python; Selenium" ;
+                                          <https://raphaffou.github.io/ns#summary> "A Selenium script that reads and sends SMS through the web interface of a TP-Link 4G router. Absolutely not stable." ;
+                                          <https://schema.org/codeRepository> "https://github.com/raphaffou/tp-link-MR6400-SMS-handler"^^xsd:anyURI ;
+                                          <https://schema.org/dateCreated> "2022" ;
+                                          <https://schema.org/name> "SMS through a 4G router" .
 
-:me site:interest
-    "Japanese",
-    "Collecting and reviving old computer hardware",
-    "Cooking",
-    "Contemporary art" .
+
+###  https://raphaffou.github.io/#souffleur
+<https://raphaffou.github.io/#souffleur> rdf:type owl:NamedIndividual ,
+                                                  <https://schema.org/SoftwareSourceCode> ;
+                                         <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Personal> ;
+                                         <https://schema.org/about> <https://raphaffou.github.io/#llms> ;
+                                         <https://raphaffou.github.io/ns#aiAssisted> "true"^^xsd:boolean ;
+                                         <https://raphaffou.github.io/ns#order> 22 ;
+                                         <https://raphaffou.github.io/ns#stack> "TypeScript; VS Code API; Claude Code CLI (stream-json); esbuild" ;
+                                         <https://raphaffou.github.io/ns#summary> "A VS Code extension for Copilot-style inline suggestions, written by Claude Haiku through the official claude CLI, so it runs on a Claude subscription instead of a pay-per-use API key. A claude process kept warm and driven over its stream-json protocol, fill-in-the-middle prompts, a cache and early interruption bring a suggestion to about 1.5 s (median)." ;
+                                         <https://schema.org/dateCreated> "2026" ;
+                                         <https://schema.org/name> "Souffleur" .
+
+
+###  https://raphaffou.github.io/#ticket-graph-mining
+<https://raphaffou.github.io/#ticket-graph-mining> rdf:type owl:NamedIndividual ,
+                                                            <https://schema.org/SoftwareSourceCode> ;
+                                                   <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Work> ;
+                                                   <https://raphaffou.github.io/ns#featured> "false"^^xsd:boolean ;
+                                                   <https://raphaffou.github.io/ns#order> 12 ;
+                                                   <https://raphaffou.github.io/ns#stack> "Python; Dataiku; Markov Clustering; FAISS; Sentence Encoders" ;
+                                                   <https://raphaffou.github.io/ns#summary> """Dataiku project and plugin to cluster a set of descriptions based on semantic similarity.
+Applied to user tickets' descriptions, it provided useful insights about the most often encountered problems our team manages.""" ;
+                                                   <https://schema.org/dateCreated> 2023 ;
+                                                   <https://schema.org/name> "Recurring and frequent problems identification using user tickets" .
+
+
+###  https://raphaffou.github.io/#web
+<https://raphaffou.github.io/#web> rdf:type owl:NamedIndividual ,
+                                            <https://schema.org/DefinedTerm> ;
+                                   <https://schema.org/name> "Web" .
+
+
+###  https://raphaffou.github.io/#web-shop
+<https://raphaffou.github.io/#web-shop> rdf:type owl:NamedIndividual ,
+                                                 <https://schema.org/SoftwareSourceCode> ;
+                                        <https://raphaffou.github.io/ns#context> <https://raphaffou.github.io/ns#Course> ;
+                                        <https://schema.org/about> <https://raphaffou.github.io/#web> ;
+                                        <https://raphaffou.github.io/ns#approach> "Angular front end with Three.js scenes and GSAP animations, one generated page per product, and an Express API backed by MariaDB." ;
+                                        <https://raphaffou.github.io/ns#archived> "true"^^xsd:boolean ;
+                                        <https://raphaffou.github.io/ns#order> 31 ;
+                                        <https://raphaffou.github.io/ns#problem> "Build a complete shop, from the design in Figma to a working cart, with a real backend." ;
+                                        <https://raphaffou.github.io/ns#result> "A live demo, deployed on Vercel." ;
+                                        <https://raphaffou.github.io/ns#role> "Course project." ;
+                                        <https://raphaffou.github.io/ns#slug> "web-shop" ;
+                                        <https://raphaffou.github.io/ns#stack> "Angular; TypeScript; Three.js; GSAP; Express; MariaDB" ;
+                                        <https://raphaffou.github.io/ns#summary> "An online shop with 3D product scenes and animated pages, built for the web course at Polytech Paris-Saclay." ;
+                                        <https://schema.org/codeRepository> "https://github.com/raphaffou/projetWebPoly"^^xsd:anyURI ;
+                                        <https://schema.org/dateCreated> "2023–2024" ;
+                                        <https://schema.org/name> "3D web shop" ;
+                                        <https://schema.org/url> "https://projet-web-poly.vercel.app"^^xsd:anyURI .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

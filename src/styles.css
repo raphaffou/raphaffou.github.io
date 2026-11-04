@@ -51,6 +51,11 @@
   --surface: #0f0f12; /* code blocks, graph */
   --edge: #4a4a52; /* graph edges */
   --focus: #33a1ff;
+  /* Graph page: one colour per kind of entry, checked for colour blindness on --surface */
+  --k-project: #3987e5;
+  --k-topic: #c98500;
+  --k-paper: #d55181;
+  --k-org: #008300;
   /* The negative of the old site's rainbow; every stop is at least 6:1 on --bg. */
   --c1: #00ffff;
   --c2: #33a1ff;
@@ -80,6 +85,10 @@
     --surface: #efece5;
     --edge: #a8a49c;
     --focus: #0a5cc2; /* 5.8:1 */
+    --k-project: #2a78d6;
+    --k-topic: #eda100;
+    --k-paper: #e87ba4;
+    --k-org: #008300;
     --c1: #d40000;
     --c2: #ab4f00;
     --c3: #6d6d00;
@@ -354,6 +363,21 @@ nav a[aria-current] .t {
 .btn:hover {
   border-color: var(--line-strong);
 }
+/* Toggle buttons (filters, the switch of the Graph page) */
+.btn[aria-pressed='true'] {
+  border-color: var(--fg);
+}
+.btn[aria-pressed='true'] .t {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--fg);
+}
+.btn .count {
+  margin-left: 2px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
 
 /* ---------- 5. Text and content blocks ---------- */
 
@@ -515,7 +539,26 @@ strong {
   overflow-wrap: anywhere;
 }
 
-/* Projects archive */
+/* Projects: filter by context */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 8px;
+}
+
+/* Projects: the Archive section, closed by default */
+.archived summary {
+  width: fit-content;
+  margin: 0 0 14px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.archived summary::marker {
+  color: var(--muted);
+}
+
+/* Project lists */
 .archive {
   list-style: none;
   margin: 0;
@@ -563,6 +606,34 @@ strong {
   margin: 0 0 12px;
   padding-left: 16px;
   border-left: 2px solid var(--line);
+}
+.prose figure {
+  margin: 20px 0;
+}
+.prose figcaption {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+/* Wide tables scroll on their own instead of widening the page. */
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0 0 16px;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.prose th,
+.prose td {
+  padding: 4px 14px 4px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.prose th {
+  color: var(--fg);
+  font-weight: 700;
 }
 
 /* About */
@@ -736,6 +807,227 @@ ul.plain li {
   scroll-margin-top: 24px;
 }
 
+/* Graph: the ontology and the data (the .graph, .node and .edges rules above are
+   the previous topic view, kept for its template commented in graph.html) */
+.rg-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 10px;
+}
+.rg-bar [role='group'] {
+  display: flex;
+  gap: 6px;
+}
+.rg {
+  margin: 0;
+  scroll-margin-top: 24px;
+}
+.rg-wrap {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.rg-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.rg-svg:active {
+  cursor: grabbing;
+}
+@media (max-width: 40em) {
+  .rg-svg.v-data {
+    height: 70vh;
+  }
+}
+.rg-edges path {
+  fill: none;
+  stroke: var(--edge);
+  stroke-width: 1.25;
+  transition: opacity 0.2s;
+}
+.rg-edges path.lit {
+  stroke: var(--fg);
+  stroke-width: 1.75;
+}
+.rg-edges path.dim {
+  opacity: 0.2;
+}
+#rg-arrow path {
+  fill: var(--edge);
+}
+#rg-arrow-lit path {
+  fill: var(--fg);
+}
+.rg-labels text {
+  fill: var(--muted);
+  font: italic 14px var(--serif);
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.rg-node {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.rg-node.dim {
+  opacity: 0.25;
+}
+.rg-node circle,
+.rg-key {
+  fill: var(--muted);
+}
+.rg-node circle {
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.rg-node.k-project circle,
+.rg-key.k-project {
+  fill: var(--k-project);
+}
+.rg-node.k-topic circle,
+.rg-key.k-topic {
+  fill: var(--k-topic);
+}
+.rg-node.k-paper circle,
+.rg-key.k-paper {
+  fill: var(--k-paper);
+}
+.rg-node.k-org circle,
+.rg-key.k-org {
+  fill: var(--k-org);
+}
+.rg-node.k-me circle,
+.rg-key.k-me {
+  fill: var(--fg);
+}
+.rg-node.on circle {
+  stroke: var(--fg);
+}
+.rg-node text {
+  fill: var(--fg);
+  font: 15px var(--serif);
+  text-anchor: middle;
+}
+.v-ontology .rg-node text {
+  font-size: 17px;
+}
+.rg-node.on text {
+  font-weight: 700;
+}
+.rg-node:hover text,
+.rg-node:focus-visible text {
+  fill: url(#inv);
+}
+.rg-node .ring {
+  fill: transparent;
+  stroke: none;
+}
+.rg-node:focus-visible {
+  outline: none;
+}
+.rg-node:focus-visible .ring {
+  stroke: var(--focus);
+  stroke-width: 2;
+}
+.rg-hint {
+  margin: 4px 0 0;
+  color: var(--muted) !important;
+  font-size: 0.9375rem;
+}
+.rg-panel {
+  margin: 16px 0 0;
+  padding: 14px 16px 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-height: 5rem;
+}
+.rg-panel .meta {
+  margin: 0 0 2px;
+}
+.rg-panel code,
+.rg-class code {
+  font-size: 0.875em;
+  font-variant: normal;
+  letter-spacing: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+main .rg-title {
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  font: 700 1.25rem/1.35 var(--serif);
+  font-variant: normal;
+  letter-spacing: 0;
+}
+main .rg-sub {
+  margin: 14px 0 4px;
+  color: var(--muted);
+  font: 400 1rem/1.4 var(--serif);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+.rg-props {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 12px;
+}
+.rg-props div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 12px;
+}
+.rg-props dt {
+  color: var(--muted);
+  font-size: 1rem;
+  padding-top: 1px;
+}
+.rg-props dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 32.5em) {
+  .rg-props div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+.rg-links {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.rg-links li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 8px;
+}
+.rg-go {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  cursor: pointer;
+  color: var(--fg);
+  text-align: left;
+}
+main .rg-class {
+  margin-top: 22px;
+}
+
 /* ---------- 7. Footer, toast, utilities ---------- */
 
 .foot {
@@ -802,7 +1094,9 @@ ul.plain li {
 
 @media (prefers-reduced-motion: reduce) {
   .t,
-  .toast {
+  .toast,
+  .rg-node,
+  .rg-edges path {
     transition: none;
   }
   .fx:hover .t,
@@ -840,6 +1134,36 @@ ul.plain li {
   }
   .edges line {
     stroke: GrayText;
+  }
+  .rg-node text,
+  .rg-node:hover text,
+  .rg-node:focus-visible text,
+  .rg-labels text {
+    fill: CanvasText;
+  }
+  .rg-node circle,
+  .rg-key {
+    fill: CanvasText;
+    stroke: Canvas;
+  }
+  .rg-node.on circle {
+    fill: Highlight;
+  }
+  .rg-labels text {
+    stroke: Canvas;
+  }
+  .rg-edges path,
+  #rg-arrow path {
+    stroke: GrayText;
+  }
+  #rg-arrow path {
+    fill: GrayText;
+  }
+  .rg-edges path.lit {
+    stroke: CanvasText;
+  }
+  #rg-arrow-lit path {
+    fill: CanvasText;
   }
 }
 

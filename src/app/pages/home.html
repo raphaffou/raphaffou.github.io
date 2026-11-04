@@ -27,7 +27,7 @@
   @for (p of projects; track p.slug) {
     <article class="item">
       <h3><a class="fx" [routerLink]="['/projects', p.slug]"><span [t]="p.name"></span></a></h3>
-      <p class="meta">{{ p.date }} · {{ p.stack.slice(0, 3).join(', ') }}</p>
+      <p class="meta">{{ p.contexts.join(', ') }} · {{ p.date }} · {{ p.stack.slice(0, 3).join(', ') }}</p>
       <p>{{ p.summary }}</p>
     </article>
   }

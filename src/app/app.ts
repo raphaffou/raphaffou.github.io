@@ -16,11 +16,12 @@ export class App {
   protected readonly toast = inject(Toast);
   protected readonly year = new Date().getFullYear();
   protected readonly nav = [
-    { num: 'i', label: 'Research', path: '/research' },
-    { num: 'ii', label: 'Projects', path: '/projects' },
-    { num: 'iii', label: 'Notes', path: '/notes' },
-    { num: 'iv', label: 'About', path: '/about' },
-    { num: 'v', label: 'Graph', path: '/graph' },
+    { num: 'i', label: 'Home', path: '/' },
+    { num: 'ii', label: 'Research', path: '/research' },
+    { num: 'iii', label: 'Projects', path: '/projects' },
+    { num: 'iv', label: 'Notes', path: '/notes' },
+    { num: 'v', label: 'About', path: '/about' },
+    { num: 'vi', label: 'Graph', path: '/graph' },
   ];
   /** Current path, without query or fragment. */
   protected readonly path = signal('/');

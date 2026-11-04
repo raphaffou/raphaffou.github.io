@@ -1,28 +1,54 @@
 <h1>Projects</h1>
-<p class="lead">Things I built, mostly for a course and sometimes for myself. The selected ones have a page of their own.</p>
+<p class="lead">Things I built for a course, at work or for myself. The selected ones have a page of their own.</p>
 
-<section aria-labelledby="h-selected">
-  <h2 id="h-selected">Selected</h2>
-  @for (p of featured; track p.slug) {
-    <article class="item">
-      <h3><a class="fx" [routerLink]="['/projects', p.slug]"><span [t]="p.name"></span></a></h3>
-      <p class="meta">{{ p.date }} · {{ p.stack.join(', ') }}</p>
-      <p>{{ p.summary }}</p>
-    </article>
+<div class="filters" role="group" aria-label="Show projects made">
+  @for (f of filters; track f.name) {
+    <button class="btn fx" type="button" [attr.aria-pressed]="context() === f.context" (click)="filter(f.context)">
+      <span [t]="f.name"></span> <span class="count">{{ f.count }}</span>
+    </button>
   }
-</section>
+</div>
+<p class="vh" aria-live="polite">{{ count() }} {{ count() === 1 ? 'project' : 'projects' }}</p>
 
-<section aria-labelledby="h-archive">
-  <h2 id="h-archive">Archive</h2>
-  <p class="section-intro">Smaller, older or school projects.</p>
-  <ng-container *ngTemplateOutlet="list; context: { $implicit: archive }" />
-</section>
+@if (featured().length) {
+  <section aria-labelledby="h-selected">
+    <h2 id="h-selected">Selected</h2>
+    @for (p of featured(); track p.slug) {
+      <article class="item">
+        <h3><a class="fx" [routerLink]="['/projects', p.slug]"><span [t]="p.name"></span></a></h3>
+        <p class="meta">{{ p.contexts.join(', ') }} · {{ p.date }} · {{ p.stack.join(', ') }}</p>
+        <p>{{ p.summary }}</p>
+      </article>
+    }
+  </section>
+}
 
-<section aria-labelledby="h-ai">
-  <h2 id="h-ai">AI-assisted side projects</h2>
-  <p class="section-intro">Personal tools written mostly with an AI coding agent: I designed and directed them, but most of the code is not mine.</p>
-  <ng-container *ngTemplateOutlet="list; context: { $implicit: ai }" />
-</section>
+@if (other().length) {
+  <section aria-labelledby="h-other">
+    <h2 id="h-other">Other projects</h2>
+    <p class="section-intro">Smaller projects, from courses, work and my spare time.</p>
+    <ng-container *ngTemplateOutlet="list; context: { $implicit: other() }" />
+  </section>
+}
+
+@if (ai().length) {
+  <section aria-labelledby="h-ai">
+    <h2 id="h-ai">AI-assisted side projects</h2>
+    <p class="section-intro">Personal tools written mostly with an AI coding agent: I designed and directed them, but most of the code is not mine.</p>
+    <ng-container *ngTemplateOutlet="list; context: { $implicit: ai() }" />
+  </section>
+}
+
+@if (archived().length) {
+  <section aria-labelledby="h-archived">
+    <h2 id="h-archived">Archive</h2>
+    <details class="archived">
+      <summary class="fx"><span [t]="'Show ' + archived().length + ' old or minor ' + (archived().length === 1 ? 'project' : 'projects')"></span></summary>
+      <p class="section-intro">Kept for the record.</p>
+      <ng-container *ngTemplateOutlet="list; context: { $implicit: archived() }" />
+    </details>
+  </section>
+}
 
 <ng-template #list let-projects>
   <ul class="archive">
@@ -34,7 +60,7 @@
           } @else {
             <span class="plain-title">{{ p.name }}</span>
           }
-          <span class="meta">{{ p.date }} · {{ p.stack.join(', ') }}</span>
+          <span class="meta">{{ p.contexts.join(', ') }}{{ p.archived && p.aiAssisted ? ', AI-assisted' : '' }} · {{ p.date }} · {{ p.stack.join(', ') }}</span>
         </p>
         <p>{{ p.summary }}@if (!p.repo) {{{ ' ' }}<span class="muted">(no public code)</span>}</p>
       </li>

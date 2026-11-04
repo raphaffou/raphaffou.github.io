@@ -4,12 +4,13 @@ My portfolio. Angular 21, prerendered to static HTML, published on GitHub Pages.
 
 ## Editing the content
 
-All the content lives in **one file: [`content/portfolio.ttl`](content/portfolio.ttl)** (Turtle, schema.org vocabulary plus a small `site:` namespace). Texts, projects, the paper, the About page and the Graph page all come from it.
+See [`content/README.md`](content/README.md) for the details. All the content lives in **one file: [`content/portfolio.ttl`](content/portfolio.ttl)** (Turtle, schema.org vocabulary plus a small `site:` namespace). Texts, projects, the paper, the About page and the Graph page all come from it.
 
-- **Add a project:** copy an existing `schema:SoftwareSourceCode` block. With `site:featured true` it gets its own page (it then needs `site:slug`, `site:problem`, `site:approach`, `site:result`); with `false` it goes to the archive.
-- **Add a note:** the template is in the "Notes" section of the file. `schema:articleBody` takes a small Markdown: `## titles`, paragraphs, `- lists`, ```` ``` ```` code blocks, `` `code` ``, `**bold**`, `*italic*`, `[links](https://…)`, `![images](/images/…)` (put images in `public/images/`).
-- **Topics** (`schema:DefinedTerm`) are the hubs of the Graph page; link a work to them with `schema:about`.
-- Values are shown in the order they are written.
+- **Add a project:** copy an existing `schema:SoftwareSourceCode` block. With `site:featured true` it gets its own page (it then needs `site:slug`, `site:problem`, `site:approach`, `site:result`); without it, it goes under Other projects; `site:aiAssisted true` puts it with the AI-assisted side projects, and `site:archived true` in the Archive, closed by default.
+- **Add a note:** the template is in [`content/README.md`](content/README.md). `schema:articleBody` is Markdown (GitHub flavour, images in `public/images/`); `schema:mentions` links the note to projects or papers.
+- **Topics** (`schema:DefinedTerm`): link a work to them with `schema:about`.
+- Order: where it matters (tools, skills, languages, authors) the value is one text, items separated by semicolons, `"Python; pandas"`; entries are ordered by `site:order`.
+- **[`content/ontology.ttl`](content/ontology.ttl)** is the model: every class and property used, with domains and ranges; [`content/shapes.ttl`](content/shapes.ttl) says, as SHACL shapes, which properties each kind of entry takes. Check the content with `pyshacl -s content/shapes.ttl content/portfolio.ttl`.
 
 `scripts/build-content.mjs` reads the Turtle file and writes `src/app/content/*.generated.ts`, `public/data/portfolio.jsonld` and `public/data/portfolio.ttl`. It stops with a clear message if a required field is missing, a slug is reused or a topic is not declared, and warns about unknown `site:` properties (typos).
 
@@ -43,7 +44,7 @@ npm run preview      # build, then serve the static site on http://localhost:430
 - At rest the text is pure white; the colours only appear on hover/focus. `prefers-reduced-motion` stops all animation; `forced-colors` (Windows high contrast) falls back to system colours.
 - The two dots of the Ë drift continuously. Strictly, WCAG 2.2.2 asks that automatic motion lasting more than 5 s can be paused; to be strict, change `infinite` to `1` in the `.e .dots` rule of `styles.css`.
 - After each client-side navigation, focus moves to the page title, and the page `<title>` changes.
-- The Graph page is a static SVG of real links, preceded by a link to skip it; the list under it carries the same links.
+- The Graph page is an SVG laid out at build time (ontology or data, one at a time): nodes are buttons reachable with Tab, Enter selects, Escape deselects, and the panel under it lists the selected node's links as buttons. A link skips the graph, and the list under it carries the same information.
 
 ## Deployment
 

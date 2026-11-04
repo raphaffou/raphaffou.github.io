@@ -1,12 +1,204 @@
 <h1>Graph</h1>
 <p class="lead">
-  Everything on this site, linked by topic. The same links are listed below the graph, and the data behind it is
-  published as <a class="fx inline" href="/data/portfolio.ttl"><span [t]="'Turtle'"></span></a> and
+  The content of this site is linked data. The ontology is the model: its classes and the properties that link them. The
+  data is every entry and its links. Both are listed below the graph, and the data is published as
+  <a class="fx inline" href="/data/portfolio.ttl"><span [t]="'Turtle'"></span></a> and
   <a class="fx inline" href="/data/portfolio.jsonld"><span [t]="'JSON-LD'"></span></a>.
 </p>
 <p class="skip-graph">
   <a class="fx inline" routerLink="/graph" fragment="list"><span [t]="'Skip the graph and go to the list'"></span></a>
 </p>
+
+<div class="rg-bar">
+  <div role="group" aria-label="Show">
+    <button class="btn fx" type="button" [attr.aria-pressed]="view() === 'ontology'" (click)="show('ontology')">
+      <span [t]="'Ontology'"></span>
+    </button>
+    <button class="btn fx" type="button" [attr.aria-pressed]="view() === 'data'" (click)="show('data')">
+      <span [t]="'Data'"></span>
+    </button>
+  </div>
+  <div role="group" aria-label="Zoom">
+    <button class="btn fx" type="button" aria-label="Zoom in" (click)="zoom(1.25)"><span [t]="'+'"></span></button>
+    <button class="btn fx" type="button" aria-label="Zoom out" (click)="zoom(0.8)"><span [t]="'−'"></span></button>
+    <button class="btn fx" type="button" (click)="fit()"><span [t]="'Reset'"></span></button>
+  </div>
+</div>
+
+<figure class="rg" [id]="anchor()" (keydown.escape)="selected.set(null)">
+  <div class="rg-wrap">
+    <svg
+      #svg
+      [attr.class]="'rg-svg v-' + view()"
+      [attr.viewBox]="'0 0 ' + g().width + ' ' + g().height"
+      role="group"
+      [attr.aria-label]="view() === 'ontology' ? 'The ontology: classes and the properties that link them' : 'The data: every entry and its links'"
+      (wheel)="wheel($event)"
+      (pointerdown)="down($event)"
+      (pointermove)="move($event)"
+      (pointerup)="up($event)"
+      (pointercancel)="up($event)"
+    >
+      <defs>
+        <linearGradient id="inv" x1="0" y1="0" x2="1" y2="0">
+          <!-- colours from styles.css, so they follow the light/dark theme -->
+          <stop offset="0" style="stop-color: var(--c1)" />
+          <stop offset=".17" style="stop-color: var(--c2)" />
+          <stop offset=".33" style="stop-color: var(--c3)" />
+          <stop offset=".5" style="stop-color: var(--c4)" />
+          <stop offset=".67" style="stop-color: var(--c5)" />
+          <stop offset=".83" style="stop-color: var(--c6)" />
+          <stop offset="1" style="stop-color: var(--c7)" />
+        </linearGradient>
+        <marker id="rg-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0 0L10 5L0 10z" />
+        </marker>
+        <marker id="rg-arrow-lit" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+          <path d="M0 0L10 5L0 10z" />
+        </marker>
+      </defs>
+      <g [attr.transform]="transform()">
+        <g class="rg-edges" aria-hidden="true">
+          @for (e of g().edges; track e.source + ' ' + e.label + ' ' + e.target) {
+            <path
+              [attr.d]="e.d"
+              [attr.class]="lit(e) ? 'lit' : dim(e.source) || dim(e.target) ? 'dim' : null"
+              [attr.marker-end]="lit(e) ? 'url(#rg-arrow-lit)' : 'url(#rg-arrow)'"
+            />
+          }
+        </g>
+        @for (n of g().nodes; track n.id) {
+          <g
+            [attr.class]="'rg-node k-' + n.kind + (selected() === n.id ? ' on' : '') + (dim(n.id) ? ' dim' : '')"
+            tabindex="0"
+            role="button"
+            [attr.aria-pressed]="selected() === n.id"
+            [attr.aria-label]="aria(n)"
+            (click)="toggle(n.id)"
+            (keydown.enter)="toggle(n.id)"
+            (keydown.space)="$event.preventDefault(); toggle(n.id)"
+            (pointerenter)="hover(n.id)"
+            (pointerleave)="hover(null)"
+            (focus)="focusNode($event, n.id)"
+            (blur)="focusNode($event, null)"
+          >
+            <rect class="ring" [attr.x]="n.x - n.w / 2" [attr.y]="n.y - n.r - 5" [attr.width]="n.w" [attr.height]="n.h + 4" rx="4" />
+            <circle [attr.cx]="n.x" [attr.cy]="n.y" [attr.r]="n.r" />
+            <text [attr.x]="n.x" [attr.y]="n.y + n.r + 17">{{ n.short }}</text>
+          </g>
+        }
+        <g class="rg-labels" aria-hidden="true">
+          @for (e of g().edges; track e.source + ' ' + e.label + ' ' + e.target) {
+            @if (labelled(e)) {
+              <text [attr.x]="e.lx" [attr.y]="e.ly + 4">{{ e.label }}</text>
+            }
+          }
+        </g>
+      </g>
+    </svg>
+  </div>
+  <figcaption class="legend" aria-hidden="true">
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-project" /></svg> project</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-topic" /></svg> topic</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-paper" /></svg> paper</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-org" /></svg> organisation</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-me" /></svg> me</span>
+    <span><svg width="14" height="14"><circle cx="7" cy="7" r="5" class="rg-key k-other" /></svg> everything else</span>
+  </figcaption>
+  <p class="rg-hint">Select a node to see its links. Drag to move; Ctrl + scroll, a pinch or the buttons to zoom.</p>
+</figure>
+
+<div class="rg-panel">
+  @if (current(); as c) {
+    <p class="meta">{{ c.classes.join(', ') }} · <code>{{ c.iri }}</code></p>
+    <h2 class="rg-title" #title tabindex="-1">{{ c.label }}</h2>
+    @if (c.comment) {
+      <p>{{ c.comment }}</p>
+    }
+    @if (c.href) {
+      <p><a class="fx inline" [routerLink]="c.href"><span [t]="'Open its page'"></span></a></p>
+    }
+    @if (c.props.length) {
+      <h3 class="rg-sub">{{ view() === 'ontology' ? 'Properties' : 'Values' }}</h3>
+      <dl class="rg-props">
+        @for (p of c.props; track p.name + p.value) {
+          <div>
+            <dt>{{ p.name }}</dt>
+            <dd>
+              @if (p.link) {
+                <a class="fx inline" [href]="p.link"><span [t]="p.value"></span></a>
+              } @else {
+                {{ p.value }}
+              }
+            </dd>
+          </div>
+        }
+      </dl>
+    }
+    @if (links().length) {
+      <h3 class="rg-sub">Links</h3>
+      <ul class="rg-links">
+        @for (l of links(); track (l.out ? '>' : '<') + l.label + l.node.id) {
+          <li>
+            @if (l.out) {
+              <span class="meta">{{ l.label }} <span aria-hidden="true">→</span><span class="vh">, to</span></span>
+            } @else {
+              <span class="meta"><span aria-hidden="true">← </span>{{ l.label }}<span class="vh">, from</span></span>
+            }
+            <button class="rg-go fx" type="button" (click)="go(l.node.id)"><span [t]="l.node.label"></span></button>
+          </li>
+        }
+      </ul>
+    }
+  } @else {
+    <p class="muted">
+      {{ view() === 'ontology' ? 'Select a class to see its properties and links.' : 'Select an entry to see its values and links.' }}
+    </p>
+  }
+</div>
+
+<section id="list" aria-labelledby="h-list">
+  <h2 id="h-list">{{ view() === 'ontology' ? 'The ontology' : 'The data' }}</h2>
+  @if (view() === 'ontology') {
+    @for (c of classes; track c.id) {
+      <h3 class="rg-class">{{ c.label }} <code>{{ c.iri }}</code></h3>
+      @if (c.comment) {
+        <p>{{ c.comment }}</p>
+      }
+      <dl class="rg-props">
+        @if (c.properties) {
+          <div><dt>properties</dt><dd>{{ c.properties }}</dd></div>
+        }
+        @for (l of c.lines; track l.property) {
+          <div><dt>{{ l.property }}</dt><dd>{{ l.nodes }}</dd></div>
+        }
+      </dl>
+    }
+  } @else {
+    @for (grp of entries; track grp.name) {
+      <h3 class="topic">{{ grp.name }}</h3>
+      <ul class="topic-list">
+        @for (n of grp.nodes; track n.id) {
+          <li>
+            @if (n.href) {
+              <a class="fx inline" [routerLink]="n.href"><span [t]="n.label"></span></a>
+            } @else {
+              {{ n.label }}
+            }
+            @for (l of n.lines; track l.property) {
+              <span class="meta"> · {{ l.property }}</span> {{ l.nodes }}
+            }
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>
+
+<!--
+  The previous Graph page: topics as hubs, with what is about each of them. It needs `graph`
+  from graph.generated.ts (buildTopicGraph in scripts/build-content.mjs) and the fields
+  commented at the end of graph.ts. The CSS (.graph, .node, .edges…) is still in styles.css.
 
 <figure class="graph">
   <div class="graph-wrap">
@@ -19,7 +211,6 @@
     >
       <defs>
         <linearGradient id="inv" x1="0" y1="0" x2="1" y2="0">
-          <!-- colours from styles.css, so they follow the light/dark theme -->
           <stop offset="0" style="stop-color: var(--c1)" />
           <stop offset=".17" style="stop-color: var(--c2)" />
           <stop offset=".33" style="stop-color: var(--c3)" />
@@ -77,3 +268,4 @@
     </ul>
   }
 </section>
+-->

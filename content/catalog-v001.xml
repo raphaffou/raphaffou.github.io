@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Lets ontology editors (Protégé…) find the model imported by portfolio.ttl in this folder. -->
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri name="https://raphaffou.github.io/ns" uri="ontology.ttl"/>
+</catalog>

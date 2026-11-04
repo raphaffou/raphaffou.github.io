@@ -1,0 +1,376 @@
+# ontology.ttl — the model of portfolio.ttl, in RDFS/OWL: the schema.org terms
+# the site uses and its own site: terms, with their domains and ranges.
+# The constraints (required fields…) are in shapes.ttl. See content/README.md.
+
+@prefix site:    <https://raphaffou.github.io/ns#> .
+@prefix schema:  <https://schema.org/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://raphaffou.github.io/ns> a owl:Ontology ;
+    rdfs:label "raphaffou.github.io" ;
+    rdfs:comment "The model of the portfolio: the schema.org terms it uses, as this site uses them, and its own site: terms (order, URL slugs, case-study fields, the About page). schema.org terms get ranges here but no domains, since schema.org uses them on many types; which property goes on which type is in the shapes." ;
+    dcterms:creator "Raphaël Thieffry" .
+
+# --- Classes -----------------------------------------------------------------
+
+schema:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "Me: the home page, the About page and the contact buttons. Exactly one." .
+
+schema:Organization a owl:Class ;
+    rdfs:label "Organisation" .
+
+schema:CollegeOrUniversity a owl:Class ;
+    rdfs:subClassOf schema:Organization ;
+    rdfs:label "University" .
+
+schema:ResearchOrganization a owl:Class ;
+    rdfs:subClassOf schema:Organization ;
+    rdfs:label "Research organisation" .
+
+schema:DefinedTerm a owl:Class ;
+    rdfs:label "Topic" ;
+    rdfs:comment "Papers, projects and notes point to it with schema:about. Listed on project pages, each one linking to the Graph page." .
+
+schema:Role a owl:Class ;
+    rdfs:label "Position" ;
+    rdfs:comment "A position (an internship…) a paper was written in: the Context part of the paper on the Research page." .
+
+schema:ScholarlyArticle a owl:Class ;
+    rdfs:label "Paper" ;
+    rdfs:comment "The Research page, and the Research section of the home page." .
+
+schema:SoftwareSourceCode a owl:Class ;
+    rdfs:label "Project" ;
+    rdfs:comment "On the Projects page, under Selected (site:featured, with a page of its own), Other projects, AI-assisted side projects (site:aiAssisted) or Archive (site:archived, closed by default)." .
+
+schema:BlogPosting a owl:Class ;
+    rdfs:label "Note" ;
+    rdfs:comment "The Notes page and /notes/<slug>." .
+
+site:PathItem a owl:Class ;
+    rdfs:label "Path item" ;
+    rdfs:comment "A step of the Path section on the About page: a degree, a job, an internship." .
+
+site:SkillGroup a owl:Class ;
+    rdfs:label "Skill group" ;
+    rdfs:comment "A line of the Skills section on the About page: a name and its skills." .
+
+site:ProjectContext a owl:Class ;
+    rdfs:label "Project context" ;
+    rdfs:comment "What a project was made for: site:Course, site:Work or site:Personal." .
+
+site:Course a owl:NamedIndividual, site:ProjectContext ;
+    rdfs:label "Course" ;
+    rdfs:comment "A project for a course or a degree." .
+
+site:Work a owl:NamedIndividual, site:ProjectContext ;
+    rdfs:label "Work" ;
+    rdfs:comment "A project done at work." .
+
+site:Personal a owl:NamedIndividual, site:ProjectContext ;
+    rdfs:label "Personal" ;
+    rdfs:comment "A project of my own." .
+
+site:Date a rdfs:Datatype ;
+    rdfs:label "date" ;
+    rdfs:comment "A day, a month or a year: \"2026-11-02\"^^xsd:date, \"2026-09\"^^xsd:gYearMonth, \"2026\"^^xsd:gYear." ;
+    owl:equivalentClass [ a rdfs:Datatype ; owl:unionOf ( xsd:date xsd:gYearMonth xsd:gYear ) ] .
+
+# --- Names and texts, on several kinds of entries ----------------------------
+
+schema:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "Name or title." ;
+    rdfs:range xsd:string .
+
+schema:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:comment "On me: the introduction of the home page. On a position or a path item: the text under its name." ;
+    rdfs:range xsd:string .
+
+schema:address a owl:DatatypeProperty ;
+    rdfs:label "place" ;
+    rdfs:comment "City and country, as written." ;
+    rdfs:range xsd:string .
+
+schema:url a owl:DatatypeProperty ;
+    rdfs:label "web page" ;
+    rdfs:comment "On a paper: the paper itself (an arXiv link gives the arXiv button). On a project: the live demo. On an organisation: its site." ;
+    rdfs:range xsd:anyURI .
+
+schema:about a owl:ObjectProperty ;
+    rdfs:label "topic" ;
+    rdfs:comment "Links a paper, a project or a note to a topic, for the Graph page." ;
+    rdfs:range schema:DefinedTerm .
+
+site:order a owl:DatatypeProperty ;
+    rdfs:label "order" ;
+    rdfs:comment "Position of the entry in its list, smallest first; without it the entry comes last. Projects are ordered within their section; the path is newest first." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode site:PathItem site:SkillGroup ) ] ;
+    rdfs:range xsd:integer .
+
+site:slug a owl:DatatypeProperty ;
+    rdfs:label "slug" ;
+    rdfs:comment "Last part of the page URL: /projects/<slug>, /notes/<slug>. Lowercase letters, digits and dashes, unique on the site. Needed by papers, notes and featured projects." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode schema:BlogPosting ) ] ;
+    rdfs:range xsd:string .
+
+site:summary a owl:DatatypeProperty ;
+    rdfs:label "summary" ;
+    rdfs:comment "Two or three sentences, in the lists (home, Projects, Notes) and at the top of the page." ;
+    rdfs:subPropertyOf schema:description ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode schema:BlogPosting ) ] ;
+    rdfs:range xsd:string .
+
+# --- Me ----------------------------------------------------------------------
+
+schema:jobTitle a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:comment "Under my name." ;
+    rdfs:range xsd:string .
+
+schema:email a owl:DatatypeProperty ;
+    rdfs:label "email" ;
+    rdfs:comment "For the email button and the Contact section." ;
+    rdfs:range xsd:string .
+
+schema:sameAs a owl:DatatypeProperty ;
+    rdfs:label "same as" ;
+    rdfs:comment "My profiles elsewhere, for search engines." ;
+    rdfs:range xsd:anyURI .
+
+schema:affiliation a owl:ObjectProperty ;
+    rdfs:label "affiliation" ;
+    rdfs:comment "Where I am now, for search engines." ;
+    rdfs:range schema:Organization .
+
+schema:alumniOf a owl:ObjectProperty ;
+    rdfs:label "alumnus of" ;
+    rdfs:comment "Where I studied, for search engines." ;
+    rdfs:range schema:Organization .
+
+schema:knowsAbout a owl:ObjectProperty ;
+    rdfs:label "knows about" ;
+    rdfs:comment "My topics, for search engines." ;
+    rdfs:range schema:DefinedTerm .
+
+site:availability a owl:DatatypeProperty ;
+    rdfs:label "availability" ;
+    rdfs:comment "What I am looking for. After the address on the home page, and in the Contact section." ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:string .
+
+site:cv a owl:DatatypeProperty ;
+    rdfs:label "CV" ;
+    rdfs:comment "For the CV button. An address on this site, https://raphaffou.github.io/cv/file.pdf, points to a file in public/cv/." ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:anyURI .
+
+site:github a owl:DatatypeProperty ;
+    rdfs:label "GitHub" ;
+    rdfs:comment "For the GitHub button." ;
+    rdfs:subPropertyOf schema:sameAs ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:anyURI .
+
+site:linkedin a owl:DatatypeProperty ;
+    rdfs:label "LinkedIn" ;
+    rdfs:comment "For the LinkedIn button." ;
+    rdfs:subPropertyOf schema:sameAs ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:anyURI .
+
+site:bio a owl:DatatypeProperty ;
+    rdfs:label "biography" ;
+    rdfs:comment "Text at the top of the About page. Paragraphs are separated by a blank line; the first one is set larger." ;
+    rdfs:subPropertyOf schema:description ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:string .
+
+site:pathItem a owl:ObjectProperty ;
+    rdfs:label "path item" ;
+    rdfs:comment "A step of the Path section, shown by site:order." ;
+    rdfs:domain schema:Person ;
+    rdfs:range site:PathItem .
+
+site:skillGroup a owl:ObjectProperty ;
+    rdfs:label "skill group" ;
+    rdfs:comment "A line of the Skills section, shown by site:order." ;
+    rdfs:domain schema:Person ;
+    rdfs:range site:SkillGroup .
+
+site:spokenLanguage a owl:DatatypeProperty ;
+    rdfs:label "languages" ;
+    rdfs:comment "The Languages section: languages with their level, separated by semicolons, in that order: \"French — native; English — C1\"." ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:string .
+
+site:interest a owl:DatatypeProperty ;
+    rdfs:label "interests" ;
+    rdfs:comment "The Outside work section: separated by semicolons, in that order." ;
+    rdfs:domain schema:Person ;
+    rdfs:range xsd:string .
+
+# --- Positions ---------------------------------------------------------------
+
+schema:startDate a owl:DatatypeProperty ;
+    rdfs:label "start" ;
+    rdfs:range site:Date .
+
+schema:endDate a owl:DatatypeProperty ;
+    rdfs:label "end" ;
+    rdfs:range site:Date .
+
+schema:memberOf a owl:ObjectProperty ;
+    rdfs:label "at" ;
+    rdfs:comment "The organisation of a position: its name and place show in the paper's context." ;
+    rdfs:range schema:Organization .
+
+# --- Papers and projects -----------------------------------------------------
+
+site:label a owl:DatatypeProperty ;
+    rdfs:label "short label" ;
+    rdfs:comment "Shorter name, used on the Graph page instead of schema:name." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode ) ] ;
+    rdfs:range xsd:string .
+
+site:problem a owl:DatatypeProperty ;
+    rdfs:label "problem" ;
+    rdfs:comment "The Problem section of the page." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode ) ] ;
+    rdfs:range xsd:string .
+
+site:approach a owl:DatatypeProperty ;
+    rdfs:label "approach" ;
+    rdfs:comment "The Approach section of the page." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode ) ] ;
+    rdfs:range xsd:string .
+
+site:result a owl:DatatypeProperty ;
+    rdfs:label "result" ;
+    rdfs:comment "The Result(s) section of the page." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode ) ] ;
+    rdfs:range xsd:string .
+
+site:stack a owl:DatatypeProperty ;
+    rdfs:label "tools" ;
+    rdfs:comment "Languages and tools, separated by semicolons: \"Python; pandas\". Shown under Tools in that order; the home page shows the first three." ;
+    rdfs:domain [ owl:unionOf ( schema:ScholarlyArticle schema:SoftwareSourceCode ) ] ;
+    rdfs:range xsd:string .
+
+schema:codeRepository a owl:DatatypeProperty ;
+    rdfs:label "source code" ;
+    rdfs:comment "The repository, for the Source code or Code link. An archive project without one is shown without a link and left out of the Graph page." ;
+    rdfs:range xsd:anyURI .
+
+# --- Papers ------------------------------------------------------------------
+
+schema:author a owl:DatatypeProperty ;
+    rdfs:label "authors" ;
+    rdfs:comment "Names separated by semicolons, in the order of the paper: \"Raphaël Thieffry; Matej Martinc\". Mine is set in bold." ;
+    rdfs:range xsd:string .
+
+schema:datePublished a owl:DatatypeProperty ;
+    rdfs:label "published" ;
+    rdfs:range site:Date .
+
+schema:isPartOf a owl:ObjectProperty ;
+    rdfs:label "written during" ;
+    rdfs:comment "The position the paper was written in, for its Context part." ;
+    rdfs:range schema:Role .
+
+site:status a owl:DatatypeProperty ;
+    rdfs:label "status" ;
+    rdfs:comment "Publication status, on the Research page and the home page." ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+site:venue a owl:DatatypeProperty ;
+    rdfs:label "venue" ;
+    rdfs:comment "Conference or journal, shown as a link to site:venueUrl (it needs both)." ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+site:venueUrl a owl:DatatypeProperty ;
+    rdfs:label "venue site" ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:anyURI .
+
+site:codeNote a owl:DatatypeProperty ;
+    rdfs:label "note on the code" ;
+    rdfs:comment "Under the tools of a paper, for instance when the code is not public yet." ;
+    rdfs:domain schema:ScholarlyArticle ;
+    rdfs:range xsd:string .
+
+# --- Projects ----------------------------------------------------------------
+
+schema:dateCreated a owl:DatatypeProperty ;
+    rdfs:label "when" ;
+    rdfs:comment "Free text: \"2026\", \"2023–2024\"." ;
+    rdfs:range xsd:string .
+
+site:featured a owl:DatatypeProperty ;
+    rdfs:label "featured" ;
+    rdfs:comment "true: on the home page and under Selected, with a page of its own, so it needs site:slug, site:problem, site:approach and site:result. false or absent: under Other projects." ;
+    rdfs:domain schema:SoftwareSourceCode ;
+    rdfs:range xsd:boolean .
+
+site:aiAssisted a owl:DatatypeProperty ;
+    rdfs:label "AI-assisted" ;
+    rdfs:comment "true: written mostly with an AI coding agent. In its own section of the Projects page, never featured (this wins over site:featured)." ;
+    rdfs:domain schema:SoftwareSourceCode ;
+    rdfs:range xsd:boolean .
+
+site:archived a owl:DatatypeProperty ;
+    rdfs:label "archived" ;
+    rdfs:comment "true: kept only for the record, in the Archive section of the Projects page, which is closed by default. This wins over site:featured and site:aiAssisted." ;
+    rdfs:domain schema:SoftwareSourceCode ;
+    rdfs:range xsd:boolean .
+
+site:context a owl:ObjectProperty ;
+    rdfs:label "context" ;
+    rdfs:comment "Course, Work or Personal; a project can have several. Shown before the date in the project lists and on the project page." ;
+    rdfs:domain schema:SoftwareSourceCode ;
+    rdfs:range site:ProjectContext .
+
+site:role a owl:DatatypeProperty ;
+    rdfs:label "my part" ;
+    rdfs:comment "Who did what, under My part on the project page." ;
+    rdfs:domain schema:SoftwareSourceCode ;
+    rdfs:range xsd:string .
+
+# --- Notes -------------------------------------------------------------------
+
+schema:headline a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:range xsd:string .
+
+schema:articleBody a owl:DatatypeProperty ;
+    rdfs:label "text" ;
+    rdfs:comment "The note, in Markdown (GitHub flavour: titles, lists, tables, code, links, HTML). Images go in public/images/: ![What it shows](/images/x.jpg \"Optional caption\")." ;
+    rdfs:range xsd:string .
+
+schema:mentions a owl:ObjectProperty ;
+    rdfs:label "mentions" ;
+    rdfs:comment "A project or a paper the note talks about: the note links to it, and the project page or the Research page links back to the note." ;
+    rdfs:domain schema:BlogPosting ;
+    rdfs:range [ owl:unionOf ( schema:SoftwareSourceCode schema:ScholarlyArticle ) ] .
+
+# --- Path and skills ---------------------------------------------------------
+
+site:period a owl:DatatypeProperty ;
+    rdfs:label "period" ;
+    rdfs:comment "Left column of the Path section, as written: \"2023–2026\", \"Summer 2026\"." ;
+    rdfs:domain site:PathItem ;
+    rdfs:range xsd:string .
+
+site:items a owl:DatatypeProperty ;
+    rdfs:label "skills" ;
+    rdfs:comment "The skills of a group, separated by semicolons; shown in that order, separated by dots." ;
+    rdfs:domain site:SkillGroup ;
+    rdfs:range xsd:string .

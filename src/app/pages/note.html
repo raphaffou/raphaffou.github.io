@@ -4,4 +4,19 @@
   <h1 [id]="'title-' + n.slug">{{ n.headline }}</h1>
   <p class="meta"><time [attr.datetime]="n.date">{{ n.dateLabel }}</time></p>
   <div [innerHTML]="body()"></div>
+
+  @if (n.mentions.length) {
+    <h2>Mentioned here</h2>
+    <ul class="link-row">
+      @for (m of n.mentions; track m.link) {
+        <li>
+          @if (m.link.startsWith('/')) {
+            <a class="fx inline" [routerLink]="m.link"><span [t]="m.name"></span></a>
+          } @else {
+            <a class="fx inline" [href]="m.link"><span [t]="m.name"></span></a>
+          }
+        </li>
+      }
+    </ul>
+  }
 </article>

@@ -15,7 +15,8 @@ export const content: Content = {
     "bio": [
       "I studied mathematics and computer science at Université Paris-Saclay, then spent three years as an apprentice engineer in industry, working on Linux infrastructure and data mining, while completing an engineering degree at Polytech Paris-Saclay (17/20).",
       "In 2026 I chose to move into research: a summer at the Jožef Stefan Institute in Ljubljana, where I wrote my first paper on LLMs and readability, then the M2 Data, Knowledge and Hybrid AI at Université Paris-Saclay.",
-      "What I want to work on sits where symbolic and statistical AI meet: knowledge graphs and ontologies that language models can use, and language models that help build them."
+      "What I want to work on sits where symbolic and statistical AI meet: knowledge graphs and ontologies that language models can use, and language models that help build them.",
+      "I also have personal side projects involving my own AI infrastructure at home, check it out!"
     ],
     "path": [
       {
@@ -26,7 +27,7 @@ export const content: Content = {
       {
         "period": "Summer 2026",
         "name": "Research internship in NLP",
-        "description": "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Readability assessment with LLMs."
+        "description": "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Working with Matej Martinc on readability assessment with large language models."
       },
       {
         "period": "2023–2026",
@@ -36,7 +37,7 @@ export const content: Content = {
       {
         "period": "2023–2026",
         "name": "Apprentice engineer in industry",
-        "description": "Three years in an IT department: Linux infrastructure, containerisation, and a data-mining project on graph representations of support tickets."
+        "description": "Three years in an IT department: Linux infrastructure, containerisation, infrastructure data management platform development and a data-mining project on graph representations of support tickets."
       },
       {
         "period": "2021–2023",
@@ -86,9 +87,12 @@ export const content: Content = {
     ],
     "interests": [
       "Japanese",
-      "Collecting and reviving old computer hardware",
       "Cooking",
-      "Contemporary art"
+      "Contemporary art",
+      "Cinema",
+      "Animation",
+      "Sequential art (manga, European graphic novels)",
+      "Maths"
     ]
   },
   "papers": [
@@ -123,19 +127,20 @@ export const content: Content = {
         "name": "Research internship in NLP",
         "org": "Jožef Stefan Institute",
         "place": "Ljubljana, Slovenia",
-        "description": "Summer 2026 in the Knowledge Laboratory of the Jožef Stefan Institute, working with Matej Martinc on readability assessment with large language models."
+        "description": "Jožef Stefan Institute, Knowledge Laboratory, Ljubljana. Working with Matej Martinc on readability assessment with large language models."
       },
       "bibtex": "@misc{thieffry2026assessing,\n  title         = {Assessing Readability with {LLMs}: The Role of Reasoning and Few-Shot Prompting},\n  author        = {Thieffry, Raphaël and Martinc, Matej},\n  year          = {2026},\n  eprint        = {2609.24650},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2609.24650}\n}",
       "topics": [
         {
-          "id": "nlp",
-          "name": "NLP"
-        },
-        {
           "id": "llms",
           "name": "LLMs"
+        },
+        {
+          "id": "nlp",
+          "name": "NLP"
         }
-      ]
+      ],
+      "notes": []
     }
   ],
   "projects": [
@@ -143,6 +148,10 @@ export const content: Content = {
       "slug": "rent-prediction",
       "featured": true,
       "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
       "name": "Rent prediction",
       "date": "2026",
       "repo": "https://github.com/raphaffou/Pr-diction-Immobili-re",
@@ -162,12 +171,284 @@ export const content: Content = {
           "id": "machine-learning",
           "name": "Machine learning"
         }
+      ],
+      "notes": []
+    },
+    {
+      "slug": "home-ai-infra",
+      "featured": true,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "Home AI infrastructure",
+      "date": "2026",
+      "summary": "Home infrastructure (AI server, 8x Nvidia V100) system and architecture designed to allow for easy inference, training, fine-tuning and agentic AI.\nAll of which while monitoring energy consumption, heat, and price.",
+      "problem": "How to create a platform allowing easy management of a private GPU compute machine?",
+      "approach": "Hardware was chosen as a compromise between capabilities and price. Energy was only a second criterion, as the goal is not to be profitable but rather to open possibilities and allow for a privacy-enabled use of large compute resources. Software-wise, the idea was to have a single app that manages everything (thus the use of Flutter). Such a huge piece of software is impossible to build all alone in a few weeks (power control, energy monitoring, user isolation, encryption, AI guards...), so I tried an approach using a specific design I made (sequence diagrams, architecture diagrams, and needs description) given to Opus 5.5 and making step by step advancements to a modular scaffolding.",
+      "result": "Currently in prototyping phase, basic models are there, and the whole scaffolding is done.\nStill debugging things at the moment",
+      "stack": [
+        "Bash",
+        "Flutter",
+        "system (BMC, ipmitool, nvidia-smi)",
+        "llama.cpp",
+        "OpenHands",
+        "Docker",
+        "Tailscale"
+      ],
+      "topics": [
+        {
+          "id": "llms",
+          "name": "LLMs"
+        }
+      ],
+      "notes": [
+        {
+          "slug": "home-ai-infra-specs",
+          "headline": "Details about my private AI infrastructure"
+        }
       ]
     },
     {
-      "slug": "web-shop",
-      "featured": true,
+      "featured": false,
       "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Work"
+      ],
+      "name": "Infrastructure data management platform",
+      "date": "2023-2026",
+      "summary": "Web platform and database to view, store, and collect information about the company's server infrastructure.",
+      "stack": [
+        "Python",
+        "Docker",
+        "Angular",
+        "TypeScript",
+        "REST API",
+        "Ansible",
+        "Bash",
+        "Kubernetes",
+        "CI/CD"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Work"
+      ],
+      "name": "Recurring and frequent problems identification using user tickets",
+      "date": "2023",
+      "summary": "Dataiku project and plugin to cluster a set of descriptions based on semantic similarity.\nApplied to user tickets' descriptions, it provided useful insights about the most often encountered problems our team manages.",
+      "stack": [
+        "Python",
+        "Dataiku",
+        "Markov Clustering",
+        "FAISS",
+        "Sentence Encoders"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
+      "name": "Forbidden Desert",
+      "date": "2023",
+      "repo": "https://github.com/raphaffou/desertinterdit",
+      "summary": "The cooperative board game in Java and Swing, for the object-oriented programming course: an MVC architecture, most of the rules and roles, and unit tests.",
+      "stack": [
+        "Java",
+        "Swing"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
+      "name": "C compiler",
+      "date": "2024",
+      "summary": "A minimal compiler for a subset of C, written in OCaml.",
+      "stack": [
+        "OCaml"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
+      "name": "Huffman compression",
+      "date": "2022–2023",
+      "summary": "Text compression with Huffman coding, written in OCaml for the functional programming course.",
+      "stack": [
+        "OCaml"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
+      "name": "Lists and quadtrees",
+      "date": "2022–2023",
+      "repo": "https://github.com/raphaffou/projetalgos3",
+      "summary": "Algorithms on linked lists and quadtrees for the advanced algorithms course.",
+      "stack": [
+        "C"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Course"
+      ],
+      "name": "Mazes",
+      "date": "2022",
+      "repo": "https://gitlab.com/l2945/labyrinthe",
+      "summary": "A small library to generate and study connected, acyclic mazes: my first time with graphs, and with Git.",
+      "stack": [
+        "Python",
+        "Jupyter"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": false,
+      "archived": false,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "SMS through a 4G router",
+      "date": "2022",
+      "repo": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler",
+      "summary": "A Selenium script that reads and sends SMS through the web interface of a TP-Link 4G router. Absolutely not stable.",
+      "stack": [
+        "Python",
+        "Selenium"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "archived": false,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "Claude Code for Android",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Claude-Code-for-Android",
+      "summary": "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone.",
+      "stack": [
+        "Kotlin",
+        "Python (asyncio)",
+        "WebSocket"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "archived": false,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "Awabi",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Awabi",
+      "summary": "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press.",
+      "stack": [
+        "Kotlin",
+        "Room",
+        "ML Kit OCR",
+        "JMdict"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "archived": false,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "Souffleur",
+      "date": "2026",
+      "summary": "A VS Code extension for Copilot-style inline suggestions, written by Claude Haiku through the official claude CLI, so it runs on a Claude subscription instead of a pay-per-use API key. A claude process kept warm and driven over its stream-json protocol, fill-in-the-middle prompts, a cache and early interruption bring a suggestion to about 1.5 s (median).",
+      "stack": [
+        "TypeScript",
+        "VS Code API",
+        "Claude Code CLI (stream-json)",
+        "esbuild"
+      ],
+      "topics": [
+        {
+          "id": "llms",
+          "name": "LLMs"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "featured": false,
+      "aiAssisted": true,
+      "archived": true,
+      "contexts": [
+        "Personal"
+      ],
+      "name": "Kanji Graph",
+      "date": "2026",
+      "repo": "https://github.com/raphaffou/Kanji-Map",
+      "summary": "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words.",
+      "stack": [
+        "Python",
+        "C (OpenMP)",
+        "NumPy",
+        "NetworkX",
+        "Tk"
+      ],
+      "topics": [],
+      "notes": []
+    },
+    {
+      "slug": "web-shop",
+      "featured": false,
+      "aiAssisted": false,
+      "archived": true,
+      "contexts": [
+        "Course"
+      ],
       "name": "3D web shop",
       "date": "2023–2024",
       "repo": "https://github.com/raphaffou/projetWebPoly",
@@ -190,11 +471,16 @@ export const content: Content = {
           "id": "web",
           "name": "Web"
         }
-      ]
+      ],
+      "notes": []
     },
     {
       "featured": false,
       "aiAssisted": false,
+      "archived": true,
+      "contexts": [
+        "Course"
+      ],
       "name": "Numerical methods",
       "date": "2024",
       "repo": "https://github.com/raphaffou/Methodes-numeriques",
@@ -203,84 +489,16 @@ export const content: Content = {
         "Python",
         "Jupyter"
       ],
-      "topics": []
+      "topics": [],
+      "notes": []
     },
     {
       "featured": false,
       "aiAssisted": false,
-      "name": "C compiler",
-      "date": "2024",
-      "summary": "A minimal compiler for a subset of C, written in OCaml.",
-      "stack": [
-        "OCaml"
+      "archived": true,
+      "contexts": [
+        "Personal"
       ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
-      "name": "Forbidden Desert",
-      "date": "2023",
-      "repo": "https://github.com/raphaffou/desertinterdit",
-      "summary": "The cooperative board game in Java and Swing, for the object-oriented programming course: an MVC architecture, most of the rules and roles, and unit tests.",
-      "stack": [
-        "Java",
-        "Swing"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
-      "name": "Huffman compression",
-      "date": "2022–2023",
-      "summary": "Text compression with Huffman coding, written in OCaml for the functional programming course.",
-      "stack": [
-        "OCaml"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
-      "name": "Lists and quadtrees",
-      "date": "2022–2023",
-      "repo": "https://github.com/raphaffou/projetalgos3",
-      "summary": "Algorithms on linked lists and quadtrees for the advanced algorithms course.",
-      "stack": [
-        "C"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
-      "name": "Mazes",
-      "date": "2022",
-      "repo": "https://gitlab.com/l2945/labyrinthe",
-      "summary": "A small library to generate and study connected, acyclic mazes: my first time with graphs, and with Git.",
-      "stack": [
-        "Python",
-        "Jupyter"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
-      "name": "SMS through a 4G router",
-      "date": "2022",
-      "repo": "https://github.com/raphaffou/tp-link-MR6400-SMS-handler",
-      "summary": "A Selenium script that reads and sends SMS through the web interface of a TP-Link 4G router. Absolutely not stable.",
-      "stack": [
-        "Python",
-        "Selenium"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": false,
       "name": "First portfolio",
       "date": "2022",
       "repo": "https://github.com/raphaffou/raphaffou.github.io/tree/41f23fb730d237d02269792a2b282b00c84fe9e2",
@@ -290,63 +508,36 @@ export const content: Content = {
         "HTML",
         "CSS"
       ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": true,
-      "name": "Kanji Graph",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Kanji-Map",
-      "summary": "An interactive map of the 175,312 JMdict words that contain a kanji, all on screen at once: words are placed from a precomputed layout of the kanji co-occurrence graph (Louvain communities, ForceAtlas2), and edges are computed in C only for the visible words.",
-      "stack": [
-        "Python",
-        "C (OpenMP)",
-        "NumPy",
-        "NetworkX",
-        "Tk"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": true,
-      "name": "Awabi",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Awabi",
-      "summary": "An Android overlay for learning Japanese: it reads the screen with on-device OCR, looks the words up in an offline JMdict and adds them to an Anki deck with a long press.",
-      "stack": [
-        "Kotlin",
-        "Room",
-        "ML Kit OCR",
-        "JMdict"
-      ],
-      "topics": []
-    },
-    {
-      "featured": false,
-      "aiAssisted": true,
-      "name": "Claude Code for Android",
-      "date": "2026",
-      "repo": "https://github.com/raphaffou/Claude-Code-for-Android",
-      "summary": "A native Android chat interface for Claude Code, running locally through Termux and a small WebSocket server. Built entirely on my phone.",
-      "stack": [
-        "Kotlin",
-        "Python (asyncio)",
-        "WebSocket"
-      ],
-      "topics": []
+      "topics": [],
+      "notes": []
     }
   ],
-  "notes": [],
+  "notes": [
+    {
+      "slug": "home-ai-infra-specs",
+      "headline": "Details about my private AI infrastructure",
+      "date": "2026-11-03",
+      "dateLabel": "3 November 2026",
+      "summary": "The brief I wrote so that Claude Code could build my home AI server: two independent control paths, an app my parents can use, and private spaces where an agent can't break anything.",
+      "html": "<p>So, I began this project some months ago. I had been thinking about building my own infrastructure for a long time, but the turning point was some offer I saw on leboncoin.\nMore specifically, I found an Inspur NF5288M5 at the very cheap price of about 4,800 €. This may sound absurdly expensive, but when you think about it, for less than the price of ONE Nvidia RTX 5090, I had the opportunity to get 8 Nvidia V100 cards, with 32 GB of VRAM each (256 GB of VRAM in total).\nThere&#39;s of course a decent CPU capacity on top of that (2x Intel Xeon), but the catch is I had to buy the RAM and storage myself (in this economy, 09/2026), and it draws a lot of current.</p>\n<p>After thinking quite a lot about it, I ended up buying the server. The buying process was something, because I had to manage this from abroad. But anyway, I managed to get it.\nMy thought about it is quite simple: until now, I didn&#39;t have any real compute capacity. The best GPU I ever had was a GTX 1060, which is pretty bad for anything AI-related. Just buying this unlocks quite a lot of possibilities for me, for various kinds of projects. However, these possibilities need to be tempered to avoid spending too much electricity. On top of that, the noise is terrible, so I need to find a better place than my 23 m² accommodation to house this enormous machine.</p>\n<h2>Architecture and problem solving</h2>\n<p>I had to find solutions for these two problems:\nFor the <strong>noise</strong> and <strong>space</strong> problem, I decided, after a long discussion with my parents, to install it in their house. There&#39;s a garage which is separate from the main &quot;house living building&quot;, and I installed it there to avoid the annoyance.\nBefore the installation, I knew I wouldn&#39;t have much time in my parents&#39; house: they live quite far from Paris, and it&#39;s a 4-hour train ride just to get there. So I had to plan ahead and bring/buy some stuff in advance to prepare for the other problem: <strong>energy</strong>.\nI&#39;m neither really rich nor really poor, but just to give you an idea, this machine draws 800 W at idle, and 1,500–2,000 W at peak. So let&#39;s say I just let it idle for a month: it comes to <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo stretchy=\"false\">(</mo><mn>800</mn><mo>×</mo><mn>24</mn><mo>×</mo><mn>30</mn><mo stretchy=\"false\">)</mo><mo>÷</mo><mn>1000</mn><mo>×</mo><mn>0.21</mn><mo>≈</mo><mn>120</mn></mrow><annotation encoding=\"application/x-tex\">(800 \\times 24 \\times 30) \\div 1000 \\times 0.21 \\approx 120</annotation></semantics></math></span> € every month.\nThis will never be a profitable expense, but anyway I needed to plan a strategy to mitigate this.</p>\n<p>The idea is simple: just install a small monitoring machine to turn the huge server on and off whenever you need it. I have many mini PCs at home, so it&#39;s a cheap, time-saving solution.\nWith a Claude subscription available, it is also not out of reach to build an Android app so that my parents can also turn this monster off (they may want to use their garage at some point).</p>\n<p>The resulting architecture is this:</p>\n<figure><img src=\"/images/home-ai-infra/architecture.svg\" alt=\"The phone app reaches a relay on the local network, which handles power through the BMC, and reaches the server directly over the tailnet for everything else\" loading=\"lazy\"><figcaption>Power goes through the relay and the BMC; everything else goes straight to the server</figcaption></figure>\n<p>While working on this, in practice I discovered that this &quot;mini relay machine&quot; can be more useful than just being a relay. It turns out the network in my parents&#39; town is awful, and as such, downloads take DAYS to complete. This mini-machine thus turned into some kind of network cache to limit the amount of time the huge server has to be powered on with no worthwhile task to compute.</p>\n<p>Inside the server, I designed the thing to be as modular as possible. In my experience, not designing something that&#39;ll last as modular is a profound mistake. So every capability of the server through the app is controlled by a modular API gateway in Docker, and Docker will be used in many projects anyway.</p>\n<h2>Safety, security, and user isolation</h2>\n<p>Safety is kind of a major concern here. First, access to the machine is protected by Tailscale. This is <strong>not</strong> on the global internet.\nWith that said, I&#39;m not planning on being the only one using this machine. The number of GPUs makes it imaginable that I&#39;ll share this thing with my family or some friends. I&#39;m also thinking about giving the model it runs some agentic capabilities with access to the internet.</p>\n<p>This raises some problems:</p>\n<ul>\n<li>First, privacy. The whole purpose of buying a machine is to have control over your data. If another user can, let&#39;s say, see everything about your life, there&#39;s no point.</li>\n<li>Second, agentic safety. Let&#39;s say the model gets badly corrupted and tries to do malicious things. How can I limit the risk?</li>\n</ul>\n<p>The solution to the first problem is user identification, encryption and contained execution, and the solution to the second one is rights management and guard models.</p>\n<p>Identification is ensured via the identity of your Tailscale account. This makes sure my mom can&#39;t trick the system into thinking she&#39;s me.\nBesides that, for the encryption, the idea is quite simple. Wherever the app is installed, you can store a private key. If you have multiple devices, you can have multiple private keys. These keys are linked to your 50 GB encrypted volume and, through a pairing process, any one of them can open the volume (see <a class=\"fx inline\" href=\"https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup\"><span class=\"t\">LUKS</span></a>).\nThese volumes are opened by containers, and once containerized, a user is limited to what he&#39;s allowed to do inside it: he&#39;s isolated.</p>\n<p>One limit to this is that when the volume is being actively used by a container, an admin on the bare-metal machine could potentially read everything. This volume can be locked/unlocked manually by the user whenever he feels like it.</p>\n<p>For the second problem, I made sure that whatever the LLM model can act upon, it CAN&#39;T access my parents&#39; local network or the tailnet. This is enforced at the container level, and it only has internet access (for obvious reasons).\nBut let&#39;s say the model is highly intelligent, finds a vulnerability and wants to exploit it or something. Here comes the second protection: a guard model. The idea is that for each agentic action the model takes, a smaller model checks whether it&#39;s safe or not.\nAs a user, the idea is to be able to configure that: if you monitor the thing actively, why bother? If you&#39;re cooking in parallel and the guard has some doubts, it can ask you to check quickly. If it&#39;s an automated night task, make it conservative.</p>\n<figure><img src=\"/images/home-ai-infra/agent.svg\" alt=\"The agent loop runs outside the space; each action goes through a supervisor before it runs in the space, which can reach the internet but not the local network\" loading=\"lazy\"><figcaption>The agent acts on its space, not in it</figcaption></figure>\n<h2>Current state</h2>\n<p>Right now, the app is working: it can control the power and monitor the electricity consumption. There&#39;s a small model (Llama 3.3 70B Q3) that&#39;s deployed as a POC, but it&#39;s an old model, and not the best in its category.\nGLM-5.3 is coming and I have to deploy it. I also have to build some kind of task manager and UI modules for all agentic things to work properly. It&#39;s still a work in progress.</p>\n<p>I also have some hardware or GPU detection issues that I can&#39;t wrap my head around, so at the moment I&#39;m capped at 4 GPUs (~128 GB of VRAM).</p>\n<p>Yeah, this is a fun project.</p>\n",
+      "topics": [
+        {
+          "id": "llms",
+          "name": "LLMs"
+        }
+      ],
+      "mentions": [
+        {
+          "name": "Home AI infrastructure",
+          "link": "/projects/home-ai-infra"
+        }
+      ]
+    }
+  ],
   "topics": [
     {
       "id": "knowledge-graphs",
       "name": "Knowledge graphs"
-    },
-    {
-      "id": "nlp",
-      "name": "NLP"
     },
     {
       "id": "llms",
@@ -355,6 +546,10 @@ export const content: Content = {
     {
       "id": "machine-learning",
       "name": "Machine learning"
+    },
+    {
+      "id": "nlp",
+      "name": "NLP"
     },
     {
       "id": "web",

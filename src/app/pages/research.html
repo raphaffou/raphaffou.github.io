@@ -46,5 +46,14 @@
       <h3>Context</h3>
       <p>{{ p.context.description }}</p>
     }
+
+    @if (p.notes.length) {
+      <h3>Notes</h3>
+      <ul class="link-row">
+        @for (n of p.notes; track n.slug) {
+          <li><a class="fx inline" [routerLink]="['/notes', n.slug]"><span [t]="n.headline"></span></a></li>
+        }
+      </ul>
+    }
   </article>
 }

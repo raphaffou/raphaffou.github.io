@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { papers, person } from '../content/content';
 import { T } from '../shared/t';
 import { Toast } from '../shared/toast';
 
 @Component({
   selector: 'app-research',
-  imports: [T],
+  imports: [RouterLink, T],
   templateUrl: './research.html',
 })
 export class Research {

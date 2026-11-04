@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="350" viewBox="0 0 680 350" role="img" aria-labelledby="title desc">
+  <title id="title">The agent acts on its space, not in it</title>
+  <desc id="desc">On the server, Mum's agent loop runs outside her space and asks the shared model, on the GPUs, for its next step. Each action it proposes goes to the supervisor, on the CPUs, which lets it through to Mum's space or blocks it. Each person's space is a gVisor container with their own encrypted vault inside; Dad's space is separate and out of reach.</desc>
+  <style>
+    .frame { fill: none; stroke: #46464c; stroke-width: 1; stroke-dasharray: 4 4; }
+    .box { fill: none; stroke: #6a6a72; stroke-width: 1.5; }
+    .inner { fill: none; stroke: #46464c; stroke-width: 1.25; }
+    .t { fill: #f4f2ee; font: 15px Georgia, 'Times New Roman', serif; text-anchor: middle; }
+    .s { fill: #a9a6a0; font: 13px Georgia, 'Times New Roman', serif; text-anchor: middle; }
+    .l { fill: #a9a6a0; font: italic 13px Georgia, 'Times New Roman', serif; }
+    .g { fill: #a9a6a0; font: 13px Georgia, 'Times New Roman', serif; }
+    .e { fill: none; stroke: #a9a6a0; stroke-width: 1.5; }
+    .d { stroke-dasharray: 5 4; }
+    .head { fill: #a9a6a0; }
+    @media (prefers-color-scheme: light) {
+      .frame, .inner { stroke: #b5b0a6; }
+      .box { stroke: #8d887f; }
+      .t { fill: #141416; }
+      .s, .l, .g { fill: #5f5c57; }
+      .e { stroke: #5f5c57; }
+      .head { fill: #5f5c57; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+      <path class="head" d="M0 0L10 5L0 10z" />
+    </marker>
+  </defs>
+
+  <rect class="frame" x="10" y="10" width="660" height="330" rx="8" />
+  <text class="g" x="24" y="32">Server</text>
+
+  <!-- The shared model, on the GPUs -->
+  <rect class="box" x="40" y="50" width="180" height="56" rx="6" />
+  <text class="t" x="130" y="74">Shared model</text>
+  <text class="s" x="130" y="93">llama-server, on the GPUs</text>
+
+  <!-- Mum's agent, outside her space -->
+  <rect class="box" x="40" y="180" width="180" height="56" rx="6" />
+  <text class="t" x="130" y="204">Mum's agent loop</text>
+  <text class="s" x="130" y="223">outside her space</text>
+
+  <!-- The supervisor, on the CPUs -->
+  <rect class="box" x="280" y="180" width="170" height="56" rx="6" />
+  <text class="t" x="365" y="204">Supervisor</text>
+  <text class="s" x="365" y="223">StepGuard 4B, on the CPUs</text>
+
+  <!-- One space per person, each with its own vault -->
+  <rect class="box" x="500" y="40" width="150" height="120" rx="6" />
+  <text class="t" x="575" y="64">Dad's space</text>
+  <text class="s" x="575" y="83">gVisor container</text>
+  <rect class="inner" x="515" y="98" width="120" height="46" rx="4" />
+  <text class="t" x="575" y="118">Dad's vault</text>
+  <text class="s" x="575" y="135">LUKS</text>
+
+  <rect class="box" x="500" y="180" width="150" height="120" rx="6" />
+  <text class="t" x="575" y="204">Mum's space</text>
+  <text class="s" x="575" y="223">gVisor container</text>
+  <rect class="inner" x="515" y="238" width="120" height="46" rx="4" />
+  <text class="t" x="575" y="258">Mum's vault</text>
+  <text class="s" x="575" y="275">LUKS</text>
+
+  <!-- The path of one action -->
+  <path class="e" d="M130 110V176" marker-start="url(#a)" marker-end="url(#a)" />
+  <text class="l" x="140" y="148">next step</text>
+  <path class="e" d="M220 208H276" marker-end="url(#a)" />
+  <text class="l" x="250" y="200" text-anchor="middle">action</text>
+  <path class="e" d="M450 208H496" marker-end="url(#a)" />
+  <text class="l" x="473" y="200" text-anchor="middle">allowed</text>
+  <path class="e d" d="M365 236V284" marker-end="url(#a)" />
+  <text class="l" x="365" y="302" text-anchor="middle">blocked</text>
+
+  <text class="g" x="575" y="324" text-anchor="middle">internet only, no local network</text>
+</svg>
