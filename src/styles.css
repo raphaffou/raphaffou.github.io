@@ -200,8 +200,23 @@ main:focus {
   background-clip: text;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  color: transparent;
+  color: var(--fg);
   transition: --mix 0.3s ease, text-decoration-color 0.3s ease;
+}
+/* The glyphs are painted by the gradient only where the browser can clip it to the text;
+   anywhere else they keep their plain colour, never transparent on the page background. */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .t {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+@media (hover: none) {
+  .t {
+    background: none;
+    color: var(--fg);
+    -webkit-text-fill-color: currentColor;
+  }
 }
 .fx:hover .t,
 .fx:focus-visible .t {
@@ -606,6 +621,10 @@ strong {
   margin: 0 0 12px;
   padding-left: 16px;
   border-left: 2px solid var(--line);
+}
+/* KaTeX sets formulas at 1.21em; here they match the body text. */
+.prose .katex {
+  font-size: 1.05em;
 }
 .prose figure {
   margin: 20px 0;

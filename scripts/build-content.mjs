@@ -148,7 +148,8 @@ const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, 
 // with the site's own link, image and code styles.
 const md = new Marked({
   gfm: true,
-  // $LaTeX$ becomes MathML at build time: browsers draw it natively, no script or font to ship.
+  // $LaTeX$ is typeset by KaTeX at build time, in its own fonts (katex.min.css, in angular.json),
+  // with MathML alongside for screen readers.
   // As in Pandoc, "$" is not math when followed by a space, or when the closing one is followed
   // by a digit, so prices like "$5 and $10" stay text.
   extensions: [
@@ -160,7 +161,7 @@ const md = new Marked({
         const m = /^\$(?!\s)([^$\n]*?[^\s\\])\$(?!\d)/.exec(src);
         if (m) return { type: 'math', raw: m[0], tex: m[1] };
       },
-      renderer: ({ tex }) => katex.renderToString(tex, { output: 'mathml', throwOnError: true }),
+      renderer: ({ tex }) => katex.renderToString(tex, { throwOnError: true }),
     },
   ],
   renderer: {
