@@ -91,7 +91,7 @@ All of which while monitoring energy consumption, heat, and price.""" ;
                                                   <https://schema.org/about> <https://raphaffou.github.io/#llms> ;
                                                   <https://schema.org/mentions> <https://raphaffou.github.io/#home-ai-infra> ;
                                                   <https://raphaffou.github.io/ns#slug> "home-ai-infra-specs" ;
-                                                  <https://raphaffou.github.io/ns#summary> "The brief I wrote so that Claude Code could build my home AI server: two independent control paths, an app my parents can use, and private spaces where an agent can't break anything." ;
+                                                  <https://raphaffou.github.io/ns#summary> "Brief article on how and why I built my own AI/GPU infrastructure." ;
                                                   <https://schema.org/articleBody> """So, I began this project some months ago. I had been thinking about building my own infrastructure for a long time, but the turning point was some offer I saw on leboncoin.
 More specifically, I found an Inspur NF5288M5 at the very cheap price of about 4,800 €. This may sound absurdly expensive, but when you think about it, for less than the price of ONE Nvidia RTX 5090, I had the opportunity to get 8 Nvidia V100 cards, with 32 GB of VRAM each (256 GB of VRAM in total).
 There's of course a decent CPU capacity on top of that (2x Intel Xeon), but the catch is I had to buy the RAM and storage myself (in this economy, 09/2026), and it draws a lot of current.
